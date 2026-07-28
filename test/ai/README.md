@@ -12,7 +12,7 @@ This directory catalogs the reusable AI prompts used to verify the AI Flywheel F
 | [Observe to Evaluate](prompts/004-observe-to-evaluate.md) | Observation semantics, evidence boundaries, Observe completion, Evaluate activation, traceability, negative cases, and repository mutation protection | Yes | 2026-07-27 | Yes | [View result](results/004-observe-to-evaluate.md) |
 | [Evaluate to Classify](prompts/005-evaluate-to-classify.md) | Evaluation completion, classification semantics and provenance, multiple classifications, lifecycle ordering, negative cases, and repository mutation protection | Yes | 2026-07-27 | Yes | [View latest result](results/005-evaluate-to-classify-rerun-2026-07-27.md) |
 | [Classify to Adapt](prompts/006-classify-to-adapt.md) | Classification completion, adaptation semantics and provenance, scope and approval boundaries, lifecycle ordering, negative cases, and repository mutation protection | Yes | 2026-07-27 | Yes | [View latest result](results/006-classify-to-adapt-rerun-2-2026-07-27.md) |
-| [Adapt to Validate](prompts/007-adapt-to-validate.md) | Adapt completion, validation semantics and provenance, evidence sufficiency, lifecycle ordering, negative cases, and repository mutation protection | Yes | 2026-07-27 | No | [View result](results/007-adapt-to-validate.md) |
+| [Adapt to Validate](prompts/007-adapt-to-validate.md) | Adapt completion, validation semantics and provenance, evidence sufficiency, lifecycle ordering, negative cases, and repository mutation protection | Yes | 2026-07-28 | No | [View latest result](results/007-adapt-to-validate-rerun-2026-07-28.md) |
 
 ## Result History
 
@@ -22,6 +22,7 @@ This directory catalogs the reusable AI prompts used to verify the AI Flywheel F
 - Prompt 006 rerun after structured adaptation changes: [Failed](results/006-classify-to-adapt-rerun-2026-07-27.md)
 - Prompt 006 rerun after pending-approval correction: [Passed](results/006-classify-to-adapt-rerun-2-2026-07-27.md)
 - Prompt 007 initial run: [Failed](results/007-adapt-to-validate.md)
+- Prompt 007 rerun after structured validation changes: [Failed](results/007-adapt-to-validate-rerun-2026-07-28.md)
 
 ## Directory Structure
 
@@ -47,7 +48,8 @@ test/ai/
     ├── 006-classify-to-adapt.md
     ├── 006-classify-to-adapt-rerun-2026-07-27.md
     ├── 006-classify-to-adapt-rerun-2-2026-07-27.md
-    └── 007-adapt-to-validate.md
+    ├── 007-adapt-to-validate.md
+    └── 007-adapt-to-validate-rerun-2026-07-28.md
 ```
 
 ## Status Rules
