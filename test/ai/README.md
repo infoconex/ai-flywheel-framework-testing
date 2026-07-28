@@ -12,6 +12,7 @@ This directory catalogs the reusable AI prompts used to verify the AI Flywheel F
 | [Observe to Evaluate](prompts/004-observe-to-evaluate.md) | Observation semantics, evidence boundaries, Observe completion, Evaluate activation, traceability, negative cases, and repository mutation protection | Yes | 2026-07-27 | Yes | [View result](results/004-observe-to-evaluate.md) |
 | [Evaluate to Classify](prompts/005-evaluate-to-classify.md) | Evaluation completion, classification semantics and provenance, multiple classifications, lifecycle ordering, negative cases, and repository mutation protection | Yes | 2026-07-27 | Yes | [View latest result](results/005-evaluate-to-classify-rerun-2026-07-27.md) |
 | [Classify to Adapt](prompts/006-classify-to-adapt.md) | Classification completion, adaptation semantics and provenance, scope and approval boundaries, lifecycle ordering, negative cases, and repository mutation protection | Yes | 2026-07-27 | Yes | [View latest result](results/006-classify-to-adapt-rerun-2-2026-07-27.md) |
+| [Adapt to Validate](prompts/007-adapt-to-validate.md) | Adapt completion, validation semantics and provenance, evidence sufficiency, lifecycle ordering, negative cases, and repository mutation protection | No | — | — | — |
 
 ## Result History
 
@@ -33,7 +34,8 @@ test/ai/
 │   ├── 003-execute-to-observe.md
 │   ├── 004-observe-to-evaluate.md
 │   ├── 005-evaluate-to-classify.md
-│   └── 006-classify-to-adapt.md
+│   ├── 006-classify-to-adapt.md
+│   └── 007-adapt-to-validate.md
 └── results/
     ├── 001-startup-validation.md
     ├── 002-execution-creation.md
