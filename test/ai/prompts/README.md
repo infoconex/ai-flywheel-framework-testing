@@ -11,6 +11,7 @@ This directory contains reusable prompts for testing the AI Flywheel Framework t
 5. [`005-evaluate-to-classify.md`](005-evaluate-to-classify.md) validates evaluation completion, classification provenance, and the transition from Evaluate to Classify.
 6. [`006-classify-to-adapt.md`](006-classify-to-adapt.md) validates classification completion, adaptation provenance, scope and approval boundaries, and the transition from Classify to Adapt.
 7. [`007-adapt-to-validate.md`](007-adapt-to-validate.md) validates Adapt completion, validation semantics and evidence requirements, and the transition from Adapt to Validate.
+8. [`008-validate-to-persist.md`](008-validate-to-persist.md) validates Validate completion, persistence semantics, immutable history, partial-persistence recovery, and the transition from Validate to Persist.
 
 ## Test Boundary
 
