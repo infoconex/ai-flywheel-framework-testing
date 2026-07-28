@@ -1,0 +1,34 @@
+# AI Flywheel Framework AI Test Prompts
+
+This directory catalogs the reusable AI prompts used to verify the AI Flywheel Framework.
+
+## Test Prompt Status
+
+| Test | Focus Area | Run | Last Run | Passed | Test Result |
+|---|---|---:|---|---:|---|
+| [Startup Validation](prompts/001-startup-validation.md) | Cold start, manifest-first startup, required-file ordering, state resolution, active mission and goal resolution, and startup boundaries | Yes | 2026-07-27 | Yes | [View result](results/001-startup-validation.md) |
+| [Execution Creation](prompts/002-execution-creation.md) | Non-persistent execution identity, canonical path, activation state, schemas, lifecycle initialization, collisions, and compare-and-swap protection | Yes | 2026-07-27 | Yes | [View result](results/002-execution-creation.md) |
+| [Execute to Observe](prompts/003-execute-to-observe.md) | Non-persistent lifecycle transition, stage ordering, timestamps, state agreement, negative cases, and repository mutation protection | Yes | 2026-07-27 | Yes | [View result](results/003-execute-to-observe.md) |
+
+## Directory Structure
+
+```text
+test/ai/
+├── README.md
+├── prompts/
+│   ├── README.md
+│   ├── 001-startup-validation.md
+│   ├── 002-execution-creation.md
+│   └── 003-execute-to-observe.md
+└── results/
+    ├── 001-startup-validation.md
+    ├── 002-execution-creation.md
+    └── 003-execute-to-observe.md
+```
+
+## Status Rules
+
+- **Run** indicates whether the prompt has been executed against the target framework repository.
+- **Last Run** records the most recent known execution date.
+- **Passed** indicates whether the most recent execution met the expected result.
+- **Test Result** links to the captured result for the most recent run.
