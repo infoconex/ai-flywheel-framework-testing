@@ -10,6 +10,7 @@ This directory contains reusable prompts for testing the AI Flywheel Framework t
 4. [`004-observe-to-evaluate.md`](004-observe-to-evaluate.md) validates the semantic and lifecycle boundary between Observe and Evaluate.
 5. [`005-evaluate-to-classify.md`](005-evaluate-to-classify.md) validates evaluation completion, classification provenance, and the transition from Evaluate to Classify.
 6. [`006-classify-to-adapt.md`](006-classify-to-adapt.md) validates classification completion, adaptation provenance, scope and approval boundaries, and the transition from Classify to Adapt.
+7. [`007-adapt-to-validate.md`](007-adapt-to-validate.md) validates Adapt completion, validation semantics and evidence requirements, and the transition from Adapt to Validate.
 
 ## Test Boundary
 
