@@ -4,20 +4,14 @@
 > **Purpose**
 >
 > Validate that the AI Flywheel operating model can deterministically complete **Validate** and begin **Persist** without modifying the repository.
->
-> This verification must prove that validation outcomes are evidence-based, synchronized with adaptation status, complete enough to authorize persistence, and kept distinct from persistence and reuse outcomes.
 
 ---
 
 # Repository
 
-**Repository**
+**Repository:** `Infoconex/ai-flywheel-framework`
 
-`Infoconex/ai-flywheel-framework`
-
-**Branch**
-
-`feature/self-contained-operating-model`
+**Branch:** `feature/self-contained-operating-model`
 
 ---
 
@@ -25,17 +19,35 @@
 
 Ignore all previous conversations, memory, cached repository knowledge, and prior test results.
 
-Treat this as the first time you have encountered this repository.
+Treat this as the first time you have encountered this repository. The repository is the authority for framework semantics. Resolve all rules from the immutable revision inspected during this verification.
 
-The repository itself is the only authoritative source.
+---
 
-Resolve all rules from the immutable revision inspected during this verification.
+# Verification Authorization
+
+This prompt explicitly authorizes a **synthetic, non-persistent operating-model verification**.
+
+This authorization is limited to:
+
+- Reading the framework repository.
+- Reconstructing hypothetical execution, state, record, and persistence artifacts entirely in memory.
+- Evaluating those proposed artifacts against repository-defined schemas and semantic rules.
+- Constructing and testing invalid in-memory fixtures.
+- Reporting proposed artifacts and results.
+
+This verification is **not goal-directed repository work** and MUST NOT be rejected merely because the repository's current active mission or goal has a different objective.
+
+The active mission, active goal, and current durable state MUST still be resolved and reported, but they provide structural context only. Their scope restrictions apply to actual repository operations, not to this read-only synthetic conformance test.
+
+Do not create or activate an execution. Do not update state. Do not inspect an application repository. Do not persist any artifact. All reconstructed artifacts are hypothetical and MUST be labeled:
+
+> **PROPOSED ONLY — NOT WRITTEN**
 
 ---
 
 # Objective
 
-Perform a **non-persistent operating-model verification** of this lifecycle transition:
+Perform a non-persistent verification of:
 
 ```text
 Validate (in progress)
@@ -49,131 +61,94 @@ Determine whether the framework provides deterministic rules for:
 
 - Completing Validate.
 - Starting Persist.
-- Distinguishing validation plans from executed validation results.
-- Requiring evidence for passed and failed validation.
-- Synchronizing validation results with adaptation validation status.
-- Handling failed, excluded, superseded, pending, and not-applicable validation.
-- Preventing unresolved required validation from reaching Persist.
-- Defining what must be persisted and where.
-- Preserving immutable execution history and canonical record locations.
-- Preventing persistence from silently changing validation conclusions.
-- Preventing reuse claims before Reuse.
-- Enforcing lifecycle ordering, timestamps, state agreement, identity, reference resolution, and compare-and-swap protection.
-- Rejecting invalid transitions and partial persistence.
-
-Do **not** perform any repository mutations.
+- Validation planning versus execution.
+- Evidence requirements for passed and failed validation.
+- Failed-validation findings, recovery actions, dispositions, decisions, and approvals.
+- Adaptation-status synchronization.
+- Persistence target derivation, canonical locations, mutability, digests, ordering, compare-and-swap, verification, rollback, and compensation.
+- Preserving immutable history.
+- Preventing premature Reuse claims.
+- Rejecting invalid transitions.
 
 ---
 
 # Repository Mutation Rules
 
-You may:
+You may read repository files and construct artifacts in memory.
 
-- Read repository files.
-- Resolve startup and operating guidance.
-- Resolve the active mission and goal.
-- Reconstruct a valid Validate-in-progress execution in memory.
-- Construct executed validation results, persistence plans, and proposed state changes in memory.
-- Validate proposed execution and state artifacts.
-- Execute negative validation using in-memory fixtures.
-- Report proposed artifacts and results.
+You MUST NOT:
 
-You must **not**:
-
-- Create, modify, or delete files.
+- Create, modify, or delete repository files.
 - Stage, commit, or push changes.
-- Activate an execution.
-- Update repository state.
-- Persist records, evidence, validation results, findings, decisions, approvals, learning, logs, lifecycle records, or knowledge.
+- Activate an execution or advance the durable lifecycle.
+- Update state.
+- Persist records, evidence, findings, decisions, approvals, validation results, learning, logs, knowledge, or persistence plans.
 - Inspect or modify an application repository.
 - Run application-changing commands.
-- Advance the actual lifecycle.
 
-All displayed artifacts are:
+---
 
-> **PROPOSED ONLY — NOT WRITTEN**
+# Mandatory Startup Completion Checkpoint
+
+Before lifecycle reconstruction:
+
+1. Begin at the repository root.
+2. Resolve `.flywheel/manifest.yaml`.
+3. Read every path in `required_files` in the declared order.
+4. Read current state, active mission, active goal, and any active execution last.
+5. Resolve the immutable commit revision.
+
+Report:
+
+- Required files declared.
+- Required files successfully read.
+- Missing or unreadable files.
+- Startup resolution as passed or failed.
+
+Do not treat response length, tool-call count, or partial inspection as a reason to stop. Continue until every manifest-required file has been read. If all files exist and are readable, startup MUST NOT fail merely because multiple reads were required.
+
+After startup succeeds, continue this synthetic verification regardless of whether the current active goal would authorize an actual Validate-to-Persist execution.
 
 ---
 
 # Verification Starting Point
 
-Assume only that these earlier verifications succeeded conceptually:
+Assume conceptually that Prompts 001 through 007 succeeded. Do not copy prior result artifacts.
 
-1. Startup validation.
-2. First execution creation and activation.
-3. Execute-to-Observe transition.
-4. Observe-to-Evaluate transition.
-5. Evaluate-to-Classify transition.
-6. Classify-to-Adapt transition.
-7. Adapt-to-Validate transition.
+Using current repository rules, reconstruct in memory a complete valid state with:
 
-Do not copy artifacts from prior test results.
-
-Use current repository rules to reconstruct the complete valid operating state with:
-
-- Execute completed.
-- Observe completed.
-- Evaluate completed.
-- Classify completed.
-- Adapt completed.
+- Execute, Observe, Evaluate, Classify, and Adapt completed.
 - Validate in progress.
 - Persist and Reuse pending.
-- State identifying Validate as the active lifecycle stage.
-- Complete structured observations, evaluations, classifications, adaptations, and validation entries.
-- At least one approved and implemented adaptation with executed validation.
-- At least one validation-ineligible adaptation explicitly excluded.
-- At least one passed validation with sufficient evidence.
-- When supported, at least one failed validation with a finding, recovery action, and authorized final disposition that either blocks persistence or permits persistence under an explicit rule.
+- State identifying Validate as the active stage.
+- Structured observations, evaluations, classifications, adaptations, and validations.
+- At least one approved and implemented adaptation.
+- At least one validation-ineligible adaptation with explicit exclusion.
+- At least one evidence-backed passed validation.
+- When supported, at least one failed validation with finding, recovery action, linked disposition decision, and required approvals.
 
-If the repository does not provide enough information to reconstruct this state deterministically, report a reusable framework defect and stop before inventing missing rules.
-
----
-
-# Startup and Operating Resolution
-
-Before testing the transition:
-
-1. Begin at the repository root.
-2. Follow repository-defined startup instructions.
-3. Resolve the manifest and ordered required files.
-4. Read state, active mission, and active goal.
-5. Read schemas and guidance for executions, lifecycle, validation, evidence, findings, decisions, approvals, failure handling, persistence, records, state, and reuse.
-6. Resolve canonical locations, reference-resolution rules, immutable-history rules, timestamp rules, identity rules, and compare-and-swap rules.
-7. Record the immutable repository revision.
-
-Do not begin transition verification until the operating model has been resolved.
+If the repository lacks deterministic rules needed for reconstruction, report a reusable framework defect. Do not substitute the active-goal scope boundary for this determination.
 
 ---
 
 # Validate Completion Verification
 
-Determine from repository-defined rules only:
+Determine from repository rules:
 
-1. What makes a validation plan complete enough to execute.
-2. What makes a validation result executed rather than planned.
-3. Which statuses are permitted at Validate completion.
-4. Whether every required validation must be resolved.
-5. Whether a passed result requires evidence proving the actual outcome.
-6. Whether a failed result requires evidence, a finding, and recovery action.
-7. Whether a not-applicable result requires explicit ineligibility and an exclusion reason.
-8. Whether pending validation may remain when Validate completes.
-9. Whether a failed validation may coexist with Validate completion.
-10. Which authorized disposition is required before persistence after failure.
-11. Whether adaptation `validation_status` must match validation results.
-12. Whether validation references must appear in the Validate stage.
-13. Which summaries, timestamps, evidence references, findings, and actions are required.
-14. Whether Validate may be `not-applicable` and under what conditions.
-15. Whether command success alone can establish a pass.
-16. How revised validation plans preserve the failed plan through `supersedes_ref` or equivalent history.
+1. Required validation-plan fields.
+2. Planned versus executed states.
+3. Permitted completion statuses.
+4. Eligibility and exclusion rules.
+5. Evidence requirements for pass and failure.
+6. Finding and recovery requirements for failure.
+7. Failed-validation disposition, decision, approval, scope, supersession, and persistence-permission rules.
+8. Pending-validation restrictions.
+9. Adaptation-status synchronization.
+10. Stage references, summaries, and timestamps.
+11. Revised-validation history requirements.
+12. Whether command success alone is sufficient proof.
 
-Construct a representative validation set containing at least:
-
-- One passed validation for an approved and implemented adaptation.
-- One executed not-applicable validation for an ineligible adaptation.
-- Complete expected and actual outcomes.
-- Sufficient evidence references for every passed or failed result.
-- Complete finding and recovery data for any failure.
-- Synchronized adaptation validation statuses.
+Construct a representative validation set containing passed, not-applicable, and—when supported—failed validation with complete traceability.
 
 Determine whether Validate may legally complete.
 
@@ -181,23 +156,21 @@ Determine whether Validate may legally complete.
 
 # Persistence Semantic Verification
 
-Determine from repository-defined rules only:
+Determine from repository rules:
 
-1. What qualifies as persistence.
-2. Which artifacts and records must be persisted.
-3. Which artifacts must not be persisted yet.
-4. The canonical location for each persisted artifact type.
-5. Whether persistence creates new immutable records or updates existing records.
-6. Whether prior execution history may ever be overwritten.
-7. How evidence, findings, decisions, approvals, validation results, and learning remain traceable.
-8. Whether persistence status on adaptations changes during Persist.
-9. Whether validation conclusions may be altered during persistence.
-10. Whether Reuse outcomes may be claimed during Persist.
-11. What must exist before Persist becomes `in-progress`.
-12. Whether Persist itself requires a plan, action references, summary, and timestamps.
-13. How partial persistence is recovered.
-14. How state and execution remain consistent while multiple durable artifacts are written.
-15. Whether canonical-path collisions, stale writes, or missing references block persistence.
+1. Persist activation prerequisites.
+2. Required persistence-plan structure and lifecycle.
+3. Complete target-set derivation.
+4. Canonical target locations.
+5. Create-only, supersede-only, and compare-and-swap mutation semantics.
+6. Digest calculation.
+7. Dependency and type ordering.
+8. State as final operational pointer.
+9. Per-write and whole-set verification.
+10. Partial-write rollback and compensation.
+11. Failed-validation authorization precheck.
+12. Immutable-history protection.
+13. Reuse boundary protection.
 
 Do not invent persistence semantics absent from the repository.
 
@@ -205,64 +178,25 @@ Do not invent persistence semantics absent from the repository.
 
 # Representative Validation and Persistence Set
 
-Construct a small concrete set entirely in memory.
+Construct a concrete in-memory set containing:
 
-The set must include, when supported by the framework:
+- Passed validation with evidence.
+- Not-applicable validation with exclusion reason.
+- Failed validation with evidence, finding, recovery action, and a valid linked decision disposition when supported.
+- Required approvals when applicable.
+- Synchronized adaptation statuses.
+- A schema-valid persistence plan.
+- Every required target and canonical path.
+- Exact operation, mutability, precondition, digest, dependencies, rollback action, and write order.
+- Complete traceability through validation, adaptation, classification, evaluation, observation, and evidence.
 
-1. At least one passed validation with actual evidence.
-2. At least one explicitly excluded validation for an ineligible adaptation.
-3. At least one adaptation whose `validation_status` becomes `passed`.
-4. A persistence plan listing every artifact that would be written or updated.
-5. Canonical target paths for the execution, state, evidence, findings, decisions, approvals, and other required records.
-6. Full traceability from persistence targets back through validation, adaptation, classification, evaluation, observation, and evidence.
-7. Exact retained revisions required for compare-and-swap.
-
-The set must not contain:
-
-- A pending required validation.
-- A passed result without evidence.
-- A failed result without finding and recovery handling.
-- A validation result silently changed during persistence.
-- A persisted artifact without a canonical location.
-- An overwritten immutable history record.
-- A Reuse conclusion.
-- A validated-learning claim unsupported by completed validation.
-
-Clearly label the set:
-
-> **PROPOSED ONLY — NOT WRITTEN**
-
----
-
-# Persist Activation Verification
-
-Determine what must exist before Persist may transition from `pending` to `in-progress`.
-
-Validate at minimum:
-
-- Execute through Adapt remain completed or properly not applicable.
-- Validate is completed or properly not applicable.
-- Validate completion timestamp exists.
-- Persist start timestamp exists.
-- Persist starts no earlier than Validate completion.
-- Persist becomes the only in-progress stage.
-- Reuse remains pending.
-- No required validation remains pending.
-- No unresolved failed validation permits unauthorized persistence.
-- Passed and failed results contain required evidence.
-- Required findings, decisions, approvals, and recovery dispositions resolve.
-- Adaptation validation statuses agree with validation results.
-- Persistence targets and canonical locations are deterministic.
-- State and execution agree on the active execution and stage.
-- Identity, reference, timestamp, immutable-history, and compare-and-swap rules remain satisfied.
-
-Determine whether Persist can legally begin.
+Use concrete values, not placeholders.
 
 ---
 
 # Proposed Lifecycle Transition
 
-Construct and validate this complete in-memory transition:
+Construct and validate:
 
 ```text
 Execute  = completed
@@ -275,42 +209,35 @@ Persist  = in-progress
 Reuse    = pending
 ```
 
-Also validate:
+Validate:
 
-- Exactly one lifecycle stage is in progress.
+- Exactly one stage is in progress.
 - No stage is skipped.
-- All predecessor stages are completed or properly not applicable.
-- Reuse remains pending.
-- Stage timestamps are chronologically valid.
-- State lifecycle stage is `persist`.
-- State and execution identify the same active execution.
-- All unchanged state fields are preserved.
+- Timestamps are ordered.
+- State and execution agree.
+- All references resolve.
 - No repository mutation occurs.
 
 ---
 
 # Proposed Execution and State Artifacts
 
-Construct the complete proposed execution and state artifacts exactly as they would exist after Validate completes and Persist starts.
+Construct complete proposed execution and state artifacts as they would exist after Validate completes and Persist starts.
 
 Requirements:
 
-- Use concrete values.
-- Do not use placeholders.
-- Preserve all unchanged fields.
-- Include all lifecycle stages.
-- Include the structured records required by the framework.
-- Preserve mission, goal, execution, readiness, and implementation fields.
-- Include required references, summaries, timestamps, identity, and revision information.
-- Include executed validation results and synchronized adaptation validation statuses.
-- Include a concrete persistence plan or action set without claiming persistence has completed.
-- Do not claim Reuse outcomes.
+- Concrete values only.
+- All lifecycle stages included.
+- Required structured records and references included.
+- Validation results and adaptation statuses synchronized.
+- Persistence plan referenced without claiming persistence completion.
+- Reuse remains pending.
 
 Precede each artifact with:
 
 > **PROPOSED ONLY — NOT WRITTEN**
 
-Validate both artifacts against schemas and all semantic and cross-artifact rules.
+Validate both artifacts against schemas and semantic and cross-artifact rules.
 
 ---
 
@@ -322,127 +249,77 @@ Report separately:
 2. Required-file resolution.
 3. Active mission resolution.
 4. Active goal resolution.
-5. Starting execution reconstruction.
-6. Execution schema validation.
-7. State schema validation.
-8. Validation semantic validation.
-9. Validation provenance validation.
-10. Validation eligibility validation.
-11. Validation evidence-sufficiency validation.
-12. Validation failure-handling validation.
-13. Adaptation-status synchronization validation.
-14. Validate completion validation.
-15. Persistence semantic validation.
-16. Persistence target-location validation.
-17. Immutable-history validation.
-18. Persist activation validation.
-19. Lifecycle ordering validation.
-20. Transition validation.
-21. Cross-artifact validation.
-22. Timestamp validation.
-23. Identity validation.
-24. Reference-resolution validation.
-25. Compare-and-swap validation.
-26. Partial-persistence recovery validation.
-27. Post-transition validation.
-28. Repository immutability validation.
+5. Synthetic-verification authorization.
+6. Starting execution reconstruction.
+7. Execution schema validation.
+8. State schema validation.
+9. Validation semantics and provenance.
+10. Validation eligibility and evidence sufficiency.
+11. Failure handling and disposition authorization.
+12. Adaptation-status synchronization.
+13. Validate completion.
+14. Persistence semantics and target locations.
+15. Immutable history.
+16. Persist activation.
+17. Lifecycle ordering and transition.
+18. Cross-artifact references.
+19. Timestamps and identities.
+20. Compare-and-swap.
+21. Partial-persistence recovery.
+22. Post-transition verification.
+23. Repository immutability.
 
-For every validation include:
-
-- Artifact or rule evaluated.
-- Expected condition.
-- Actual condition.
-- Pass or fail result.
-- Repository source enforcing the result.
+For each include the expected condition, actual condition, result, and repository source.
 
 ---
 
 # Negative Validation
 
-Construct invalid in-memory fixtures and demonstrate rejection of at least these cases:
+Construct invalid in-memory fixtures and demonstrate rejection of at least:
 
-1. Persist starts while Validate remains in progress.
-2. Validate and Persist are both in progress.
+1. Persist starts while Validate is in progress.
+2. Validate and Persist both in progress.
 3. Persist starts before Validate completion.
-4. Validate completes with a required validation still pending.
-5. Passed validation lacks evidence.
-6. Failed validation lacks evidence.
-7. Failed validation lacks a finding.
-8. Failed validation lacks a recovery action.
-9. Failed validation is persisted without an authorized disposition.
-10. Not-applicable validation lacks an exclusion reason.
-11. Ineligible adaptation is marked passed.
-12. Adaptation validation status disagrees with the validation result.
-13. Validation references nonexistent adaptation, criterion, rule, evidence, or finding.
+4. Required validation remains pending.
+5. Passed or failed validation lacks evidence.
+6. Failed validation lacks finding or recovery action.
+7. Failed validation lacks a valid linked disposition.
+8. A blocking disposition is treated as permitting persistence.
+9. A required approval is missing or scope-mismatched.
+10. Not-applicable lacks exclusion reason.
+11. Ineligible adaptation passes.
+12. Adaptation status disagrees with validation.
+13. A reference does not resolve.
 14. Command success alone is treated as proof.
-15. Failed validation is silently changed to passed before persistence.
-16. A revised validation weakens the original scope or expected outcome.
-17. A revised validation does not reference the superseded validation.
-18. Persist has no deterministic target list.
-19. Persist target uses a noncanonical location.
-20. Immutable execution history is overwritten.
-21. Existing evidence is mutated instead of preserved or superseded according to the rules.
-22. Persistence omits a required decision, approval, finding, or validation result.
-23. Persistence claims Reuse completion or reusable learning early.
-24. Lifecycle stage is skipped.
-25. State says Persist while execution says Validate.
-26. Execution says Persist while state says Validate.
-27. Stage timestamps are out of order.
-28. Stale compare-and-swap value is used.
-29. Partial persistence lacks rollback or recovery handling.
-30. Final durable pair is not re-read and verified.
-31. Repository artifacts are actually persisted during this verification.
+15. Failed validation is silently changed to passed.
+16. Revised validation weakens scope or lacks supersession.
+17. Persistence plan lacks a complete target set.
+18. Persistence plan targets itself or uses a self-digest.
+19. Target path is noncanonical.
+20. Immutable history is overwritten.
+21. Required record is omitted.
+22. Persist claims Reuse early.
+23. Lifecycle stage is skipped.
+24. State and execution disagree.
+25. Timestamps are out of order.
+26. A stale compare-and-swap revision is used.
+27. Partial persistence lacks recovery.
+28. Final artifacts are not re-read and verified.
+29. Repository artifacts are actually persisted during verification.
 
-For each scenario report:
+For each report the invalid condition, expected rejection, actual result, and enforcing rule.
 
-- Invalid condition.
-- Expected rejection.
-- Actual result.
-- Rule enforcing rejection.
-
-If a required case cannot be rejected deterministically, report a reusable framework defect.
-
----
-
-# Compare-and-Swap and Partial Persistence
-
-Validate the repository-defined durable transition sequence without executing it.
-
-At minimum determine whether the framework requires:
-
-1. Retaining current execution and state revisions.
-2. Retaining revisions for every other artifact that would be updated.
-3. Constructing all proposed durable artifacts in memory first.
-4. Validating schemas, references, canonical paths, and semantic rules before writing.
-5. Rechecking retained revisions immediately before each write.
-6. A deterministic artifact write order.
-7. Rejecting stale revisions without overwrite.
-8. Final re-read and exact comparison of every written artifact.
-9. Exact-content rollback or compensating recovery after partial persistence.
-10. A durable finding and blocked continuation when consistency cannot be restored.
-
-No compare-and-swap write may actually occur.
+If a case cannot be rejected deterministically, report a reusable framework defect.
 
 ---
 
 # Framework Defects
 
-Only report reusable framework defects.
+Only report reusable framework defects. Do not report absent persisted execution artifacts, current active-goal scope, or the synthetic nature of this test as defects.
 
-Do not report the absence of persisted execution artifacts as a defect.
+For each defect include identifier, severity, artifact, rule, observed behavior, expected behavior, deterministic impact, and framework-only correction.
 
-For each defect include:
-
-- Identifier.
-- Severity.
-- Artifact.
-- Rule.
-- Observed behavior.
-- Expected behavior.
-- Deterministic impact.
-- Framework-only correction.
-
-If no reusable defects are found, state:
+If none are found, state:
 
 > No reusable framework defects were found during the non-persistent Validate-to-Persist lifecycle verification.
 
@@ -480,12 +357,10 @@ Commit Required: False
 Framework Defects Found: <count>
 ```
 
-The final section must state only the next authorized action supported by the result.
-
-When verification passes, use:
+When verification passes, the final section must state:
 
 > Run the next non-persistent lifecycle verification.
 
-When a framework defect blocks verification, use:
+When a reusable framework defect blocks verification, use:
 
 > Correct only the reusable framework defect before repeating this verification.
