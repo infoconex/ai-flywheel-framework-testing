@@ -7,6 +7,7 @@ This directory contains reusable prompts for testing the AI Flywheel Framework t
 1. [`001-startup-validation.md`](001-startup-validation.md) validates manifest-first startup and stops before execution creation.
 2. [`002-execution-creation.md`](002-execution-creation.md) validates non-persistent creation and activation of the first execution.
 3. [`003-execute-to-observe.md`](003-execute-to-observe.md) validates the non-persistent transition from Execute to Observe.
+4. [`004-observe-to-evaluate.md`](004-observe-to-evaluate.md) validates the semantic and lifecycle boundary between Observe and Evaluate.
 
 ## Test Boundary
 
