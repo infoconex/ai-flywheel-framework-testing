@@ -10,6 +10,7 @@ This directory catalogs the reusable AI prompts used to verify the AI Flywheel F
 | [Execution Creation](prompts/002-execution-creation.md) | Non-persistent execution identity, canonical path, activation state, schemas, lifecycle initialization, collisions, and compare-and-swap protection | Yes | 2026-07-27 | Yes | [View result](results/002-execution-creation.md) |
 | [Execute to Observe](prompts/003-execute-to-observe.md) | Non-persistent lifecycle transition, stage ordering, timestamps, state agreement, negative cases, and repository mutation protection | Yes | 2026-07-27 | Yes | [View result](results/003-execute-to-observe.md) |
 | [Observe to Evaluate](prompts/004-observe-to-evaluate.md) | Observation semantics, evidence boundaries, Observe completion, Evaluate activation, traceability, negative cases, and repository mutation protection | Yes | 2026-07-27 | Yes | [View result](results/004-observe-to-evaluate.md) |
+| [Evaluate to Classify](prompts/005-evaluate-to-classify.md) | Evaluation completion, classification semantics and provenance, multiple classifications, lifecycle ordering, negative cases, and repository mutation protection | No | — | — | — |
 
 ## Directory Structure
 
@@ -21,7 +22,8 @@ test/ai/
 │   ├── 001-startup-validation.md
 │   ├── 002-execution-creation.md
 │   ├── 003-execute-to-observe.md
-│   └── 004-observe-to-evaluate.md
+│   ├── 004-observe-to-evaluate.md
+│   └── 005-evaluate-to-classify.md
 └── results/
     ├── 001-startup-validation.md
     ├── 002-execution-creation.md
