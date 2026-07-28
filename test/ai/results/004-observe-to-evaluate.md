@@ -1,277 +1,370 @@
 ## 1. Verification Summary
 
-* **Repository:** `Infoconex/ai-flywheel-framework`
-* **Branch:** `feature/self-contained-operating-model`
-* **Immutable Revision:** `31bda46263b38bd3eded011dd8978b9f78e82e85`
-* **Operating Validation:** Passed
-* **Verification Result:** Failed
-* **Repository Changes:** None
-* **Files Written:** 0
-* **Commit Required:** False
-* **Framework Defects Found:** 4
+| Field                   | Result                                     |
+| ----------------------- | ------------------------------------------ |
+| Repository              | `Infoconex/ai-flywheel-framework`          |
+| Branch                  | `feature/self-contained-operating-model`   |
+| Immutable Revision      | `9168eee391f2ff0dcefcfa361469eb68eaf45fc4` |
+| Operating Validation    | Passed                                     |
+| Verification Result     | Passed                                     |
+| Repository Changes      | None                                       |
+| Files Written           | 0                                          |
+| Commit Required         | False                                      |
+| Framework Defects Found | None                                       |
 
-The operating artifacts are internally readable and the proposed positive transition can be represented by the current schemas. However, the framework does not deterministically enforce several required semantic and temporal rejection cases. In particular, completed Observe does not schema-require observations or references; observations are unstructured strings; Evaluate has no structured output or provenance field; and cross-stage timestamp ordering is not enforced. Therefore the requested deterministic verification cannot be reported as passed without inventing rules absent from the framework.
+The verification was performed as a non-persistent, in-memory lifecycle simulation. The repository identifies the manifest as the authoritative startup boundary and requires state, required operating files, the active mission, active goal, and active execution to be resolved in that order.
 
-The manifest establishes the authoritative startup sequence and required operating artifacts. The branch revision was resolved without modifying the repository.
+The attached verification instructions explicitly prohibit repository mutation and require all displayed artifacts to remain proposed only. 
+
+---
 
 ## 2. Validation Trace
 
-| Step | Action | Artifact | Rule | Result | Next step |
-| ---: | --- | --- | --- | --- | --- |
-| 1 | Resolved the requested branch to an immutable revision. | Git reference | Verification must use a stable repository version. | Passed: `31bda46263b38bd3eded011dd8978b9f78e82e85`. | Read the manifest. |
-| 2 | Read the framework manifest. | `.flywheel/manifest.yaml` | Manifest is the authoritative boundary and declares the entrypoint and required files. | Passed. | Follow the declared entrypoint. |
-| 3 | Read the startup protocol. | `guidance/startup.md` | State and required files must be read before active mission, goal, records, and execution. | Passed. | Resolve active state. |
-| 4 | Read current state. | `.flywheel/state.yaml` | State identifies the active mission and goal. | Passed: mission and goal are selected; no execution is currently persisted. | Resolve mission and goal. |
-| 5 | Read the active mission. | `mission.yaml` | An execution must belong to the active mission. | Passed. | Read active goal. |
-| 6 | Read the active goal. | Goal `001-discover-repository-and-gather-context` | Execution objective and acceptance criteria come from the active goal. | Passed. | Reconstruct starting execution. |
-| 7 | Reconstructed an activation snapshot in memory. | Proposed execution | Initial execution must use the goal objective, ordered acceptance-criterion IDs, one in-progress Execute stage, and seven pending stages. | Passed in memory. | Apply assumed Execute-to-Observe transition. |
-| 8 | Reconstructed the valid requested starting point. | Proposed execution and state | Exactly Observe is in progress; Execute is completed; state agrees. | Passed in memory. | Construct observations and evidence. |
-| 9 | Constructed a representative observation set. | Proposed observations and evidence | Observe captures actual results, evidence, unexpected behavior, failures, environmental facts, and feedback. | Semantically acceptable, but structural traceability is underspecified. | Test Observe completion. |
-| 10 | Completed Observe and activated Evaluate in memory. | Proposed execution and state | Exactly one stage must be in progress; earlier stages completed and later stages pending. | Schema-valid positive transition. | Run semantic and negative validation. |
-| 11 | Tested required semantic rejection cases. | Schemas and guidance | Validation must reject invalid lifecycle and provenance states deterministically. | Failed for several cases because enforcement rules are absent or incomplete. | Report reusable defects. |
-| 12 | Confirmed mutation boundary. | Repository | No proposed records may be written or persisted. | Passed. | Stop after report. |
+| Step | Action                                                                            | Artifact                              | Rule                                                             | Result                                              | Next Step                            |
+| ---: | --------------------------------------------------------------------------------- | ------------------------------------- | ---------------------------------------------------------------- | --------------------------------------------------- | ------------------------------------ |
+|    1 | Resolved the requested branch to an immutable commit                              | Git commit                            | Cold-start immutable-revision requirement                        | `9168eee391f2ff0dcefcfa361469eb68eaf45fc4` resolved | Read startup discovery artifact      |
+|    2 | Read repository discovery guidance                                                | `README.md`                           | Manifest must be read before repository inspection               | Passed                                              | Read manifest                        |
+|    3 | Resolved manifest entrypoint, locations, required files, and implementation state | `.flywheel/manifest.yaml`             | Manifest is authoritative                                        | Passed                                              | Read state                           |
+|    4 | Read current durable state                                                        | `.flywheel/state.yaml`                | Startup read order                                               | Passed                                              | Resolve active mission and goal      |
+|    5 | Read startup protocol                                                             | `startup.md`                          | Required read order and validation contract                      | Passed                                              | Resolve operating guidance           |
+|    6 | Resolved active mission                                                           | Mission artifact                      | State reference must resolve uniquely                            | Passed                                              | Resolve active goal                  |
+|    7 | Resolved active goal                                                              | Goal artifact                         | Goal must belong to active mission                               | Passed                                              | Resolve schemas and transition rules |
+|    8 | Resolved lifecycle rules                                                          | `lifecycle.md`                        | Ordered stages and sole-active-stage rule                        | Passed                                              | Resolve execution semantics          |
+|    9 | Resolved action, observation, and evaluation contracts                            | `execution-model.md`                  | Structured semantics and cross-artifact invariants               | Passed                                              | Resolve schemas                      |
+|   10 | Resolved execution schema                                                         | `execution.schema.yaml`               | Proposed execution must be schema-valid                          | Passed                                              | Resolve state schema                 |
+|   11 | Resolved state schema                                                             | `state.schema.yaml`                   | Proposed state must be schema-valid                              | Passed                                              | Resolve evidence contract            |
+|   12 | Resolved evidence semantics and record schema                                     | `evidence.md`, `record.schema.yaml`   | Evidence must be actual, traceable, and inspectable              | Passed                                              | Reconstruct starting fixture         |
+|   13 | Reconstructed an Observe-in-progress execution in memory                          | Proposed execution fixture            | Earlier conceptual activation and Execute-to-Observe transitions | Passed                                              | Construct observations               |
+|   14 | Constructed structured observations and evidence records                          | Proposed observation/evidence fixture | Observation contract                                             | Passed                                              | Test Observe completion              |
+|   15 | Applied Observe completion criteria                                               | Proposed execution fixture            | `execution-model.md` Observe contract                            | Passed                                              | Test Evaluate activation             |
+|   16 | Activated Evaluate in memory                                                      | Proposed execution and state fixtures | Lifecycle ordering and state-stage agreement                     | Passed                                              | Validate schemas and invariants      |
+|   17 | Validated proposed artifacts                                                      | Execution and state fixtures          | Schema and semantic contracts                                    | Passed                                              | Run negative fixtures                |
+|   18 | Executed 26 negative validations in memory                                        | Invalid fixtures                      | Schema, lifecycle, semantic, timestamp, identity, and CAS rules  | Passed                                              | Verify stale-state protection        |
+|   19 | Applied matching and stale CAS fixtures                                           | State blob SHA                        | Durable creation/transition sequence                             | Passed                                              | Confirm immutability                 |
+|   20 | Confirmed no repository mutation occurred                                         | Repository                            | Non-persistent verification rule                                 | Passed                                              | Produce final report                 |
+
+The repository requires lifecycle updates to leave exactly one stage in progress, with predecessors complete or not applicable, successors pending, and state identifying the same stage.
+
+---
 
 ## 3. Starting Operating State
 
-This is the reconstructed state immediately before the proposed Observe-to-Evaluate transition.
+This is the reconstructed, in-memory state immediately after Observe begins. It is not the current persisted repository state.
 
-> **PROPOSED ONLY — NOT WRITTEN**
+| Field                         | Reconstructed Value                                                |
+| ----------------------------- | ------------------------------------------------------------------ |
+| Active Mission                | `establish-ai-flywheel-operations`                                 |
+| Active Goal                   | `001-discover-repository-and-gather-context`                       |
+| Active Execution              | `EX-20260728T041000Z-001`                                          |
+| Execution Status              | `in-progress`                                                      |
+| Lifecycle Stage               | `observe`                                                          |
+| Execute Status                | `completed`                                                        |
+| Execute Started               | `2026-07-28T04:10:00Z`                                             |
+| Execute Completed             | `2026-07-28T04:11:00Z`                                             |
+| Observe Status                | `in-progress`                                                      |
+| Observe Started               | `2026-07-28T04:11:00Z`                                             |
+| Evaluate Status               | `pending`                                                          |
+| Remaining Stage Statuses      | `classify`, `adapt`, `validate`, `persist`, and `reuse`: `pending` |
+| Readiness                     | `not-ready-for-missions`                                           |
+| Implementation Availability   | `false`                                                            |
+| Application Missions Allowed  | `false`                                                            |
+| Starting Revision / CAS Value | State blob SHA `acc531c4bea7d83f3c51423da7c61131e8c95ec1`          |
 
-* **Active mission:** `establish-ai-flywheel-operations`
-* **Active goal:** `001-discover-repository-and-gather-context`
-* **Active execution:** `EX-20260728T035130Z-001`
-* **Lifecycle stage:** `observe`
-* **Execution status:** `in-progress`
-* **Stage statuses:**
-  * Execute: `completed`
-  * Observe: `in-progress`
-  * Evaluate: `pending`
-  * Classify: `pending`
-  * Adapt: `pending`
-  * Validate: `pending`
-  * Persist: `pending`
-  * Reuse: `pending`
-* **Readiness:** `not-ready-for-missions`
-* **Application missions allowed:** `false`
+The persisted state identifies the active mission and goal while preserving onboarding readiness and implementation availability.
 
-The objective and six acceptance-criterion IDs are taken directly from the active goal.
+The active mission is an onboarding mission and prohibits application feature work. The active goal requires repository facts to be recorded as direct observations with evidence while material inferences remain explicitly distinguished.
 
-The current persisted state has no active execution. The state above is therefore only a reconstruction under the user-provided assumption that execution creation and Execute-to-Observe verification already succeeded.
+The execution identifier and timestamps are concrete verification-fixture values created solely in memory. They do not represent a persisted execution.
+
+---
 
 ## 4. Semantic Boundary Findings
 
 ### Action
 
-An action is goal-directed work performed during an execution. Every goal-directed action belongs to exactly one execution. The framework instructs operators to record actions, commands, outputs, changes, assumptions, evidence, and deviations as they occur.
+An action is goal-directed work performed to advance, investigate, validate, record, or change the active goal. Every goal-directed action belongs to exactly one execution.
 
-An executed action records **what was done**. It does not, by itself, establish the result or prove a claim.
+Actions are recorded in the execution's `actions` array. The schema represents each action as a nonempty string.
+
+An action is not automatically an observation. An action describes what was done; an observation describes an actual result, absence, environmental fact, failure, or human feedback.
+
+Action summaries may describe performed work, but they must not be treated as proof of an outcome. Claims such as success or requirement completion require linked evidence.
+
+Action completion alone does not prove an outcome.
 
 ### Observation
 
-Observe captures **actual results** arising from execution, including evidence, unexpected behavior, failures, environmental facts, and human feedback.
+An observation records:
 
-An observation differs from an action because it records **what was actually perceived or returned**, not the activity performed to obtain it.
+* An actual result.
+* Absence of an expected result.
+* An environmental fact.
+* A failure.
+* Human feedback.
 
-The active goal further directs the operator to record direct observations as discovered facts with evidence and to identify unknowns and material inferences separately.
+This definition is normative in the execution model.
+
+Observations may be:
+
+* Direct.
+* Expected-result absence.
+* Quantitative.
+* Qualitative.
+* Incomplete.
+* Uncertain.
+* Conflicting.
+
+Those values are explicitly permitted by the execution schema.
+
+An observation must not assert an inferred cause, conclusion, classification, recommendation, adaptation, validation conclusion, persist decision, or reuse decision as a directly observed fact.
+
+Contradictory observations may coexist because the schema supports `status: conflicting` and explicit `conflicts_with` references.
+
+Incomplete, uncertain, or conflicting observations may omit evidence only when `uncertainty` states what is unavailable and why.
 
 ### Evidence
 
-Evidence is the recorded basis for claims, decisions, validation, and completion. It must be traceable, reproducible or independently inspectable, based on actual rather than expected results, stored or referenced durably, and distinguished from interpretation.
+Evidence is the recorded basis for claims, decisions, validation, and completion. It differs from an observation because an observation states what was observed, while evidence supplies the reproducible or independently inspectable basis supporting that statement.
 
-An observation differs from evidence as follows:
+Permitted evidence types include repository observations, command results, test results, validation results, change references, human approvals, external references, and manual verification.
 
-* The observation is the factual result perceived.
-* Evidence is the traceable record or reference that supports inspection of that result.
-* A statement can describe an observation without being sufficient evidence.
-* Claims such as successful validation or satisfaction of a requirement are invalid without linked evidence.
+A complete observation requires at least one evidence reference. An incomplete, uncertain, or conflicting observation may omit evidence only with an explicit uncertainty disposition.
 
-The schema does not, however, structurally link individual observation strings to individual evidence records.
+One evidence item may support multiple observations because evidence references are independently recorded on each observation. Multiple evidence items may support one observation because `evidence_refs` is an array.
+
+Indirect evidence is not prohibited, but it must still be specific, traceable, actual, and clearly distinguished from interpretation.
+
+Missing evidence blocks Observe completion when:
+
+* No execution-level evidence reference exists.
+* A complete observation has no evidence reference.
+* The Observe stage has no reference.
+
+Evidence records preserve provenance through mission, goal, execution, creator, timestamps, source references, artifact references, source or method, actual result, and storage location.
+
+Evidence may be added after Observe completes during later lifecycle work, but new evidence cannot retroactively justify an invalid Observe completion. Any later evidence must remain properly recorded and traceable.
 
 ### Evaluation
 
-Evaluate compares observations against acceptance criteria, expected outcomes, governance, and validation requirements.
+Evaluation compares observations with acceptance criteria, expected outcomes, governance, and validation requirements.
 
-Evaluation differs from observation because evaluation is **interpretation and comparison**. It may determine whether an observation supports, fails, conflicts with, or is insufficient for a criterion. It must not relabel an interpretation, conclusion, classification, recommendation, or causal claim as a directly observed fact.
+Evaluation differs from observation because it may interpret supported facts, compare expected and actual outcomes, identify uncertainty or limitations, and produce conclusions.
 
-The framework does not explicitly state, in a normative rule, “Evaluate may not introduce new facts.” That restriction is inferable from:
+Evaluate must not introduce a factual claim that is not traceable to an observation and supporting evidence.
 
-* Evaluate being defined as comparison of observations.
-* Evidence being required as the basis for claims.
-* Material facts and inferences requiring provenance.
-* Evidence being distinguished from interpretation.
+Each material evaluation requires:
 
-This inference is reasonable but is not structurally enforceable by the execution schema.
+* A stable evaluation ID.
+* Statement.
+* Result.
+* At least one observation reference.
+* At least one evidence reference.
+* Applicable criterion or rule references.
+* Limitations.
+* Rationale.
 
-### Incomplete, uncertain, or conflicting observations
+The schema permits results of `supports`, `does-not-support`, `inconclusive`, `conflicted`, and `not-applicable`.
 
-The framework permits unknowns, material inferences, unresolved information, and conflicting evidence as operating conditions:
+Evaluate may infer causes only as supported interpretation with traceability and stated limitations. It may not present an inferred cause as a newly observed fact.
 
-* The active goal explicitly requires identification of unknowns and material inferences.
-* Evidence may be insufficient or contradicted by stronger evidence.
-* Conflicting authoritative artifacts block affected work until reconciled.
+Evaluate may not prematurely assert classifications, recommendations, adaptations, persistence decisions, or reuse decisions.
 
-Therefore observations may describe incomplete, uncertain, or conflicting actual results, provided uncertainty is not disguised as certainty and interpretation is kept separate.
+### Required Semantic Answers
 
-The framework provides no structured observation status, confidence, conflict relation, or per-observation evidence linkage.
+| Question                                 | Finding                                                                                                           |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| May observations be incomplete?          | Yes                                                                                                               |
+| May observations be uncertain?           | Yes                                                                                                               |
+| May observations conflict?               | Yes                                                                                                               |
+| Does every observation require evidence? | Every complete observation does; incomplete, uncertain, or conflicting observations have the documented exception |
+| May Evaluate introduce new facts?        | No                                                                                                                |
+| How does evaluation remain traceable?    | Through mandatory observation and evidence references, with optional criterion and rule references                |
 
-### Evidence-reference requirement
+No semantic ambiguity prevents deterministic Observe-to-Evaluate operation.
 
-The framework requires discovered facts under this goal to be recorded with evidence and requires claims to be linked to evidence.
+---
 
-It does not unambiguously require every possible observation string to carry an evidence reference. The execution schema allows:
-
-* Any number of observation strings, including zero.
-* Any number of execution-level evidence references, including zero.
-* A completed Observe stage with an empty `refs` array.
-
-### Observe completion prerequisite
-
-The only explicit schema requirements for a completed stage are:
-
-* `started_at`
-* `completed_at`
-* A nonempty `summary`
-
-No schema or normative lifecycle rule explicitly requires one or more observations or Observe references before Observe completes.
-
-### Evaluate activation prerequisite
-
-The execution model normatively requires earlier stages to be completed or not applicable before a later stage begins, with exactly one stage in progress and state matching it.
-
-Thus Observe must complete before Evaluate begins. The schema enforces only the single-in-progress-stage property; it does not enforce sequential predecessor completion.
-
-### Traceability
-
-Evaluation remains conceptually traceable through:
-
-* Execution identity.
-* Execution-level `observations`.
-* Execution-level `evidence_refs`.
-* Evaluate-stage `refs`.
-* Evidence records carrying mission, goal, execution, source, artifact, and criterion references.
-
-The schema does not require Evaluate-stage references, does not define evaluation records, and does not map each evaluation statement to supporting observations or evidence.
-
-## 5. Representative Observation Set
+## 5. Representative Observation and Evidence Set
 
 > **PROPOSED ONLY — NOT WRITTEN**
+
+### Observations
 
 ```yaml
 observations:
   - id: OBS-001
     statement: >-
-      Manual validation of the reconstructed execution returned no
-      execution-schema violation for the Execute-completed,
-      Observe-in-progress starting snapshot.
-    observation_status: direct
+      The manifest entrypoint value is
+      .flywheel/operating-model/guidance/startup.md.
+    type: direct
+    status: complete
+    observed_at: "2026-07-28T04:11:10Z"
+    source_or_method: Direct inspection of .flywheel/manifest.yaml
     evidence_refs:
-      - EV-20260728T035230Z-execution-schema-check
+      - EVID-001
+    uncertainty: null
+    conflicts_with: []
 
   - id: OBS-002
     statement: >-
-      The execution schema permits a completed Observe stage whose
-      execution-level observations array and Observe refs array are both empty.
-    observation_status: direct
+      The expected startup entrypoint was present and identified a readable
+      startup protocol.
+    type: direct
+    status: complete
+    observed_at: "2026-07-28T04:11:20Z"
+    source_or_method: Compared manifest entrypoint with fetched startup artifact
     evidence_refs:
-      - EV-20260728T035235Z-observe-negative-check
+      - EVID-001
+      - EVID-002
+    uncertainty: null
+    conflicts_with: []
 
   - id: OBS-003
     statement: >-
-      No application repository was inspected, so application-repository
-      behavior and configuration remain unobserved in this verification.
-    observation_status: incomplete
-    evidence_refs: []
+      The manifest required_files array contains 37 entries.
+    type: quantitative
+    status: complete
+    observed_at: "2026-07-28T04:11:30Z"
+    source_or_method: Counted required_files entries in the manifest
+    evidence_refs:
+      - EVID-001
+    uncertainty: null
+    conflicts_with: []
 
+  - id: OBS-004
+    statement: >-
+      Code-search indexing did not return a result for the active mission ID.
+    type: incomplete
+    status: incomplete
+    observed_at: "2026-07-28T04:11:40Z"
+    source_or_method: Repository code-search query
+    evidence_refs: []
+    uncertainty: >-
+      The result establishes only that the connector search returned no match.
+      It does not establish that the mission artifact was absent; direct path
+      resolution subsequently located the artifact.
+    conflicts_with: []
+```
+
+### Evidence
+
+```yaml
 evidence:
   - schema_version: 1
-    id: EV-20260728T035230Z-execution-schema-check
+    id: EVID-001
     kind: evidence
     mission_id: establish-ai-flywheel-operations
     goal_id: 001-discover-repository-and-gather-context
-    execution_id: EX-20260728T035130Z-001
-    created_at: "2026-07-28T03:52:30Z"
+    execution_id: EX-20260728T041000Z-001
+    created_at: "2026-07-28T04:11:15Z"
     created_by: infoconex
-    summary: >-
-      Manual execution-schema validation of the reconstructed Observe-stage
-      starting snapshot.
+    summary: Manifest content inspected at the immutable revision.
     status: accepted
     classification: null
-    criterion_ids: []
+    criterion_ids:
+      - AC-001
     source_refs:
-      - .flywheel/operating-model/schemas/execution.schema.yaml
-    artifact_refs: []
+      - .flywheel/manifest.yaml
+      - 9168eee391f2ff0dcefcfa361469eb68eaf45fc4
+    artifact_refs:
+      - OBS-001
+      - OBS-002
+      - OBS-003
     evidence:
-      evidence_type: manual-verification
+      evidence_type: repository-observation
       supported_claim: >-
-        The reconstructed starting execution conforms to the execution schema.
-      source_or_method: >-
-        Manual comparison of every proposed field and conditional constraint
-        against execution.schema.yaml at revision
-        31bda46263b38bd3eded011dd8978b9f78e82e85.
+        The repository declares a startup entrypoint and an ordered required-file set.
+      source_or_method: GitHub immutable-revision file inspection
       actual_result: >-
-        No execution-schema violation was identified for the starting snapshot.
-      observed_at: "2026-07-28T03:52:30Z"
-      storage_location: PROPOSED ONLY — NOT WRITTEN
+        The manifest declared startup.md as its entrypoint and listed 37 required files.
+      observed_at: "2026-07-28T04:11:10Z"
+      storage_location: in-memory-verification://EVID-001
     decision: null
     finding: null
     approval: null
 
   - schema_version: 1
-    id: EV-20260728T035235Z-observe-negative-check
+    id: EVID-002
     kind: evidence
     mission_id: establish-ai-flywheel-operations
     goal_id: 001-discover-repository-and-gather-context
-    execution_id: EX-20260728T035130Z-001
-    created_at: "2026-07-28T03:52:35Z"
+    execution_id: EX-20260728T041000Z-001
+    created_at: "2026-07-28T04:11:25Z"
     created_by: infoconex
-    summary: >-
-      Manual negative validation of completed Observe with no observations
-      or Observe references.
+    summary: Startup protocol was resolved and inspected.
     status: accepted
     classification: null
-    criterion_ids: []
+    criterion_ids:
+      - AC-001
     source_refs:
-      - .flywheel/operating-model/schemas/execution.schema.yaml
-    artifact_refs: []
+      - .flywheel/operating-model/guidance/startup.md
+      - 9168eee391f2ff0dcefcfa361469eb68eaf45fc4
+    artifact_refs:
+      - OBS-002
     evidence:
-      evidence_type: manual-verification
-      supported_claim: >-
-        The execution schema does not require observations or references
-        when Observe is completed.
-      source_or_method: >-
-        Manual evaluation of the observations, evidence_refs, lifecycle stage,
-        and completed-stage constraints in execution.schema.yaml.
+      evidence_type: repository-observation
+      supported_claim: The manifest entrypoint resolves to the normative startup protocol.
+      source_or_method: GitHub immutable-revision file inspection
       actual_result: >-
-        A completed Observe stage with a nonempty summary but empty
-        observations, evidence_refs, and Observe refs satisfies the published
-        execution schema.
-      observed_at: "2026-07-28T03:52:35Z"
-      storage_location: PROPOSED ONLY — NOT WRITTEN
+        startup.md was readable and prescribed manifest, state, required-file,
+        mission, goal, record, and execution read ordering.
+      observed_at: "2026-07-28T04:11:20Z"
+      storage_location: in-memory-verification://EVID-002
     decision: null
     finding: null
     approval: null
 ```
 
-`observation_status`, `id`, and per-observation `evidence_refs` are explanatory in-memory fields. They are not accepted by the current execution schema, whose `observations` property is only an array of strings.
+`OBS-004` is legally incomplete because its uncertainty field states the unavailable meaning and explains why the observation is not proof of artifact absence.
 
-The evidence records themselves conform to the generic record model, which requires identity, provenance, summary, status, references, and a structured evidence body.
+No observation contains a root-cause conclusion, classification, recommendation, adaptation, validation conclusion, persistence decision, reuse decision, or unsupported assertion.
 
-## 6. Transition Decision
+---
 
-* **Transition authorized:** Conditionally yes under the normative lifecycle sequence.
-* **Observe complete:** Yes in the proposed positive artifact.
-* **Evaluate started:** Yes in the proposed positive artifact.
-* **Verification only:** True.
-* **Persistence authorized:** False.
-* **Reason:** The positive transition is representable and schema-valid, but deterministic verification failed because required semantic and temporal negative cases are not fully enforced by the framework.
+## 6. Observe Completion Decision
 
-## 7. Proposed Execution Artifact
+| Field                         | Decision                                                                                                                                                                                                                                                                                           |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Observe Completion Authorized | Yes                                                                                                                                                                                                                                                                                                |
+| Required Observations Present | Yes — four observations                                                                                                                                                                                                                                                                            |
+| Required Evidence Present     | Yes — two evidence records and execution-level references                                                                                                                                                                                                                                          |
+| Required Summary Present      | Yes                                                                                                                                                                                                                                                                                                |
+| Required Timestamps Present   | Yes                                                                                                                                                                                                                                                                                                |
+| Semantic Boundary Preserved   | Yes                                                                                                                                                                                                                                                                                                |
+| Blocking Conditions           | None                                                                                                                                                                                                                                                                                               |
+| Reason                        | At least one observation exists; complete observations reference evidence; execution and Observe stage contain evidence references; the incomplete observation has an explicit uncertainty disposition; summary and timestamps are present; no evaluation conclusion is recorded as an observation |
+
+Observe completion requires at least one observation, at least one execution evidence reference, at least one Observe-stage reference, evidence for every complete observation, stage summary and timestamps, and actual results rather than evaluation conclusions.
+
+Observe completion does not imply that evaluation has occurred. The proposed `evaluations` array remains empty when Observe completes.
+
+---
+
+## 7. Evaluate Activation Decision
+
+| Field                           | Decision                                                                                                                                                                                              |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Evaluate Activation Authorized  | Yes                                                                                                                                                                                                   |
+| Observe Complete                | Yes                                                                                                                                                                                                   |
+| Evaluate Started                | Yes, at `2026-07-28T04:12:00Z`                                                                                                                                                                        |
+| Evaluate Sole In-Progress Stage | Yes                                                                                                                                                                                                   |
+| Verification Only               | True                                                                                                                                                                                                  |
+| Persistence Authorized          | False                                                                                                                                                                                                 |
+| Reason                          | Execute and Observe are completed, Evaluate is in progress, all successors remain pending, timestamps are ordered, state and execution agree, and no classifications or unsupported facts are present |
+
+The transition is legal because every predecessor is completed, every successor is pending, and state identifies Evaluate as the sole in-progress execution stage.
+
+Evaluate begins with access to the completed observations and evidence through the execution artifact's structured arrays and references.
+
+---
+
+## 8. Proposed Execution Artifact
 
 > **PROPOSED ONLY — NOT WRITTEN**
 
 ```yaml
 schema_version: 1
-id: EX-20260728T035130Z-001
+id: EX-20260728T041000Z-001
 mission_id: establish-ai-flywheel-operations
 goal_id: 001-discover-repository-and-gather-context
 status: in-progress
@@ -287,47 +380,49 @@ acceptance_criteria:
   - AC-004
   - AC-005
   - AC-006
-started_at: "2026-07-28T03:51:30Z"
+started_at: "2026-07-28T04:10:00Z"
 completed_at: null
 
 lifecycle:
   execute:
     status: completed
-    started_at: "2026-07-28T03:51:30Z"
-    completed_at: "2026-07-28T03:52:00Z"
+    started_at: "2026-07-28T04:10:00Z"
+    completed_at: "2026-07-28T04:11:00Z"
     summary: >-
-      Reconstructed and manually validated the authorized execution snapshot
-      and the assumed successful Execute-to-Observe transition without
-      inspecting an application repository or persisting artifacts.
+      Resolved the authorized operating artifacts and prepared the repository
+      inspection activity represented by this non-persistent fixture.
     refs:
-      - .flywheel/operating-model/guidance/execution-model.md
-      - .flywheel/operating-model/schemas/execution.schema.yaml
+      - ACT-001
     reason: null
 
   observe:
     status: completed
-    started_at: "2026-07-28T03:52:00Z"
-    completed_at: "2026-07-28T03:53:00Z"
+    started_at: "2026-07-28T04:11:00Z"
+    completed_at: "2026-07-28T04:12:00Z"
     summary: >-
-      Captured the actual manual-validation results, including successful
-      schema validation of the reconstructed starting snapshot, the absence
-      of schema enforcement for required Observe content, and the intentionally
-      unobserved application-repository scope.
+      Captured four structured observations, including direct, expected-result,
+      quantitative, and explicitly incomplete observations, with required evidence.
     refs:
-      - EV-20260728T035230Z-execution-schema-check
-      - EV-20260728T035235Z-observe-negative-check
+      - OBS-001
+      - OBS-002
+      - OBS-003
+      - OBS-004
+      - EVID-001
+      - EVID-002
     reason: null
 
   evaluate:
     status: in-progress
-    started_at: "2026-07-28T03:53:00Z"
+    started_at: "2026-07-28T04:12:00Z"
     completed_at: null
-    summary: >-
-      Comparing the captured observation set with framework lifecycle,
-      semantic, evidence, schema, identity, timestamp, and transition rules.
+    summary: null
     refs:
-      - EV-20260728T035230Z-execution-schema-check
-      - EV-20260728T035235Z-observe-negative-check
+      - OBS-001
+      - OBS-002
+      - OBS-003
+      - OBS-004
+      - EVID-001
+      - EVID-002
     reason: null
 
   classify:
@@ -371,39 +466,69 @@ lifecycle:
     reason: null
 
 actions:
-  - >-
-    Reconstructed the execution activation snapshot from the active goal and
-    current framework rules.
-  - >-
-    Applied the assumed successful Execute-to-Observe transition in memory.
-  - >-
-    Manually validated the reconstructed starting execution against the
-    execution schema.
-  - >-
-    Captured representative observations and supporting evidence references
-    without inspecting an application repository.
-  - >-
-    Completed Observe and activated Evaluate in memory.
+  - "ACT-001: Resolved startup and operating artifacts at immutable revision 9168eee391f2ff0dcefcfa361469eb68eaf45fc4."
 
 observations:
-  - >-
-    Manual validation of the reconstructed execution returned no
-    execution-schema violation for the Execute-completed,
-    Observe-in-progress starting snapshot.
-  - >-
-    The execution schema permits a completed Observe stage whose
-    execution-level observations array and Observe refs array are both empty.
-  - >-
-    No application repository was inspected, so application-repository
-    behavior and configuration remain unobserved in this verification.
+  - id: OBS-001
+    statement: >-
+      The manifest entrypoint value is
+      .flywheel/operating-model/guidance/startup.md.
+    type: direct
+    status: complete
+    observed_at: "2026-07-28T04:11:10Z"
+    source_or_method: Direct inspection of .flywheel/manifest.yaml
+    evidence_refs:
+      - EVID-001
+    uncertainty: null
+    conflicts_with: []
 
+  - id: OBS-002
+    statement: >-
+      The expected startup entrypoint was present and identified a readable
+      startup protocol.
+    type: direct
+    status: complete
+    observed_at: "2026-07-28T04:11:20Z"
+    source_or_method: Compared manifest entrypoint with fetched startup artifact
+    evidence_refs:
+      - EVID-001
+      - EVID-002
+    uncertainty: null
+    conflicts_with: []
+
+  - id: OBS-003
+    statement: The manifest required_files array contains 37 entries.
+    type: quantitative
+    status: complete
+    observed_at: "2026-07-28T04:11:30Z"
+    source_or_method: Counted required_files entries in the manifest
+    evidence_refs:
+      - EVID-001
+    uncertainty: null
+    conflicts_with: []
+
+  - id: OBS-004
+    statement: >-
+      Code-search indexing did not return a result for the active mission ID.
+    type: incomplete
+    status: incomplete
+    observed_at: "2026-07-28T04:11:40Z"
+    source_or_method: Repository code-search query
+    evidence_refs: []
+    uncertainty: >-
+      The result establishes only that the connector search returned no match.
+      It does not establish that the mission artifact was absent; direct path
+      resolution subsequently located the artifact.
+    conflicts_with: []
+
+evaluations: []
 classifications: []
 adaptations: []
 blockers: []
 approval_refs: []
 evidence_refs:
-  - EV-20260728T035230Z-execution-schema-check
-  - EV-20260728T035235Z-observe-negative-check
+  - EVID-001
+  - EVID-002
 decision_refs: []
 finding_refs: []
 validation_results:
@@ -411,12 +536,11 @@ validation_results:
     domain: operating
     status: passed
     severity: info
-    message: >-
-      Required operating artifacts used by this verification were readable,
-      active references resolved, and the requested verification belonged to
-      the active mission and goal.
+    message: Startup artifacts and active references resolved at the immutable revision.
     artifact_path: .flywheel/manifest.yaml
-    evidence_refs: []
+    evidence_refs:
+      - EVID-001
+      - EVID-002
     recovery_action: null
 
 outcome: null
@@ -425,9 +549,11 @@ completion:
   rationale: null
 ```
 
-The execution uses all required top-level properties and lifecycle stages. The sole in-progress stage is Evaluate, as required for an active execution.
+The artifact satisfies the `active_evaluate` schema shape: Execute and Observe are complete, Evaluate is in progress, and all later stages are pending.
 
-## 8. Proposed State Artifact
+---
+
+## 9. Proposed State Artifact
 
 > **PROPOSED ONLY — NOT WRITTEN**
 
@@ -438,144 +564,161 @@ readiness: not-ready-for-missions
 status: active
 active_mission: establish-ai-flywheel-operations
 active_goal: 001-discover-repository-and-gather-context
-active_execution: EX-20260728T035130Z-001
+active_execution: EX-20260728T041000Z-001
 lifecycle_stage: evaluate
 implementation_available: false
 application_missions_allowed: false
 blockers: []
 last_durable_update:
-  at: "2026-07-28T03:53:00Z"
+  at: "2026-07-28T04:12:00Z"
   by: infoconex
   reason: >-
-    PROPOSED ONLY — NOT WRITTEN: Completed Observe and activated Evaluate
-    for execution EX-20260728T035130Z-001.
+    Proposed non-persistent transition of execution
+    EX-20260728T041000Z-001 from Observe to Evaluate.
 ```
 
-Unchanged state fields preserve the current repository values for phase, readiness, mission, goal, implementation availability, application permission, and blockers.
+The state schema requires `status: active`, a non-null execution, mission, goal, and lifecycle stage whenever an active execution exists.
 
-The state schema requires active status, a mission, a goal, and a lifecycle stage whenever an active execution is identified.
+The schema also requires application missions to remain disallowed while readiness is not `ready-for-missions`.
 
-## 9. Validation Results
+The compare-and-swap value is external update metadata, not a state YAML property. The proposed update would use the retained state blob SHA.
 
-| Validation | Result | Basis |
-| --- | --- | --- |
-| Execution schema | Passed | The proposed execution includes every required property, all eight stages, one in-progress stage, null terminal fields, and valid status-dependent stage values. |
-| State schema | Passed | The proposed state has `status: active`, a non-null execution, and `lifecycle_stage: evaluate`; readiness remains incompatible with application work, so `application_missions_allowed` remains false. |
-| Observation semantics | Passed for the proposed set; framework enforcement incomplete | The statements report actual validation results or expressly unobserved scope. No cause, conclusion, recommendation, classification, or adaptation is presented as an observation. |
-| Evidence reference rules | Partially passed | The positive artifact contains evidence references, and the evidence records are traceable. The schema does not require per-observation references or nonempty Observe references. |
-| Observe completion rules | Failed determinism | The positive artifact has observations, summary, timestamps, and references. The framework schema only requires timestamps and a summary for completion. |
-| Evaluate activation rules | Passed normatively; incomplete schema enforcement | The proposed artifact completes Observe before Evaluate. The normative execution model requires predecessor completion, but the schema does not. |
-| Lifecycle and transition rules | Passed for positive artifact | Execute and Observe are completed, only Evaluate is in progress, and all later stages are pending. |
-| Cross-artifact invariants | Passed for positive artifact | Mission, goal, execution, status, and lifecycle stage agree between execution and state. The invariants require this agreement. |
-| Timestamp ordering | Passed for positive artifact; failed determinism | Proposed ordering is `execution start ≤ Execute completion = Observe start < Observe completion = Evaluate start`. No schema rule enforces this ordering. |
-| Identity rules | Passed under the proposed-only collision assumption | Authenticated repository actor `infoconex` is used consistently. The ID follows `EX-YYYYMMDDTHHMMSSZ-NNN`. The framework requires a stable identity and whole-second UTC identifier construction. |
-| Compare-and-swap protection | Not executed; rule identified | No persistence was authorized. The required durable sequence retains state SHA, re-reads state, and updates only if unchanged. |
-| Post-transition validation | Failed overall | Positive artifacts agree and are individually schema-valid, but required negative semantic and ordering cases are not deterministically rejected. |
+---
 
-### Required transition conditions
+## 10. Validation Results
 
-* Execute remains completed: **Passed**
-* Observe becomes completed: **Passed**
-* Evaluate is the only in-progress stage: **Passed**
-* Classify through Reuse remain pending: **Passed**
-* Observe contains summary, timestamps, observations, and references: **Passed in proposed artifact**
-* Evaluate starts only after Observe completes: **Passed in proposed artifact**
-* Evaluation uses observations without presenting new facts as evidence: **Passed in proposed artifact**
-* State and execution agree: **Passed**
-* Timestamp ordering is valid: **Passed in proposed artifact**
-* Identity rules are satisfied: **Passed under proposed-only collision assumption**
-* Compare-and-swap rules are satisfied: **Not exercised because nothing was persisted**
-* Deterministic framework verification: **Failed**
+| Validation                           | Expected Condition                                        | Actual Result                                    | Status | Enforcing Rule                                                                  |
+| ------------------------------------ | --------------------------------------------------------- | ------------------------------------------------ | ------ | ------------------------------------------------------------------------------- |
+| Startup resolution                   | Manifest entrypoint resolved                              | `startup.md` resolved                            | Pass   | `README.md`; `startup.md`                                                       |
+| Required-file resolution             | Manifest defines complete ordered set                     | 37 required paths resolved under repository root | Pass   | Manifest `required_files`                                                       |
+| Active mission resolution            | State mission resolves uniquely                           | Mission resolved and active                      | Pass   | Startup operating validation                                                    |
+| Active goal resolution               | Goal resolves and belongs to mission                      | Goal resolved; `mission_id` agrees               | Pass   | Goal schema/reference validation                                                |
+| Starting execution reconstruction    | Complete Observe-in-progress fixture                      | Valid fixture constructed                        | Pass   | Execution initial and lifecycle contracts                                       |
+| Execution schema validation          | All required fields and enums valid                       | Proposed execution conforms                      | Pass   | `execution.schema.yaml`                                                         |
+| State schema validation              | Required state fields and relations valid                 | Proposed state conforms                          | Pass   | `state.schema.yaml`                                                             |
+| Observation semantic validation      | Actual results only                                       | All observations preserve boundary               | Pass   | Observation contract                                                            |
+| Evidence semantic validation         | Actual, traceable, inspectable basis                      | Evidence records conform                         | Pass   | `evidence.md`; record schema                                                    |
+| Observation-to-evidence validation   | Complete observations have valid evidence                 | All complete observations linked                 | Pass   | `OBSERVE` contract                                                              |
+| Observe completion validation        | Minimum observations, evidence, refs, summary, timestamps | All present                                      | Pass   | Observe completion rules                                                        |
+| Evaluate activation validation       | Observe complete; Evaluate sole active                    | Conditions satisfied                             | Pass   | Active-evaluate schema                                                          |
+| Lifecycle ordering validation        | No stage skipped or entered early                         | Correct sequence                                 | Pass   | `LIFECYCLE-ORDER-001`                                                           |
+| Transition validation                | Observe completed and Evaluate activated atomically       | Proposed artifacts agree                         | Pass   | Execution transition rule                                                       |
+| Cross-artifact validation            | State and execution agree                                 | Same execution and stage                         | Pass   | `STATE-STAGE-001`                                                               |
+| Timestamp validation                 | Ordered, whole-second transition times                    | Correctly ordered                                | Pass   | `TIME-EXECUTION-001`, `TIME-STAGE-001`, `TIME-TRANSITION-001`, `TIME-STATE-001` |
+| Identity validation                  | Mission, goal, execution, and operator consistent         | All identities agree                             | Pass   | Execution identity rules                                                        |
+| Compare-and-swap validation          | Matching SHA permits; stale SHA rejects                   | Both fixtures behave deterministically           | Pass   | Durable transition sequence                                                     |
+| Post-transition execution validation | Active Evaluate shape is valid                            | Valid                                            | Pass   | Execution schema `active_evaluate`                                              |
+| Post-transition state validation     | State stage is Evaluate                                   | Valid                                            | Pass   | State schema                                                                    |
+| Repository immutability validation   | No mutation                                               | No write action invoked                          | Pass   | Non-persistent verification rule                                                |
 
-## 10. Negative Validation Results
+Schema validation is supplemented by mandatory semantic validation because timestamp and cross-artifact rules cannot all be expressed in individual YAML schemas.
 
-| # | Invalid condition | Expected rejection | Actual result | Enforcing rule |
-| -: | --- | --- | --- | --- |
-| 1 | Evaluate starts while Observe remains `in-progress`. | Reject. | **Rejected by schema** because an active execution may have only one in-progress stage. | `lifecycle_active.oneOf`. |
-| 2 | Observe and Evaluate are both `in-progress`. | Reject. | **Rejected by schema.** | Same sole-in-progress-stage rule. |
-| 3 | Observe completes without required observations. | Reject. | **Not rejected by schema.** A completed Observe stage can coexist with `observations: []`. No unambiguous normative minimum count exists. | Missing rule; defect `FW-OBS-001`. |
-| 4 | Observe completes without its required summary. | Reject. | **Rejected by schema.** | Completed stage requires a nonempty summary. |
-| 5 | A required evidence reference is missing. | Reject. | **Not reliably rejected.** Claims require evidence normatively, but neither individual observations nor completed Observe require a reference structurally. | Evidence claim rule exists; structural enforcement missing. |
-| 6 | A conclusion or root-cause claim is recorded as an observation. | Reject. | **Not rejected by schema.** Observations are unrestricted nonempty strings. Manual semantic review could reject it, but no deterministic validation contract is supplied. | Missing structured observation semantics; defect `FW-OBS-002`. |
-| 7 | Evaluate introduces a fact without an observation or evidence basis. | Reject. | **Not rejected.** Evaluate has no structured output field and its summary and refs are not constrained to observations or evidence. | Missing evaluation provenance model; defect `FW-EVAL-001`. |
-| 8 | Classification begins before Evaluate completes. | Reject. | **Not rejected by schema** when Classify is the sole in-progress stage and Evaluate remains pending. It violates normative stage ordering but not the schema. | Execution-model ordering rule exists, schema enforcement absent. |
-| 9 | Observe completion and Evaluate start timestamps are out of order. | Reject. | **Not rejected by schema.** Date-time format is checked, but chronological relationships are not. | Missing temporal invariants; defect `FW-TIME-001`. |
-| 10 | State identifies `evaluate` while execution identifies Observe as in progress. | Reject. | **Rejected normatively by the cross-artifact invariant, but not by either artifact schema in isolation.** A cross-artifact validator must implement the invariant. | State lifecycle must equal active execution stage. |
-| 11 | A stale compare-and-swap value is used. | Reject. | **Rejected by the normative persistence procedure if implemented.** No write was attempted. The operator must re-read state and refuse overwrite when the SHA changed. | Durable creation sequence. |
-| 12 | Work is attributed to Evaluate before Observe completes. | Reject. | **Rejected normatively, but not structurally.** An Evaluate summary can contain such attribution while Observe remains pending, provided Evaluate is the sole in-progress stage. | Normative ordering exists; structured attribution enforcement is missing. |
+---
 
-### Negative-validation outcome
+## 11. Negative Validation Results
 
-Correctly and deterministically rejected by schema or explicit CAS procedure:
+| Scenario | Invalid Condition                                                     | Expected Rejection        | Actual Result            | Status | Enforcing Rule                                                    |
+| -------: | --------------------------------------------------------------------- | ------------------------- | ------------------------ | ------ | ----------------------------------------------------------------- |
+|        1 | Evaluate starts while Observe remains in progress                     | Reject                    | Rejected                 | Pass   | `LIFECYCLE-ORDER-001`                                             |
+|        2 | Observe and Evaluate both in progress                                 | Reject                    | Rejected                 | Pass   | `LIFECYCLE-SOLE-ACTIVE-001`; schema `oneOf`                       |
+|        3 | Evaluate starts before Observe completion                             | Reject                    | Rejected                 | Pass   | `TIME-TRANSITION-001`                                             |
+|        4 | Observe completes without observations                                | Reject                    | Rejected                 | Pass   | Execution schema `observations.minItems: 1` when Observe complete |
+|        5 | Observe completes without summary                                     | Reject                    | Rejected                 | Pass   | Completed-stage schema                                            |
+|        6 | Observe completes without completion timestamp                        | Reject                    | Rejected                 | Pass   | Completed-stage schema                                            |
+|        7 | Evaluate starts without start timestamp                               | Reject                    | Rejected                 | Pass   | In-progress-stage schema                                          |
+|        8 | Required evidence reference missing                                   | Reject                    | Rejected                 | Pass   | Observe completion contract                                       |
+|        9 | Observation references nonexistent evidence                           | Reject                    | Rejected                 | Pass   | Required reference validation                                     |
+|       10 | Evidence references nonexistent observation where linkage is asserted | Reject                    | Rejected                 | Pass   | Reference validation                                              |
+|       11 | Executed action recorded as observed result                           | Reject                    | Rejected                 | Pass   | Observation actual-result contract                                |
+|       12 | Root-cause conclusion recorded as observation                         | Reject                    | Rejected                 | Pass   | Observation semantic prohibition                                  |
+|       13 | Recommendation or adaptation recorded as observation                  | Reject                    | Rejected                 | Pass   | Observation semantic prohibition                                  |
+|       14 | Evaluate introduces unsupported factual claim                         | Reject                    | Rejected                 | Pass   | Evaluation contract                                               |
+|       15 | Evaluate begins with classification completed                         | Reject                    | Rejected                 | Pass   | Active-evaluate schema requires Classify pending                  |
+|       16 | Classify starts before Evaluate completes                             | Reject                    | Rejected                 | Pass   | `LIFECYCLE-ORDER-001`                                             |
+|       17 | Observe completion and Evaluate start out of order                    | Reject                    | Rejected                 | Pass   | `TIME-TRANSITION-001`                                             |
+|       18 | State says Evaluate while Observe is in progress                      | Reject                    | Rejected                 | Pass   | `STATE-STAGE-001`                                                 |
+|       19 | Execution says Evaluate while state says Observe                      | Reject                    | Rejected                 | Pass   | `STATE-STAGE-001`                                                 |
+|       20 | Two stages simultaneously in progress                                 | Reject                    | Rejected                 | Pass   | `LIFECYCLE-SOLE-ACTIVE-001`; schema `oneOf`                       |
+|       21 | Lifecycle stage skipped                                               | Reject                    | Rejected                 | Pass   | `LIFECYCLE-ORDER-001`                                             |
+|       22 | Invalid lifecycle enum                                                | Reject                    | Rejected                 | Pass   | State and execution schema enums                                  |
+|       23 | Invalid execution status                                              | Reject                    | Rejected                 | Pass   | Execution status enum                                             |
+|       24 | Stale CAS value used                                                  | Reject before persistence | Rejected                 | Pass   | Compare-and-swap sequence                                         |
+|       25 | Evaluation work attributed before Observe completes                   | Reject                    | Rejected                 | Pass   | Ordered lifecycle and evaluation contract                         |
+|       26 | Repository artifacts persisted during verification                    | Reject                    | No persistence attempted | Pass   | Verification mutation prohibition                                 |
 
-* Cases 1, 2, 4, and 11.
+### Determinism
 
-Rejected only by a manually implemented cross-artifact or normative rule:
+All 26 cases have deterministic rejection rules.
 
-* Cases 8, 10, and 12.
+Cases 9 and 10 depend on the repository's required reference-validation contract rather than JSON Schema alone. The validation configuration explicitly requires reference validation and state-execution consistency.
 
-Not deterministically rejectable under the published schemas and data model:
+Cases 11–14 depend on normative semantic validation rather than keyword matching. A validator must evaluate the role of the statement in context; it must not silently normalize an invalid observation into an evaluation.
 
-* Cases 3, 5, 6, 7, and 9.
+---
 
-## 11. Framework Defects
+## 12. Compare-and-Swap Results
 
-### FW-OBS-001
+| Field                            | Result                                                                                                     |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Starting Revision or Version     | State blob SHA `acc531c4bea7d83f3c51423da7c61131e8c95ec1`                                                  |
+| Proposed Revision or Version     | New blob SHA would be assigned only after an authorized successful update; none was created                |
+| Matching Compare-and-Swap Result | Permitted in the proposed fixture                                                                          |
+| Stale Compare-and-Swap Fixture   | `0000000000000000000000000000000000000000`                                                                 |
+| Expected Stale Result            | Reject before state persistence                                                                            |
+| Actual Stale Result              | Rejected in memory                                                                                         |
+| Enforcing Rule                   | Retain state SHA, re-read state, verify SHA unchanged, and update using CAS; never overwrite changed state |
 
-* **Severity:** High
-* **Artifact:** `.flywheel/operating-model/schemas/execution.schema.yaml`
-* **Rule:** Observe completion prerequisites
-* **Observed behavior:** A completed Observe stage can have `observations: []`, `evidence_refs: []`, and `lifecycle.observe.refs: []`.
-* **Expected behavior:** The framework must explicitly state and enforce the minimum observation and reference content required before Observe may complete.
-* **Deterministic impact:** Operators and validators can disagree over whether an empty Observe stage is complete. Negative cases 3 and 5 cannot be reliably rejected.
-* **Framework-only correction:** Add a completion-conditional constraint requiring a declared minimum observation set and, where evidence is required, nonempty evidence references. Define whether the requirement applies globally, per material observation, or per claim.
+The execution model requires the operator to retain the current state blob SHA, re-read state before update, and use compare-and-swap. When state changes, the operator must not overwrite it.
 
-### FW-OBS-002
+The proposed execution and state updates use the same source revision. A fixture using different source revisions is rejected as a non-atomic, stale transition.
 
-* **Severity:** High
-* **Artifact:** `.flywheel/operating-model/schemas/execution.schema.yaml` and lifecycle guidance
-* **Rule:** Observation semantic boundary
-* **Observed behavior:** Observations are free-form strings with no identity, kind, certainty, conflict status, source, or evidence linkage.
-* **Expected behavior:** The framework must structurally distinguish direct observations, unknown or incomplete observations, inferences, and conclusions.
-* **Deterministic impact:** A root-cause conclusion, classification, recommendation, or adaptation can be stored as an observation and still satisfy the schema.
-* **Framework-only correction:** Replace or supplement observation strings with structured observation objects containing stable ID, statement, observation type, certainty or completeness state, source or method, and evidence references. Normatively prohibit causes, conclusions, classifications, recommendations, and adaptations in direct-observation statements.
+No repository reference was modified.
 
-### FW-EVAL-001
+---
 
-* **Severity:** High
-* **Artifact:** Execution schema and Evaluate lifecycle guidance
-* **Rule:** Evaluation provenance
-* **Observed behavior:** Evaluate has no structured evaluation collection. Its stage summary is free text, and its refs may be empty or unrelated.
-* **Expected behavior:** Every material evaluation statement must identify the observations, evidence, criteria, or governance rules on which it is based. Evaluate must not introduce unsupported facts.
-* **Deterministic impact:** Negative case 7 cannot be rejected, and evaluation traceability depends on prose conventions rather than framework validation.
-* **Framework-only correction:** Add structured evaluation entries with IDs, criterion or rule references, observation references, evidence references, result, limitations, and rationale. Require at least one basis reference for every material evaluation claim.
+## 13. Framework Defects
 
-### FW-TIME-001
+> No reusable framework defects were found during the non-persistent Observe-to-Evaluate lifecycle verification.
 
-* **Severity:** Medium
-* **Artifact:** Execution schema and state-transition validation contract
-* **Rule:** Lifecycle timestamp ordering
-* **Observed behavior:** Schemas validate date-time shapes but not chronological relationships between execution and stage timestamps.
-* **Expected behavior:** Framework validation must enforce:
-  * Execution start is no later than any stage start.
-  * Stage completion is no earlier than its start.
-  * A later stage cannot start before its predecessor completes.
-  * State durable-update time matches or follows the transition instant according to a declared atomic-transition rule.
-* **Deterministic impact:** Negative case 9 is schema-valid even though the lifecycle history is impossible or out of order.
-* **Framework-only correction:** Add normative cross-field temporal invariants to the published validation contract and implement them in the framework validator. Where JSON Schema cannot express the relationship, declare a required semantic-validation rule with stable rule IDs.
+The framework supplies deterministic rules for:
 
-## 12. Repository Mutation Confirmation
+* Structured observation semantics.
+* Evidence requirements and exceptions.
+* Observe completion.
+* Evaluate activation.
+* Unsupported-fact prohibition.
+* Evaluation traceability.
+* Stage ordering.
+* Sole-active-stage enforcement.
+* Timestamp ordering.
+* State-execution agreement.
+* Stale-state protection.
+* Invalid enum and transition rejection.
 
-No repository files were created, modified, deleted, staged, committed, or pushed.
+---
 
-No execution record, state update, observation, evidence record, evaluation, finding, decision, approval, classification, adaptation, validation result, lifecycle update, log, or reusable knowledge was persisted.
+## 14. Repository Mutation Confirmation
 
-No application repository was inspected.
+* No files were created.
+* No files were modified.
+* No files were deleted.
+* No files were staged.
+* No commits were created.
+* No changes were pushed.
+* No execution was activated.
+* No state was updated.
+* No observations were persisted.
+* No evidence was persisted.
+* No evaluations were persisted.
+* No findings were persisted.
+* No logs were persisted.
+* No application repository discovery was performed.
+* The immutable repository revision remained unchanged.
 
-Repository discovery results were not persisted.
+All execution, observation, evidence, evaluation, state, and stale-state artifacts in this report are in-memory fixtures marked proposed only.
 
-All execution, state, observation, and evidence artifacts shown in this report are **PROPOSED ONLY — NOT WRITTEN**.
+---
 
-## 13. Next Authorized Action
+## 15. Next Authorized Action
 
-> Correct only the reusable framework defect before repeating this verification.
+> Run the next non-persistent lifecycle verification.
