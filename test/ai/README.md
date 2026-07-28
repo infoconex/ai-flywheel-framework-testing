@@ -13,7 +13,7 @@ This directory catalogs the reusable AI prompts used to verify the AI Flywheel F
 | [Evaluate to Classify](prompts/005-evaluate-to-classify.md) | Evaluation completion, classification semantics and provenance, multiple classifications, lifecycle ordering, negative cases, and repository mutation protection | Yes | 2026-07-27 | Yes | [View latest result](results/005-evaluate-to-classify-rerun-2026-07-27.md) |
 | [Classify to Adapt](prompts/006-classify-to-adapt.md) | Classification completion, adaptation semantics and provenance, scope and approval boundaries, lifecycle ordering, negative cases, and repository mutation protection | Yes | 2026-07-27 | Yes | [View latest result](results/006-classify-to-adapt-rerun-2-2026-07-27.md) |
 | [Adapt to Validate](prompts/007-adapt-to-validate.md) | Adapt completion, validation semantics and provenance, evidence sufficiency, lifecycle ordering, negative cases, and repository mutation protection | Yes | 2026-07-28 | Yes | [View latest result](results/007-adapt-to-validate-rerun-5-2026-07-28.md) |
-| [Validate to Persist](prompts/008-validate-to-persist.md) | Validate completion, evidence-backed outcomes, persistence semantics, canonical locations, immutable history, partial-persistence recovery, and repository mutation protection | Yes | 2026-07-28 | No | [View result](results/008-validate-to-persist.md) |
+| [Validate to Persist](prompts/008-validate-to-persist.md) | Validate completion, evidence-backed outcomes, persistence semantics, canonical locations, immutable history, partial-persistence recovery, and repository mutation protection | Yes | 2026-07-28 | No | [View latest result](results/008-validate-to-persist-rerun-2026-07-28.md) |
 
 ## Result History
 
@@ -29,6 +29,7 @@ This directory catalogs the reusable AI prompts used to verify the AI Flywheel F
 - Prompt 007 rerun after deferred-validation-status schema correction: [Failed](results/007-adapt-to-validate-rerun-4-2026-07-28.md)
 - Prompt 007 rerun after deferred approval-state correction: [Passed](results/007-adapt-to-validate-rerun-5-2026-07-28.md)
 - Prompt 008 initial run: [Failed due to underdefined multi-artifact persistence transaction](results/008-validate-to-persist.md)
+- Prompt 008 rerun after multi-artifact persistence contract: [Failed due to self-referential persistence-plan digest](results/008-validate-to-persist-rerun-2026-07-28.md)
 
 ## Status Rules
 
