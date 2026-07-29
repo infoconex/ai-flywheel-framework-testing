@@ -14,7 +14,7 @@ This directory catalogs the reusable AI prompts used to verify the AI Flywheel F
 | [Classify to Adapt](prompts/006-classify-to-adapt.md) | Classification completion, adaptation semantics and provenance, scope and approval boundaries, lifecycle ordering, negative cases, and repository mutation protection | Yes | 2026-07-27 | Yes | [View latest result](results/006-classify-to-adapt-rerun-2-2026-07-27.md) |
 | [Adapt to Validate](prompts/007-adapt-to-validate.md) | Adapt completion, validation semantics and provenance, evidence sufficiency, lifecycle ordering, negative cases, and repository mutation protection | Yes | 2026-07-28 | Yes | [View latest result](results/007-adapt-to-validate-rerun-5-2026-07-28.md) |
 | [Validate to Persist](prompts/008-validate-to-persist.md) | Validate completion, evidence-backed outcomes, persistence semantics, canonical locations, immutable history, partial-persistence recovery, and repository mutation protection | Yes | 2026-07-28 | Yes | [View latest result](results/008-validate-to-persist-rerun-6-2026-07-28.md) |
-| [Persist to Reuse](prompts/009-persist-to-reuse.md) | Persist completion, structured reuse assessments, knowledge qualification, duplicate/conflict handling, immutable supersession/deprecation, Reuse durability, and completion boundaries | No | — | — | [View prompt self-test](results/009-prompt-self-test-2026-07-28.md) |
+| [Persist to Reuse](prompts/009-persist-to-reuse.md) | Persist completion, structured reuse assessments, knowledge qualification, duplicate/conflict handling, immutable supersession/deprecation, Reuse durability, and terminal completion boundaries | Yes | 2026-07-28 | Inconclusive | [View latest result](results/009-persist-to-reuse.md) |
 
 ## Result History
 
@@ -38,6 +38,7 @@ This directory catalogs the reusable AI prompts used to verify the AI Flywheel F
 - Prompt 008 prompt self-test: [Passed after narrowing repeated startup work to transition-relevant resolution](results/008-prompt-self-test-2026-07-28.md)
 - Prompt 008 rerun after prompt self-test correction: [Passed](results/008-validate-to-persist-rerun-6-2026-07-28.md)
 - Prompt 009 repeated prompt self-test: [Passed after four framework/prompt correction cycles](results/009-prompt-self-test-2026-07-28.md)
+- Prompt 009 initial independent run: [Inconclusive because focused repository resolution was incomplete and the fixture terminal boundary was ambiguous](results/009-persist-to-reuse.md)
 
 ## Status Rules
 
