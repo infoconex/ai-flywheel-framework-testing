@@ -16,6 +16,7 @@ This directory catalogs the reusable AI prompts used to verify the AI Flywheel F
 | [Validate to Persist](prompts/008-validate-to-persist.md) | Validate completion, evidence-backed outcomes, persistence semantics, canonical locations, immutable history, partial-persistence recovery, and repository mutation protection | Yes | 2026-07-28 | Yes | [View result](results/008-validate-to-persist.md) |
 | [Persist to Reuse](prompts/009-persist-to-reuse.md) | Persist completion, structured reuse assessments, knowledge qualification, duplicate/conflict handling, immutable supersession/deprecation, Reuse durability, and terminal completion boundaries | Yes | 2026-07-28 | Yes | [View result](results/009-persist-to-reuse.md) |
 | [End-to-End Execution](prompts/010-end-to-end-execution.md) | One stable execution across all lifecycle stages, checkpoint persistence, transaction commit markers, planned-to-completed reuse assessments, and terminal closure | Yes | 2026-07-28 | Yes | [View result](results/010-end-to-end-execution.md) |
+| [Resume Interrupted Execution](prompts/011-resume-interrupted-execution.md) | Fresh-session discovery and safe CAS resume of a durable interrupted execution without identity loss, repeated work, stale overwrites, or repository mutation | No | — | No | Pending independent result |
 
 ## Status Rules
 
