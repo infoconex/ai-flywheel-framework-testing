@@ -15,10 +15,11 @@ This directory catalogs the reusable AI prompts used to verify the AI Flywheel F
 | [Adapt to Validate](prompts/007-adapt-to-validate.md) | Adapt completion, validation semantics and provenance, evidence sufficiency, lifecycle ordering, negative cases, and repository mutation protection | Yes | 2026-07-28 | Yes | [View result](results/007-adapt-to-validate.md) |
 | [Validate to Persist](prompts/008-validate-to-persist.md) | Validate completion, evidence-backed outcomes, persistence semantics, canonical locations, immutable history, partial-persistence recovery, and repository mutation protection | Yes | 2026-07-28 | Yes | [View result](results/008-validate-to-persist.md) |
 | [Persist to Reuse](prompts/009-persist-to-reuse.md) | Persist completion, structured reuse assessments, knowledge qualification, duplicate/conflict handling, immutable supersession/deprecation, Reuse durability, and terminal completion boundaries | Yes | 2026-07-28 | Yes | [View result](results/009-persist-to-reuse.md) |
+| [End-to-End Execution](prompts/010-end-to-end-execution.md) | One stable execution across all lifecycle stages, checkpoint persistence, transaction commit markers, planned-to-completed reuse assessments, and terminal closure | No | — | — | [View prompt self-test](results/010-end-to-end-execution-self-test.md) |
 
 ## Status Rules
 
 - **Run** indicates whether the prompt has been executed independently against the target framework repository.
 - **Last Run** records the most recent independent framework execution date.
 - **Passed** indicates whether the current retained result met the expected result.
-- **Test Result** links to the retained result for the test.
+- **Test Result** links to the retained result or prompt self-test.
