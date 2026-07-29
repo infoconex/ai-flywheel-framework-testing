@@ -3,19 +3,19 @@
 
 > **Purpose**
 >
-> Verify that the AI Flywheel operating model can deterministically complete **Persist**, begin and complete **Reuse**, durably qualify reusable knowledge, and preserve immutable history without modifying the repository.
+> Verify that the AI Flywheel operating model can deterministically complete **Persist**, begin and complete **Reuse**, durably qualify reusable knowledge, preserve immutable history, and terminally close a synthetic verification execution without modifying the repository.
 
 # Repository
 
 **Repository:** `Infoconex/ai-flywheel-framework`
 
-**Branch:** `feature/self-contained-operating-model`
+**Immutable revision:** `d7cf8e6928d818d7f51485fb79c7a6a4c931a2d7`
+
+Use this exact immutable revision. Do not resolve or substitute a later branch head.
 
 # Cold Verification Rules
 
 Ignore prior conversations, memory, cached repository knowledge, and prior Prompt 009 results.
-
-Resolve and report the immutable commit SHA for the branch. Use only files read from that immutable revision.
 
 This prompt verifies one lifecycle boundary. It does not repeat Prompt 001 or prior lifecycle tests.
 
@@ -23,51 +23,73 @@ This prompt verifies one lifecycle boundary. It does not repeat Prompt 001 or pr
 
 This prompt explicitly authorizes synthetic, read-only operating-model verification. You may read framework files, reconstruct hypothetical artifacts in memory, validate them, and construct invalid fixtures.
 
-This is not durable goal-directed work. Resolve current state, mission, and goal as context, but do not reject the test because their objective differs.
+This is not durable goal-directed work. Resolve current durable state, mission, and goal as context only. Do not reject the test because their objective differs.
 
-You must not create, modify, or delete repository files; activate an execution; update state; persist records, assessments, plans, or knowledge; inspect an application repository; or stage, commit, push, or advance the durable lifecycle.
+You must not create, modify, or delete repository files; activate an execution; update durable state; persist records, assessments, plans, or knowledge; inspect an application repository; or stage, commit, push, or advance the durable lifecycle.
 
 Every displayed artifact must be labeled:
 
 > **PROPOSED ONLY — NOT WRITTEN**
 
-# Required Repository Resolution
+# Focused Repository Resolution
 
-Before reconstruction, read from the immutable revision:
+Read these 17 items from the exact immutable revision before reconstruction:
 
 1. `.flywheel/manifest.yaml`
 2. `.flywheel/state.yaml`
-3. `.flywheel/operating-model/guidance/authority.md`
-4. `.flywheel/operating-model/guidance/invariants.md`
-5. `.flywheel/operating-model/guidance/principles.md`
-6. `.flywheel/operating-model/guidance/lifecycle.md`
-7. `.flywheel/operating-model/guidance/execution-model.md`
-8. `.flywheel/operating-model/guidance/records.md`
-9. `.flywheel/operating-model/guidance/evidence.md`
-10. `.flywheel/operating-model/guidance/decisions.md`
-11. `.flywheel/operating-model/guidance/failure-handling.md`
-12. `.flywheel/operating-model/guidance/classifications.md`
-13. `.flywheel/operating-model/guidance/validation.md`
-14. `.flywheel/operating-model/guidance/persistence.md`
-15. `.flywheel/operating-model/guidance/reuse.md`
-16. `.flywheel/operating-model/config/governance.yaml`
-17. `.flywheel/operating-model/config/validation.yaml`
-18. `.flywheel/operating-model/schemas/README.md`
-19. `.flywheel/operating-model/schemas/state.schema.yaml`
-20. `.flywheel/operating-model/schemas/execution.schema.yaml`
-21. `.flywheel/operating-model/schemas/record.schema.yaml`
-22. `.flywheel/operating-model/schemas/knowledge.schema.yaml`
-23. `.flywheel/operating-model/schemas/persistence-plan.schema.yaml`
-24. `.flywheel/operating-model/schemas/reuse-assessment.schema.yaml`
-25. The active mission and active goal identified by state.
+3. `.flywheel/operating-model/guidance/lifecycle.md`
+4. `.flywheel/operating-model/guidance/execution-model.md`
+5. `.flywheel/operating-model/guidance/records.md`
+6. `.flywheel/operating-model/guidance/classifications.md`
+7. `.flywheel/operating-model/guidance/persistence.md`
+8. `.flywheel/operating-model/guidance/reuse.md`
+9. `.flywheel/operating-model/config/validation.yaml`
+10. `.flywheel/operating-model/schemas/README.md`
+11. `.flywheel/operating-model/schemas/state.schema.yaml`
+12. `.flywheel/operating-model/schemas/goal.schema.yaml`
+13. `.flywheel/operating-model/schemas/execution.schema.yaml`
+14. `.flywheel/operating-model/schemas/record.schema.yaml`
+15. `.flywheel/operating-model/schemas/knowledge.schema.yaml`
+16. `.flywheel/operating-model/schemas/persistence-plan.schema.yaml`
+17. `.flywheel/operating-model/schemas/reuse-assessment.schema.yaml`
 
-Report the immutable SHA and whether all 25 items were read successfully. A missing item fails verification. Do not stop because multiple reads are required.
+Also read the active mission and active goal identified by durable state for context. These two contextual reads do not change the 17-item focused-resolution count.
+
+Report the immutable SHA, `17/17` focused resolution, and active-context resolution. A missing required item fails verification. Do not stop because multiple reads are required.
+
+# Synthetic Verification Goal
+
+Do not force the fixture into the repository's actual onboarding goal.
+
+Construct an in-memory synthetic goal under the resolved active mission:
+
+```yaml
+id: verify-persist-to-reuse
+mission_id: establish-ai-flywheel-operations
+status: active
+objective: Verify the Persist-to-Reuse lifecycle boundary without repository mutation.
+acceptance_criteria:
+  - id: AC-901
+    statement: Persist completion is deterministic and evidence-backed.
+  - id: AC-902
+    statement: Reuse assessments and knowledge dispositions are deterministic.
+  - id: AC-903
+    statement: Reuse outputs have canonical durable transaction semantics.
+  - id: AC-904
+    statement: Invalid Persist-to-Reuse fixtures are deterministically rejected.
+  - id: AC-905
+    statement: Repository immutability is preserved.
+```
+
+Use exactly these five acceptance-criterion IDs, in this order, in the synthetic execution. Construct sufficient in-memory evidence mappings for all five so terminal execution completion can be evaluated honestly.
+
+The actual durable mission, goal, and state remain unchanged and are reported separately as context.
 
 # Verification Starting Point
 
 Assume conceptually that Prompts 001 through 008 passed. Do not copy prior result artifacts.
 
-Reconstruct a complete in-memory execution with Execute through Validate completed, Persist initially in progress with an applied and verified persistence plan ready for completion, Reuse pending, and state identifying Persist as active.
+Reconstruct a complete synthetic execution with Execute through Validate completed, Persist initially in progress with an applied and verified persistence plan ready for completion, Reuse pending, and a synthetic state identifying Persist as active.
 
 Include:
 
@@ -80,7 +102,7 @@ Include:
 - A replacement eligible to supersede prior knowledge.
 - A deprecation case requiring a new immutable tombstone artifact rather than mutation of prior knowledge.
 
-If deterministic reconstruction is impossible after required resolution, report a reusable framework defect.
+If deterministic reconstruction is impossible after focused resolution, report a reusable framework defect.
 
 # Persist Completion Verification
 
@@ -121,18 +143,18 @@ Construct concrete schema-valid reuse assessments and knowledge artifacts.
 
 Construct a dedicated Reuse persistence plan that includes every new or changed Reuse output:
 
-- Completed reuse assessments at canonical goal record paths.
+- Completed reuse assessments at canonical goal record paths under the synthetic goal.
 - New validated, superseding, or deprecation-tombstone knowledge artifacts at canonical knowledge paths.
 - Required decisions and approvals.
-- Execution update with final assessment references, synchronized reuse statuses, and Reuse completion.
-- State update as final operational pointer.
+- Synthetic execution update with final assessment references, synchronized reuse statuses, Reuse completion, terminal status, outcome, and completion disposition.
+- Synthetic state update as final operational pointer, clearing `active_execution` and `lifecycle_stage` after terminal execution.
 
 Validate:
 
 - The plan does not target or digest itself.
 - `reuse-assessment` appears after approvals and before knowledge in canonical type order.
 - Assessments and knowledge are create-only.
-- Execution and state use retained-SHA compare-and-swap.
+- Execution and state use retained-SHA compare-and-swap when modeled as existing synthetic artifacts.
 - State is last.
 - Per-write and whole-set verification are required.
 - Partial failure has deterministic rollback or compensation.
@@ -151,45 +173,68 @@ Adapt    = completed
 Validate = completed
 Persist  = completed
 Reuse    = in-progress
+Execution status = in-progress
+Synthetic state lifecycle_stage = reuse
 ```
 
-Then construct the Reuse-completed form with every stage completed or properly not applicable and the Reuse persistence plan applied and verified.
+Then construct the terminal form:
 
-Construct complete proposed execution and state artifacts with concrete values. Keep execution active unless repository rules deterministically authorize terminal completion. Separately evaluate the execution and goal completion boundary without inventing acceptance-criterion evidence.
+```text
+Execute  = completed
+Observe  = completed
+Evaluate = completed
+Classify = completed
+Adapt    = completed
+Validate = completed
+Persist  = completed
+Reuse    = completed
+Execution status = succeeded
+Execution completed_at = set
+Execution outcome = set
+Execution completion.disposition = goal-completed
+Synthetic state active_execution = null
+Synthetic state lifecycle_stage = null
+```
+
+Do not leave an `in-progress` execution with all lifecycle stages terminal. Do not claim terminal completion unless all five synthetic acceptance criteria have sufficient evidence mappings and all blockers and required approvals are resolved.
+
+Construct complete proposed synthetic goal, execution, and before/after state artifacts with concrete values. Validate schemas, lifecycle order, timestamps, identities, canonical paths, references, evidence mappings, state agreement, immutable history, and compare-and-swap requirements.
 
 # Required Validation Results
 
 Report separately:
 
 1. Immutable revision resolution.
-2. Required repository-item resolution.
-3. Active state, mission, and goal resolution.
+2. Focused repository-item resolution.
+3. Durable state, mission, and goal context resolution.
 4. Synthetic-verification authorization.
-5. Starting persisted-state reconstruction.
-6. Persist-plan terminal validation.
-7. Persist completion.
-8. Execution schema validation.
-9. State schema validation.
-10. Reuse activation.
-11. Reuse-assessment schema validation.
-12. Knowledge schema validation.
-13. Promotion eligibility.
-14. Evidence and validation provenance.
-15. Applicability, limitations, and reuse guidance.
-16. Duplicate and conflict handling.
-17. Supersession and immutable history.
-18. Immutable deprecation tombstone handling.
-19. Existing-knowledge disposition.
-20. Approval and decision handling.
-21. Adaptation reuse-status synchronization.
-22. Reuse persistence-plan validation.
-23. Reuse output durability.
-24. Reuse completion.
-25. Lifecycle ordering and timestamps.
-26. Cross-artifact references and canonical locations.
-27. Compare-and-swap and partial recovery.
-28. Execution and goal completion boundary.
-29. Repository immutability.
+5. Synthetic goal schema validation.
+6. Starting persisted-state reconstruction.
+7. Persist-plan terminal validation.
+8. Persist completion.
+9. Execution schema validation.
+10. State schema validation.
+11. Reuse activation.
+12. Reuse-assessment schema validation.
+13. Knowledge schema validation.
+14. Promotion eligibility.
+15. Evidence and validation provenance.
+16. Applicability, limitations, and reuse guidance.
+17. Duplicate and conflict handling.
+18. Supersession and immutable history.
+19. Immutable deprecation tombstone handling.
+20. Existing-knowledge disposition.
+21. Approval and decision handling.
+22. Adaptation reuse-status synchronization.
+23. Reuse persistence-plan validation.
+24. Reuse output durability.
+25. Reuse completion.
+26. Terminal execution completion.
+27. Lifecycle ordering and timestamps.
+28. Cross-artifact references and canonical locations.
+29. Compare-and-swap and partial recovery.
+30. Acceptance-criterion evidence mapping.
+31. Repository immutability.
 
 For each include expected condition, actual condition, result, and enforcing repository source.
 
@@ -228,12 +273,15 @@ Construct invalid in-memory fixtures and demonstrate deterministic rejection of 
 29. Reuse plan targets or digests itself.
 30. Reuse claims durability without final re-read.
 31. Execution closes while a lifecycle stage remains pending or active.
-32. Goal completion is claimed without acceptance-criterion evidence.
-33. State and execution disagree.
-34. Stage timestamps are out of order.
-35. A stale compare-and-swap revision is used.
-36. Partial transition or persistence lacks recovery.
-37. Repository artifacts are actually written during verification.
+32. An execution remains `in-progress` after all lifecycle stages become terminal.
+33. Terminal execution lacks outcome, completion timestamp, or completion disposition.
+34. Goal completion is claimed without evidence for all AC-901 through AC-905.
+35. Synthetic state retains an active execution after terminal completion.
+36. State and execution disagree.
+37. Stage timestamps are out of order.
+38. A stale compare-and-swap revision is used.
+39. Partial transition or persistence lacks recovery.
+40. Repository artifacts are actually written during verification.
 
 For each report invalid condition, expected rejection, actual result, and enforcing rule. A case that cannot be rejected deterministically is a reusable framework defect.
 
@@ -251,24 +299,27 @@ Use these sections in this exact order:
 
 1. Verification Summary
 2. Validation Trace
-3. Starting Persisted State
-4. Persist Completion Findings
-5. Reuse Semantic Findings
-6. Representative Reuse Assessment Set
-7. Proposed Knowledge Artifacts
-8. Reuse Persistence Plan
-9. Persist Completion Decision
-10. Reuse Activation Decision
-11. Reuse Completion Decision
-12. Proposed Execution Artifact
-13. Proposed State Artifact
-14. Validation Results
-15. Negative Validation Results
-16. Compare-and-Swap and Recovery Results
-17. Execution and Goal Completion Boundary
-18. Framework Defects
-19. Repository Mutation Confirmation
-20. Next Authorized Action
+3. Durable Operating Context
+4. Synthetic Verification Goal
+5. Starting Persisted State
+6. Persist Completion Findings
+7. Reuse Semantic Findings
+8. Representative Reuse Assessment Set
+9. Proposed Knowledge Artifacts
+10. Reuse Persistence Plan
+11. Persist Completion Decision
+12. Reuse Activation Decision
+13. Reuse Completion Decision
+14. Terminal Execution Completion Decision
+15. Proposed Execution Artifact
+16. Proposed State Artifacts
+17. Validation Results
+18. Negative Validation Results
+19. Compare-and-Swap and Recovery Results
+20. Acceptance-Criterion Evidence Mapping
+21. Framework Defects
+22. Repository Mutation Confirmation
+23. Next Authorized Action
 
 The summary must report:
 
