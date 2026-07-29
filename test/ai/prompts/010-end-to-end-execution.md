@@ -3,63 +3,58 @@
 
 > **Purpose**
 >
-> Verify that one coherent synthetic execution can move from creation through Execute, Observe, Evaluate, Classify, Adapt, Validate, Persist, Reuse, and terminal closure without cross-stage contradiction or repository mutation.
+> Verify that one coherent synthetic execution can move from creation through all eight lifecycle stages and terminal closure without accumulated contradiction or repository mutation.
 
 # Repository
 
 **Repository:** `Infoconex/ai-flywheel-framework`
 
-**Immutable revision:** `d7cf8e6928d818d7f51485fb79c7a6a4c931a2d7`
+**Immutable revision:** `92e2fb15c2aeb480fed21d194fb56f94d45f6eb8`
 
-Use this exact immutable revision. Do not resolve or substitute a later branch head.
+Use this exact revision. Do not resolve or substitute a later branch head.
 
-# Verification Authorization
+# Authorization
 
-This prompt explicitly authorizes synthetic, read-only operating-model verification. You may read framework files, reconstruct complete hypothetical artifacts in memory, validate them, and construct invalid fixtures.
+This prompt authorizes synthetic, read-only operating-model verification. Read framework files, construct complete hypothetical artifacts in memory, validate them, and construct invalid fixtures.
 
-This is not durable goal-directed work. Resolve the actual durable state, mission, and goal as context only. Do not force the synthetic execution into the repository's active onboarding goal.
+Resolve actual durable state, mission, and goal as context only. Do not force the synthetic fixture into the active onboarding goal.
 
-You must not create, modify, or delete repository files; activate an execution; update durable state; persist records, plans, assessments, or knowledge; inspect an application repository; or stage, commit, push, or advance the durable lifecycle.
+Do not create, modify, or delete repository files; activate an execution; update durable state; persist artifacts; inspect an application repository; commit; push; or advance the durable lifecycle.
 
-Every displayed artifact must be labeled:
+Label every displayed artifact:
 
 > **PROPOSED ONLY — NOT WRITTEN**
 
-# Focused Repository Resolution
+# Focused Resolution
 
-Read these 23 items from the immutable revision before reconstruction:
+Read these 20 files from the immutable revision:
 
 1. `.flywheel/manifest.yaml`
 2. `.flywheel/state.yaml`
-3. `.flywheel/operating-model/guidance/authority.md`
-4. `.flywheel/operating-model/guidance/invariants.md`
-5. `.flywheel/operating-model/guidance/lifecycle.md`
-6. `.flywheel/operating-model/guidance/execution-model.md`
-7. `.flywheel/operating-model/guidance/records.md`
-8. `.flywheel/operating-model/guidance/evidence.md`
-9. `.flywheel/operating-model/guidance/decisions.md`
-10. `.flywheel/operating-model/guidance/failure-handling.md`
-11. `.flywheel/operating-model/guidance/classifications.md`
-12. `.flywheel/operating-model/guidance/adaptation.md`
-13. `.flywheel/operating-model/guidance/validation.md`
-14. `.flywheel/operating-model/guidance/persistence.md`
-15. `.flywheel/operating-model/guidance/reuse.md`
-16. `.flywheel/operating-model/config/governance.yaml`
-17. `.flywheel/operating-model/config/validation.yaml`
-18. `.flywheel/operating-model/schemas/state.schema.yaml`
-19. `.flywheel/operating-model/schemas/mission.schema.yaml`
-20. `.flywheel/operating-model/schemas/goal.schema.yaml`
-21. `.flywheel/operating-model/schemas/execution.schema.yaml`
-22. `.flywheel/operating-model/schemas/record.schema.yaml`
-23. `.flywheel/operating-model/schemas/knowledge.schema.yaml`, `persistence-plan.schema.yaml`, and `reuse-assessment.schema.yaml` as one schema-set resolution item.
+3. `.flywheel/operating-model/guidance/lifecycle.md`
+4. `.flywheel/operating-model/guidance/execution-model.md`
+5. `.flywheel/operating-model/guidance/records.md`
+6. `.flywheel/operating-model/guidance/evidence.md`
+7. `.flywheel/operating-model/guidance/classifications.md`
+8. `.flywheel/operating-model/guidance/adaptation.md`
+9. `.flywheel/operating-model/guidance/validation.md`
+10. `.flywheel/operating-model/guidance/persistence.md`
+11. `.flywheel/operating-model/guidance/reuse.md`
+12. `.flywheel/operating-model/config/validation.yaml`
+13. `.flywheel/operating-model/schemas/state.schema.yaml`
+14. `.flywheel/operating-model/schemas/mission.schema.yaml`
+15. `.flywheel/operating-model/schemas/goal.schema.yaml`
+16. `.flywheel/operating-model/schemas/execution.schema.yaml`
+17. `.flywheel/operating-model/schemas/record.schema.yaml`
+18. `.flywheel/operating-model/schemas/knowledge.schema.yaml`
+19. `.flywheel/operating-model/schemas/persistence-plan.schema.yaml`
+20. `.flywheel/operating-model/schemas/reuse-assessment.schema.yaml`
 
-Also read the active mission and active goal identified by durable state for context. Contextual reads do not change the `23/23` count.
-
-Report the immutable SHA, `23/23` focused resolution, and active-context resolution. A missing required item fails verification. Do not stop because multiple reads are required.
+Also read the active mission and active goal identified by durable state for context. Report the SHA, `20/20` resolution, and contextual resolution. A missing required file fails verification. Do not stop because multiple reads are required.
 
 # Synthetic Mission and Goal
 
-Construct complete schema-valid in-memory mission and goal artifacts:
+Construct these complete in-memory artifacts:
 
 ```yaml
 mission:
@@ -71,8 +66,7 @@ mission:
   success_criteria:
     - id: MSC-910
       statement: One execution completes every lifecycle stage with deterministic traceability and closure.
-  goals:
-    - verify-complete-execution
+  goals: [verify-complete-execution]
   constraints:
     - All artifacts are proposed only and must not be written.
   approvals_required: []
@@ -86,13 +80,13 @@ goal:
   objective: Verify lifecycle continuity from execution creation through terminal closure.
   acceptance_criteria:
     - id: AC-910
-      statement: Execution identity and state remain consistent through every lifecycle transition.
+      statement: Execution identity and state remain consistent through every transition.
     - id: AC-911
-      statement: Evidence, observations, evaluations, classifications, adaptations, validations, and decisions remain fully traceable.
+      statement: All material values remain traceable across lifecycle stages.
     - id: AC-912
-      statement: Persist and Reuse durability transactions contain every required changed artifact in deterministic order.
+      statement: Persist and Reuse transactions contain every required changed artifact.
     - id: AC-913
-      statement: Reusable knowledge is qualified without overwriting immutable history.
+      statement: Reusable knowledge is qualified without overwriting history.
     - id: AC-914
       statement: Invalid accumulated and terminal states are deterministically rejected.
     - id: AC-915
@@ -115,9 +109,9 @@ goal:
   approvals_required: []
 ```
 
-Use exactly `AC-910` through `AC-915`, in order, in the execution. Construct sufficient in-memory evidence mappings for all six criteria before terminal completion.
+Use exactly `AC-910` through `AC-915`, in order, in the execution. Construct sufficient in-memory evidence mappings for all six before terminal completion.
 
-# Stable Execution Fixture
+# Stable Fixture
 
 Use one execution identity throughout:
 
@@ -125,21 +119,21 @@ Use one execution identity throughout:
 EX-20260728T210000Z-001
 ```
 
-Construct one complete execution containing:
+Include:
 
 - One approved, implemented, and passed adaptation.
 - One rejected or deferred adaptation that is not validation-eligible.
-- One evidence-backed failed validation with an authorized persistence-permitting disposition.
+- One failed required validation with evidence, finding, recovery action, and an authorized persistence-permitting disposition.
 - One confirmed validated-learning classification eligible for promotion.
 - One provisional or execution-specific learning item that must not be promoted.
-- Existing applicable knowledge, an inapplicable item, a semantic duplicate, and a conflicting item requiring supersession or deprecation.
-- Required findings, decisions, approvals, evidence, validation results, reuse assessments, and knowledge artifacts.
+- Existing applicable and inapplicable knowledge, a semantic duplicate, and a conflict requiring supersession or immutable deprecation.
+- Complete evidence, decisions, findings, approvals, validations, assessments, and knowledge artifacts.
 
-All identities, references, timestamps, statuses, and scope values must remain stable and consistent throughout the lifecycle.
+All identities, references, timestamps, statuses, and scope values must remain stable.
 
-# End-to-End Transition Sequence
+# Transition Sequence
 
-Reconstruct and validate every transition in this order:
+Reconstruct execution and state snapshots for:
 
 1. Execution creation and Execute activation.
 2. Execute completion and Observe activation.
@@ -148,67 +142,55 @@ Reconstruct and validate every transition in this order:
 5. Classify completion and Adapt activation.
 6. Adapt completion and Validate activation.
 7. Validate completion and Persist activation.
-8. Persist completion and Reuse activation.
-9. Reuse completion and terminal execution closure.
-10. Goal and mission completion and terminal state cleanup.
+8. Persist transaction commit and Reuse activation.
+9. Reuse transaction commit and terminal execution closure.
+10. Goal and mission completion with terminal state cleanup.
 
-For each transition construct the proposed execution and state pair immediately before and after the transition. Verify:
-
-- Exactly one active lifecycle stage for an in-progress execution.
-- All predecessors terminal and all successors pending.
-- Stable execution, mission, and goal identities.
-- State and execution agreement.
-- Monotonic whole-second UTC timestamps.
-- Required summaries, reasons, and references.
-- Compare-and-swap preconditions and final pair re-read.
-- Deterministic recovery if execution updates but state does not.
+For every transition verify one active stage, predecessor/successor ordering, stable identities, state agreement, whole-second UTC timestamp ordering, required metadata, retained-SHA compare-and-swap, final pair verification, and deterministic recovery.
 
 # Cross-Stage Continuity
 
-Prove that information accumulates without semantic leakage or stale references:
+Prove:
 
-- Execute actions remain authorized by the synthetic goal.
-- Observations contain facts, not later-stage conclusions.
-- Evaluations interpret only referenced observations and evidence.
+- Execute actions remain within the synthetic goal.
+- Observations contain facts rather than later-stage conclusions.
+- Evaluations use only referenced observations and evidence.
 - Classifications remain traceable to evaluations and evidence.
 - Adaptations remain traceable to classifications, evaluations, observations, and evidence.
-- Validations target eligible implemented adaptations and preserve failed-validation history.
-- Persist includes every new or changed pre-Reuse artifact and all governing decisions and approvals.
-- Reuse assessments reference durable validated learning and applicable existing knowledge.
-- Knowledge promotion includes evidence, passed-validation provenance, applicability, limitations, guidance, origin, and assessment references.
-- Acceptance-criterion mappings use durable evidence and remain valid at terminal closure.
+- Validations target only eligible implemented adaptations and preserve failed-validation history.
+- Persist contains all new or changed artifacts produced through Validate, including governing decisions and approvals.
+- Reuse assessments use durable validated learning and existing knowledge.
+- Knowledge includes evidence, passed validation, applicability, limitations, guidance, origin, and assessment provenance.
+- Acceptance-criterion mappings remain valid and durable at terminal closure.
 
-# Persist Transaction
+# First Persistence Transaction
 
-Construct a complete first persistence plan that durably records all new or changed artifacts produced through Validate and activates the durable Persist-completed/Reuse-active pair.
+Construct a complete persistence plan containing all changed artifacts produced through Validate plus the execution/state values that will represent Persist completion and Reuse activation when committed.
 
-The plan must include every applicable:
+The plan must include all applicable evidence, decisions, findings, approvals, execution, changed goal or mission, and state. It must not include Reuse assessments or promoted knowledge because they do not yet exist.
 
-- Evidence, decision, finding, and approval record.
-- Execution update.
-- Goal and mission update only when changed.
-- State update as final operational pointer.
+Verify canonical paths, complete targets, exact SHA-256 digests, create-only/CAS semantics, dependency and type order, state last, per-write re-read, whole-set verification, and rollback or compensation.
 
-It must exclude itself, use canonical paths, exact SHA-256 digests, create-only or CAS semantics, dependency/type ordering, per-write re-read, whole-set verification, and rollback or compensation.
+The proposed execution/state targets may contain Persist-completed and Reuse-active values while the plan is `applying`, but those values are transaction-pending and non-authoritative. They become authoritative together only after the exact plan is terminal `applied`, final verification passed, and plan finalization is re-read. Test `PERSIST-COMMIT-001` explicitly.
 
-Do not include Reuse assessments or newly promoted knowledge in this first transaction because they do not yet exist.
+# Reuse Persistence Transaction
 
-# Reuse Transaction
+Construct a separate complete plan containing:
 
-Construct a separate complete Reuse persistence plan containing every new or changed Reuse output:
-
-- Reuse assessments.
-- New validated, superseding, or deprecation-tombstone knowledge.
+- Completed reuse assessments.
+- Validated, superseding, and deprecation-tombstone knowledge.
 - New Reuse decisions and approvals.
-- Terminal goal and mission updates.
+- Completed goal and mission updates.
 - Terminal execution update.
-- Terminal state update as final operational pointer.
+- Terminal state update as final pointer.
 
-The plan must exclude itself, order assessments before knowledge, execution before state, and state last. Reuse and terminal closure cannot be claimed durable until the plan is terminal `applied` and the complete target set is re-read successfully.
+Verify assessments before knowledge, execution before state, state last, complete target derivation, CAS, per-write and whole-set verification, and recovery.
+
+The governed target content may contain Reuse completion, terminal execution, completed goal and mission, and cleared state while the plan is `applying`, but those values remain transaction-pending. They become authoritative together only when the plan is terminal `applied` and re-read successfully. A finalization failure must block use of the pending values and require reconciliation.
 
 # Terminal Form
 
-Construct and validate:
+Validate:
 
 ```text
 Execute  = completed
@@ -232,104 +214,99 @@ Synthetic state active_execution = null
 Synthetic state lifecycle_stage = null
 ```
 
-Do not leave a terminal lifecycle under an in-progress execution. Do not clear state before terminal mission, goal, and execution artifacts are durable and verified.
+Do not leave a terminal lifecycle under an in-progress execution. Do not report or use transaction-pending completion values before the applicable plan commit marker is verified.
 
 # Required Validation Results
 
 Report separately:
 
-1. Immutable revision resolution.
-2. Focused repository resolution.
-3. Durable context resolution.
-4. Synthetic authorization.
-5. Mission schema validation.
-6. Goal schema validation.
-7. Execution creation and identity.
-8. Execute-to-Observe continuity.
-9. Observe-to-Evaluate continuity.
-10. Evaluate-to-Classify continuity.
-11. Classify-to-Adapt continuity.
-12. Adapt-to-Validate continuity.
-13. Validate-to-Persist continuity.
-14. Persist-to-Reuse continuity.
-15. Reuse-to-terminal continuity.
-16. Execution schema validation at every snapshot.
-17. State schema validation at every snapshot.
-18. Cross-stage reference resolution.
-19. Evidence and acceptance-criterion mapping.
-20. Decision, approval, and finding authorization.
-21. Adaptation/validation synchronization.
-22. Failed-validation disposition preservation.
-23. First persistence-plan validation.
-24. First transaction target completeness and ordering.
-25. Reuse-assessment validation.
-26. Knowledge qualification and immutable history.
-27. Reuse persistence-plan validation.
-28. Terminal execution, goal, and mission completion.
-29. Terminal state cleanup.
-30. Compare-and-swap and partial-transition recovery.
-31. Timestamp ordering.
-32. Repository immutability.
+1. Immutable revision and focused resolution.
+2. Durable context and synthetic authorization.
+3. Mission and goal schema validation.
+4. Stable execution identity and creation.
+5. Execute-to-Observe continuity.
+6. Observe-to-Evaluate continuity.
+7. Evaluate-to-Classify continuity.
+8. Classify-to-Adapt continuity.
+9. Adapt-to-Validate continuity.
+10. Validate-to-Persist continuity.
+11. First plan schema, target completeness, and ordering.
+12. First transaction commit-marker behavior.
+13. Persist-to-Reuse continuity.
+14. Cross-stage references and provenance.
+15. Evidence and acceptance-criterion mappings.
+16. Decision, approval, finding, and failed-validation authorization.
+17. Adaptation/validation/persistence synchronization.
+18. Reuse-assessment validation.
+19. Knowledge qualification and immutable history.
+20. Reuse plan schema, target completeness, and ordering.
+21. Reuse transaction commit-marker behavior.
+22. Reuse-to-terminal continuity.
+23. Terminal execution, goal, mission, and state validation.
+24. Compare-and-swap and partial recovery.
+25. Timestamp ordering.
+26. Repository immutability.
 
-For each include expected condition, actual condition, result, and enforcing repository source.
+For each include expected condition, actual condition, result, and enforcing source.
 
 # Negative Validation
 
-Construct invalid in-memory fixtures and demonstrate deterministic rejection of at least:
+Construct invalid fixtures and demonstrate deterministic rejection of:
 
 1. Execution identity changes between stages.
 2. Mission or goal identity changes mid-execution.
-3. Two lifecycle stages are active.
+3. Two stages are active.
 4. A stage starts before its predecessor completes.
 5. A successor is non-pending while an earlier stage is active.
-6. State points to a different stage than execution.
-7. State points to a different execution.
-8. Observation contains an unsupported classification or recommendation.
-9. Evaluation references missing observation or evidence.
-10. Classification references a stale or superseded evaluation.
-11. Adaptation lacks classification, evaluation, observation, or evidence provenance.
-12. Adaptation status becomes approved without required decision or approval.
-13. Rejected or deferred adaptation is treated as validation-eligible.
-14. Validation passes without evidence.
-15. Failed validation is silently changed to passed.
-16. Failed validation lacks finding, recovery action, or governing disposition.
-17. A blocking validation disposition permits persistence.
-18. Persist plan omits an earlier execution record or governing approval.
-19. Persist plan includes a Reuse artifact that does not yet exist.
-20. Persist plan targets or digests itself.
-21. Persist plan uses noncanonical ordering or writes state early.
-22. Persist claims completion without final whole-set re-read.
-23. Reuse assessment references nondurable or provisional learning as promotable.
-24. Duplicate knowledge creates a new identity without resolution.
-25. Conflicting knowledge is promoted without scope distinction, supersession, or deprecation.
-26. Existing knowledge is overwritten.
-27. Knowledge lacks evidence, passed validation, applicability, limitations, guidance, origin, or assessment provenance.
-28. Reuse plan omits an assessment, knowledge item, decision, approval, goal, mission, execution, or state target that changed.
-29. Reuse plan orders knowledge before its assessment.
-30. Reuse completes before its dedicated plan is applied and verified.
-31. Acceptance criterion is marked satisfied by chat text rather than durable evidence.
-32. Acceptance evidence references an artifact omitted from persistence.
-33. A reference valid at one stage becomes stale by terminal closure.
-34. Adaptation validation, persistence, or reuse status is not synchronized at terminal closure.
-35. Terminal execution retains a pending or active lifecycle stage.
-36. Execution remains in-progress after all stages become terminal.
-37. Terminal execution lacks outcome, completion time, disposition, or rationale.
-38. Goal completes without evidence for one of AC-910 through AC-915.
-39. Mission completes while its goal is not completed.
-40. State is cleared before terminal execution and goal artifacts are durable.
-41. Terminal state retains an active mission, goal, execution, or stage.
-42. Timestamps regress across stages or transactions.
-43. A stale CAS revision is used.
-44. Partial execution/state transition lacks rollback or compensation.
-45. Partial multi-artifact persistence lacks recovery or reconciliation.
-46. An unplanned artifact changes.
-47. Repository artifacts are actually written during verification.
+6. State disagrees with execution or stage.
+7. Observation contains an unsupported classification or recommendation.
+8. Evaluation references missing observation or evidence.
+9. Classification references stale or unresolved provenance.
+10. Adaptation lacks required provenance.
+11. Adaptation becomes approved without required decision or approval.
+12. Rejected or deferred adaptation is validation-eligible.
+13. Validation passes without evidence.
+14. Failed validation is silently changed to passed.
+15. Failed validation lacks finding, recovery, or governing disposition.
+16. A blocking disposition permits persistence.
+17. The first plan omits an earlier changed record or approval.
+18. The first plan includes a Reuse artifact that does not yet exist.
+19. A plan targets or digests itself.
+20. A plan writes state before referenced targets.
+21. Durability is claimed without final whole-set and plan-finalization re-read.
+22. Transaction-pending completion values are reported or reused before `applied`.
+23. Plan finalization fails but pending completion values remain usable.
+24. Reuse promotes nondurable, provisional, rejected, or failed learning.
+25. Duplicate knowledge creates a new identity without resolution.
+26. Conflict is promoted without scope distinction, supersession, or deprecation.
+27. Existing knowledge is overwritten.
+28. Knowledge lacks required evidence, validation, applicability, limitations, guidance, origin, or assessment provenance.
+29. Reuse plan omits a changed assessment, knowledge, decision, approval, goal, mission, execution, or state target.
+30. Knowledge is ordered before its assessment.
+31. Reuse completes before its plan commit marker is verified.
+32. Acceptance criterion is satisfied by chat text rather than durable evidence.
+33. Acceptance evidence references an artifact omitted from persistence.
+34. A formerly valid reference is stale at terminal closure.
+35. Adaptation validation, persistence, or reuse status is unsynchronized.
+36. Terminal execution retains a pending or active stage.
+37. Execution remains in-progress after all stages are terminal.
+38. Terminal execution lacks outcome, completion time, disposition, or rationale.
+39. Goal completes without evidence for any AC-910 through AC-915.
+40. Mission completes while its goal is not completed.
+41. State is cleared before terminal artifacts are committed.
+42. Terminal state retains an active pointer.
+43. Timestamps regress.
+44. A stale CAS revision is used.
+45. Partial execution/state transition lacks recovery.
+46. Partial multi-artifact persistence lacks recovery or reconciliation.
+47. An unplanned artifact changes.
+48. Repository artifacts are actually written.
 
 A case that cannot be rejected deterministically is a reusable framework defect.
 
 # Framework Defects
 
-Report only reusable framework defects. For each include identifier, severity, artifact, rule, observed behavior, expected behavior, deterministic impact, and framework-only correction.
+Report only reusable framework defects. Include identifier, severity, artifact, rule, observed behavior, expected behavior, deterministic impact, and framework-only correction.
 
 If none are found, state:
 
@@ -337,7 +314,7 @@ If none are found, state:
 
 # Required Output
 
-Use these sections in this exact order:
+Use these sections in order:
 
 1. Verification Summary
 2. Validation Trace
@@ -354,7 +331,7 @@ Use these sections in this exact order:
 13. Terminal Execution, Goal, Mission, and State
 14. Validation Results
 15. Negative Validation Results
-16. Compare-and-Swap and Recovery Results
+16. Commit-Marker, Compare-and-Swap, and Recovery Results
 17. Framework Defects
 18. Repository Mutation Confirmation
 19. Next Authorized Action
