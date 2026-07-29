@@ -10,7 +10,7 @@
 
 **Repository:** `Infoconex/ai-flywheel-framework`
 
-**Immutable revision:** `3454e3d22098e1e1186a52039d097d29cdf9d424`
+**Immutable revision:** `41eba79d29e9d047cecf25792a871380371a9dfa`
 
 Use this exact revision. Do not resolve or substitute a later branch head.
 
@@ -254,13 +254,13 @@ execution and state revisions, then construct a new plan-governed
 Evaluate-to-Classify transition without repeating the completed evaluations.
 ```
 
-The failed transition plan must not be reused, returned to `planned`, or changed to `applied` after terminal rollback.
+The rolled-back transition plan must not be reused, returned to `planned`, or changed to `applied` after terminal rollback.
 
 # Alternate Deterministic States
 
 Construct and evaluate these additional plan-governed states:
 
-1. **No target written:** Plan is `planned` or `applying`, and execution and state both match retained preconditions. Finalize the plan without applying the transition; verify the pair remains original.
+1. **No target written:** Plan is `planned` or `applying`, and execution and state both match retained preconditions. Finalize it as `rolled-back` with `recovery.mode: not-started`, null finding reference, no blocker, and final verification `passed`; verify the pair remains original. No recovery finding is required because no governed target changed.
 2. **Both targets written, plan still applying:** Both targets exactly match proposed digests. Treat values as transaction-pending, complete whole-set verification, and finalize the exact plan to `applied`; do not roll back merely because a new session began.
 3. **Rollback cannot be proven:** Persist a blocking finding when safely possible, finalize the original plan to `blocked` when its revision remains owned, and require human reconciliation.
 
@@ -297,6 +297,8 @@ Construct invalid fixtures and demonstrate deterministic rejection of:
 27. Recovery finding or plan exists only in chat or memory.
 28. A terminal or unrelated plan is used as recovery authority.
 29. Repository artifacts are actually written during this synthetic verification.
+30. A no-target-written plan is finalized as `failed` and lifecycle continuation is allowed without reconciliation.
+31. Classify begins after rollback by reusing the rolled-back plan instead of creating a new transition plan.
 
 A case that cannot be rejected deterministically is a reusable framework defect.
 
