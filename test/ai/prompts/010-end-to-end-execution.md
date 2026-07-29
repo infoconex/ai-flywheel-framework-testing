@@ -9,7 +9,7 @@
 
 **Repository:** `Infoconex/ai-flywheel-framework`
 
-**Immutable revision:** `92e2fb15c2aeb480fed21d194fb56f94d45f6eb8`
+**Immutable revision:** `bcc1ed3458e3a2d2a800fa14a59db3d351d960e6`
 
 Use this exact revision. Do not resolve or substitute a later branch head.
 
@@ -158,16 +158,18 @@ Prove:
 - Classifications remain traceable to evaluations and evidence.
 - Adaptations remain traceable to classifications, evaluations, observations, and evidence.
 - Validations target only eligible implemented adaptations and preserve failed-validation history.
-- Persist contains all new or changed artifacts produced through Validate, including governing decisions and approvals.
-- Reuse assessments use durable validated learning and existing knowledge.
-- Knowledge includes evidence, passed validation, applicability, limitations, guidance, origin, and assessment provenance.
+- Persist contains all new or changed artifacts produced through Validate, governing decisions and approvals, and the planned assessments required for Reuse activation.
+- Reuse assessments retain stable identities from planned creation through completed CAS update.
+- Knowledge includes evidence, passed validation, applicability, limitations, guidance, origin, and completed-assessment provenance.
 - Acceptance-criterion mappings remain valid and durable at terminal closure.
 
 # First Persistence Transaction
 
-Construct a complete persistence plan containing all changed artifacts produced through Validate plus the execution/state values that will represent Persist completion and Reuse activation when committed.
+Construct a complete persistence plan containing all changed artifacts produced through Validate, every planned reuse assessment required for activation, and the execution/state values that will represent Persist completion and Reuse activation when committed.
 
-The plan must include all applicable evidence, decisions, findings, approvals, execution, changed goal or mission, and state. It must not include Reuse assessments or promoted knowledge because they do not yet exist.
+The plan must include all applicable evidence, decisions, findings, approvals, planned reuse assessments, execution, changed goal or mission, and state. It must not include completed assessments or promoted knowledge because Reuse has not executed yet.
+
+Every planned assessment must be a create target at its canonical `reuse/` path, precede the execution/state targets that reference it, use a stable `REUSE-NNN` identity, and contain no final disposition, rationale, assessment timestamp, or assessor.
 
 Verify canonical paths, complete targets, exact SHA-256 digests, create-only/CAS semantics, dependency and type order, state last, per-write re-read, whole-set verification, and rollback or compensation.
 
@@ -177,14 +179,14 @@ The proposed execution/state targets may contain Persist-completed and Reuse-act
 
 Construct a separate complete plan containing:
 
-- Completed reuse assessments.
-- Validated, superseding, and deprecation-tombstone knowledge.
+- CAS updates of every planned reuse assessment to `completed` using the retained planned-record SHA.
+- Validated, superseding, and deprecation-tombstone knowledge that references completed assessments.
 - New Reuse decisions and approvals.
 - Completed goal and mission updates.
 - Terminal execution update.
 - Terminal state update as final pointer.
 
-Verify assessments before knowledge, execution before state, state last, complete target derivation, CAS, per-write and whole-set verification, and recovery.
+Verify that fixed assessment identity and scope fields are unchanged, completed fields are supplied, assessments precede knowledge, execution precedes state, state is last, and complete target derivation, CAS, per-write and whole-set verification, and recovery all pass.
 
 The governed target content may contain Reuse completion, terminal execution, completed goal and mission, and cleared state while the plan is `applying`, but those values remain transaction-pending. They become authoritative together only when the plan is terminal `applied` and re-read successfully. A finalization failure must block use of the pending values and require reconciliation.
 
@@ -230,22 +232,23 @@ Report separately:
 8. Classify-to-Adapt continuity.
 9. Adapt-to-Validate continuity.
 10. Validate-to-Persist continuity.
-11. First plan schema, target completeness, and ordering.
-12. First transaction commit-marker behavior.
-13. Persist-to-Reuse continuity.
-14. Cross-stage references and provenance.
-15. Evidence and acceptance-criterion mappings.
-16. Decision, approval, finding, and failed-validation authorization.
-17. Adaptation/validation/persistence synchronization.
-18. Reuse-assessment validation.
-19. Knowledge qualification and immutable history.
-20. Reuse plan schema, target completeness, and ordering.
-21. Reuse transaction commit-marker behavior.
-22. Reuse-to-terminal continuity.
-23. Terminal execution, goal, mission, and state validation.
-24. Compare-and-swap and partial recovery.
-25. Timestamp ordering.
-26. Repository immutability.
+11. Planned reuse-assessment creation and schema validation.
+12. First plan schema, target completeness, and ordering.
+13. First transaction commit-marker behavior.
+14. Persist-to-Reuse continuity.
+15. Cross-stage references and provenance.
+16. Evidence and acceptance-criterion mappings.
+17. Decision, approval, finding, and failed-validation authorization.
+18. Adaptation/validation/persistence synchronization.
+19. Planned-to-completed assessment CAS lifecycle.
+20. Knowledge qualification and immutable history.
+21. Reuse plan schema, target completeness, and ordering.
+22. Reuse transaction commit-marker behavior.
+23. Reuse-to-terminal continuity.
+24. Terminal execution, goal, mission, and state validation.
+25. Compare-and-swap and partial recovery.
+26. Timestamp ordering.
+27. Repository immutability.
 
 For each include expected condition, actual condition, result, and enforcing source.
 
@@ -269,38 +272,43 @@ Construct invalid fixtures and demonstrate deterministic rejection of:
 14. Failed validation is silently changed to passed.
 15. Failed validation lacks finding, recovery, or governing disposition.
 16. A blocking disposition permits persistence.
-17. The first plan omits an earlier changed record or approval.
-18. The first plan includes a Reuse artifact that does not yet exist.
-19. A plan targets or digests itself.
-20. A plan writes state before referenced targets.
-21. Durability is claimed without final whole-set and plan-finalization re-read.
-22. Transaction-pending completion values are reported or reused before `applied`.
-23. Plan finalization fails but pending completion values remain usable.
-24. Reuse promotes nondurable, provisional, rejected, or failed learning.
-25. Duplicate knowledge creates a new identity without resolution.
-26. Conflict is promoted without scope distinction, supersession, or deprecation.
-27. Existing knowledge is overwritten.
-28. Knowledge lacks required evidence, validation, applicability, limitations, guidance, origin, or assessment provenance.
-29. Reuse plan omits a changed assessment, knowledge, decision, approval, goal, mission, execution, or state target.
-30. Knowledge is ordered before its assessment.
-31. Reuse completes before its plan commit marker is verified.
-32. Acceptance criterion is satisfied by chat text rather than durable evidence.
-33. Acceptance evidence references an artifact omitted from persistence.
-34. A formerly valid reference is stale at terminal closure.
-35. Adaptation validation, persistence, or reuse status is unsynchronized.
-36. Terminal execution retains a pending or active stage.
-37. Execution remains in-progress after all stages are terminal.
-38. Terminal execution lacks outcome, completion time, disposition, or rationale.
-39. Goal completes without evidence for any AC-910 through AC-915.
-40. Mission completes while its goal is not completed.
-41. State is cleared before terminal artifacts are committed.
-42. Terminal state retains an active pointer.
-43. Timestamps regress.
-44. A stale CAS revision is used.
-45. Partial execution/state transition lacks recovery.
-46. Partial multi-artifact persistence lacks recovery or reconciliation.
-47. An unplanned artifact changes.
-48. Repository artifacts are actually written.
+17. The first plan omits an earlier changed record, approval, or required planned assessment.
+18. Reuse activates with an assessment that exists only in memory.
+19. A planned assessment contains a final disposition or assessment timestamp.
+20. A plan targets or digests itself.
+21. A plan writes state before referenced targets.
+22. Durability is claimed without final whole-set and plan-finalization re-read.
+23. Transaction-pending completion values are reported or reused before `applied`.
+24. Plan finalization fails but pending completion values remain usable.
+25. A completed assessment changes identity, subject, execution, mission, goal, or adaptation scope.
+26. A planned assessment is completed without retained-SHA CAS.
+27. A completed assessment is updated again or returned to planned.
+28. Reuse promotes nondurable, provisional, rejected, or failed learning.
+29. Duplicate knowledge creates a new identity without resolution.
+30. Conflict is promoted without scope distinction, supersession, or deprecation.
+31. Existing knowledge is overwritten.
+32. Knowledge references a planned rather than completed assessment.
+33. Knowledge lacks required evidence, validation, applicability, limitations, guidance, origin, or assessment provenance.
+34. Reuse plan omits a changed assessment, knowledge, decision, approval, goal, mission, execution, or state target.
+35. Knowledge is ordered before its completed assessment.
+36. Reuse completes before its plan commit marker is verified.
+37. Acceptance criterion is satisfied by chat text rather than durable evidence.
+38. Acceptance evidence references an artifact omitted from persistence.
+39. A formerly valid reference is stale at terminal closure.
+40. Adaptation validation, persistence, or reuse status is unsynchronized.
+41. Terminal execution retains a pending or active stage.
+42. Execution remains in-progress after all stages are terminal.
+43. Terminal execution lacks outcome, completion time, disposition, or rationale.
+44. Goal completes without evidence for any AC-910 through AC-915.
+45. Mission completes while its goal is not completed.
+46. State is cleared before terminal artifacts are committed.
+47. Terminal state retains an active pointer.
+48. Timestamps regress.
+49. A stale CAS revision is used.
+50. Partial execution/state transition lacks recovery.
+51. Partial multi-artifact persistence lacks recovery or reconciliation.
+52. An unplanned artifact changes.
+53. Repository artifacts are actually written.
 
 A case that cannot be rejected deterministically is a reusable framework defect.
 
@@ -324,7 +332,7 @@ Use these sections in order:
 6. Lifecycle Transition Trace
 7. Cross-Stage Provenance Findings
 8. Representative Execution Record Set
-9. First Persistence Plan
+9. First Persistence Plan and Planned Assessments
 10. Reuse Assessment and Knowledge Set
 11. Reuse Persistence Plan
 12. Acceptance-Criterion Evidence Mapping
