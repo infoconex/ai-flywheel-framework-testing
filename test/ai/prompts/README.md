@@ -12,9 +12,11 @@ This directory contains reusable prompts for testing the AI Flywheel Framework t
 6. [`006-classify-to-adapt.md`](006-classify-to-adapt.md) validates classification completion, adaptation provenance, scope and approval boundaries, and the transition from Classify to Adapt.
 7. [`007-adapt-to-validate.md`](007-adapt-to-validate.md) validates Adapt completion, validation semantics and evidence requirements, and the transition from Adapt to Validate.
 8. [`008-validate-to-persist.md`](008-validate-to-persist.md) validates Validate completion, persistence semantics, immutable history, partial-persistence recovery, and the transition from Validate to Persist.
+9. [`009-persist-to-reuse.md`](009-persist-to-reuse.md) validates Persist completion, structured Reuse assessment, knowledge qualification, Reuse durability, and terminal closure.
+10. [`010-end-to-end-execution.md`](010-end-to-end-execution.md) validates one complete execution across all lifecycle stages, checkpoint persistence, final durability transactions, and terminal completion.
 
 ## Test Boundary
 
-These prompts target `Infoconex/ai-flywheel-framework` on branch `feature/self-contained-operating-model` unless a prompt explicitly states otherwise.
+These prompts target `Infoconex/ai-flywheel-framework` on branch `feature/self-contained-operating-model` unless a prompt pins an immutable revision.
 
 They are read-only verification prompts. They must not persist execution artifacts, state transitions, evidence, logs, repository-discovery results, or commits to the framework-development branch.
