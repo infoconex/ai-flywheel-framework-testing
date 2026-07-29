@@ -39,6 +39,7 @@ This directory catalogs the reusable AI prompts used to verify the AI Flywheel F
 - Prompt 008 rerun after prompt self-test correction: [Passed](results/008-validate-to-persist-rerun-6-2026-07-28.md)
 - Prompt 009 repeated prompt self-test: [Passed after four framework/prompt correction cycles](results/009-prompt-self-test-2026-07-28.md)
 - Prompt 009 initial independent run: [Inconclusive because focused repository resolution was incomplete and the fixture terminal boundary was ambiguous](results/009-persist-to-reuse.md)
+- Prompt 009 final prompt self-test after independent-run corrections: [Passed](results/009-prompt-self-test-rerun-2026-07-28.md)
 
 ## Status Rules
 
