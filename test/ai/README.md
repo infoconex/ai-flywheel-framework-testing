@@ -13,7 +13,7 @@ This directory catalogs the reusable AI prompts used to verify the AI Flywheel F
 | [Evaluate to Classify](prompts/005-evaluate-to-classify.md) | Evaluation completion, classification semantics and provenance, multiple classifications, lifecycle ordering, negative cases, and repository mutation protection | Yes | 2026-07-27 | Yes | [View latest result](results/005-evaluate-to-classify-rerun-2026-07-27.md) |
 | [Classify to Adapt](prompts/006-classify-to-adapt.md) | Classification completion, adaptation semantics and provenance, scope and approval boundaries, lifecycle ordering, negative cases, and repository mutation protection | Yes | 2026-07-27 | Yes | [View latest result](results/006-classify-to-adapt-rerun-2-2026-07-27.md) |
 | [Adapt to Validate](prompts/007-adapt-to-validate.md) | Adapt completion, validation semantics and provenance, evidence sufficiency, lifecycle ordering, negative cases, and repository mutation protection | Yes | 2026-07-28 | Yes | [View latest result](results/007-adapt-to-validate-rerun-5-2026-07-28.md) |
-| [Validate to Persist](prompts/008-validate-to-persist.md) | Validate completion, evidence-backed outcomes, persistence semantics, canonical locations, immutable history, partial-persistence recovery, and repository mutation protection | Yes | 2026-07-28 | Inconclusive | [View latest result](results/008-validate-to-persist-rerun-4-2026-07-28.md) |
+| [Validate to Persist](prompts/008-validate-to-persist.md) | Validate completion, evidence-backed outcomes, persistence semantics, canonical locations, immutable history, partial-persistence recovery, and repository mutation protection | Yes | 2026-07-28 | Inconclusive | [View latest result](results/008-validate-to-persist-rerun-5-2026-07-28.md) |
 
 ## Result History
 
@@ -33,6 +33,7 @@ This directory catalogs the reusable AI prompts used to verify the AI Flywheel F
 - Prompt 008 rerun after detached persistence-plan correction: [Failed due to undefined failed-validation disposition linkage](results/008-validate-to-persist-rerun-2-2026-07-28.md)
 - Prompt 008 rerun after failed-validation disposition correction: [Inconclusive because manifest-ordered startup resolution was not completed](results/008-validate-to-persist-rerun-3-2026-07-28.md)
 - Prompt 008 rerun after startup clarification: [Inconclusive because synthetic verification authorization was treated as outside the active goal](results/008-validate-to-persist-rerun-4-2026-07-28.md)
+- Prompt 008 rerun after synthetic-verification authorization clarification: [Inconclusive because the mandatory startup traversal and immutable revision resolution were not completed](results/008-validate-to-persist-rerun-5-2026-07-28.md)
 
 ## Status Rules
 
