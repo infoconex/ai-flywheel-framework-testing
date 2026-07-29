@@ -10,41 +10,15 @@ This directory catalogs the reusable AI prompts used to verify the AI Flywheel F
 | [Execution Creation](prompts/002-execution-creation.md) | Non-persistent execution identity, canonical path, activation state, schemas, lifecycle initialization, collisions, and compare-and-swap protection | Yes | 2026-07-27 | Yes | [View result](results/002-execution-creation.md) |
 | [Execute to Observe](prompts/003-execute-to-observe.md) | Non-persistent lifecycle transition, stage ordering, timestamps, state agreement, negative cases, and repository mutation protection | Yes | 2026-07-27 | Yes | [View result](results/003-execute-to-observe.md) |
 | [Observe to Evaluate](prompts/004-observe-to-evaluate.md) | Observation semantics, evidence boundaries, Observe completion, Evaluate activation, traceability, negative cases, and repository mutation protection | Yes | 2026-07-27 | Yes | [View result](results/004-observe-to-evaluate.md) |
-| [Evaluate to Classify](prompts/005-evaluate-to-classify.md) | Evaluation completion, classification semantics and provenance, multiple classifications, lifecycle ordering, negative cases, and repository mutation protection | Yes | 2026-07-27 | Yes | [View latest result](results/005-evaluate-to-classify-rerun-2026-07-27.md) |
-| [Classify to Adapt](prompts/006-classify-to-adapt.md) | Classification completion, adaptation semantics and provenance, scope and approval boundaries, lifecycle ordering, negative cases, and repository mutation protection | Yes | 2026-07-27 | Yes | [View latest result](results/006-classify-to-adapt-rerun-2-2026-07-27.md) |
-| [Adapt to Validate](prompts/007-adapt-to-validate.md) | Adapt completion, validation semantics and provenance, evidence sufficiency, lifecycle ordering, negative cases, and repository mutation protection | Yes | 2026-07-28 | Yes | [View latest result](results/007-adapt-to-validate-rerun-5-2026-07-28.md) |
-| [Validate to Persist](prompts/008-validate-to-persist.md) | Validate completion, evidence-backed outcomes, persistence semantics, canonical locations, immutable history, partial-persistence recovery, and repository mutation protection | Yes | 2026-07-28 | Yes | [View latest result](results/008-validate-to-persist-rerun-6-2026-07-28.md) |
-| [Persist to Reuse](prompts/009-persist-to-reuse.md) | Persist completion, structured reuse assessments, knowledge qualification, duplicate/conflict handling, immutable supersession/deprecation, Reuse durability, and terminal completion boundaries | Yes | 2026-07-28 | Yes | [View latest result](results/009-persist-to-reuse-rerun-2026-07-28.md) |
-
-## Result History
-
-- Prompt 005 initial run: [Failed](results/005-evaluate-to-classify.md)
-- Prompt 005 rerun after framework corrections: [Passed](results/005-evaluate-to-classify-rerun-2026-07-27.md)
-- Prompt 006 initial run: [Failed](results/006-classify-to-adapt.md)
-- Prompt 006 rerun after structured adaptation changes: [Failed](results/006-classify-to-adapt-rerun-2026-07-27.md)
-- Prompt 006 rerun after pending-approval correction: [Passed](results/006-classify-to-adapt-rerun-2-2026-07-27.md)
-- Prompt 007 initial run: [Failed](results/007-adapt-to-validate.md)
-- Prompt 007 rerun after structured validation changes: [Failed](results/007-adapt-to-validate-rerun-2026-07-28.md)
-- Prompt 007 rerun after Adapt-completion matrix correction: [Inconclusive](results/007-adapt-to-validate-rerun-2-2026-07-28.md)
-- Prompt 007 rerun against immutable revision after matrix correction: [Failed](results/007-adapt-to-validate-rerun-3-2026-07-28.md)
-- Prompt 007 rerun after deferred-validation-status schema correction: [Failed](results/007-adapt-to-validate-rerun-4-2026-07-28.md)
-- Prompt 007 rerun after deferred approval-state correction: [Passed](results/007-adapt-to-validate-rerun-5-2026-07-28.md)
-- Prompt 008 initial run: [Failed due to underdefined multi-artifact persistence transaction](results/008-validate-to-persist.md)
-- Prompt 008 rerun after multi-artifact persistence contract: [Failed due to self-referential persistence-plan digest](results/008-validate-to-persist-rerun-2026-07-28.md)
-- Prompt 008 rerun after detached persistence-plan correction: [Failed due to undefined failed-validation disposition linkage](results/008-validate-to-persist-rerun-2-2026-07-28.md)
-- Prompt 008 rerun after failed-validation disposition correction: [Inconclusive because manifest-ordered startup resolution was not completed](results/008-validate-to-persist-rerun-3-2026-07-28.md)
-- Prompt 008 rerun after startup clarification: [Inconclusive because synthetic verification authorization was treated as outside the active goal](results/008-validate-to-persist-rerun-4-2026-07-28.md)
-- Prompt 008 rerun after synthetic-verification authorization clarification: [Inconclusive because the mandatory startup traversal and immutable revision resolution were not completed](results/008-validate-to-persist-rerun-5-2026-07-28.md)
-- Prompt 008 prompt self-test: [Passed after narrowing repeated startup work to transition-relevant resolution](results/008-prompt-self-test-2026-07-28.md)
-- Prompt 008 rerun after prompt self-test correction: [Passed](results/008-validate-to-persist-rerun-6-2026-07-28.md)
-- Prompt 009 repeated prompt self-test: [Passed after four framework/prompt correction cycles](results/009-prompt-self-test-2026-07-28.md)
-- Prompt 009 initial independent run: [Inconclusive because focused repository resolution was incomplete and the fixture terminal boundary was ambiguous](results/009-persist-to-reuse.md)
-- Prompt 009 final prompt self-test after independent-run corrections: [Passed](results/009-prompt-self-test-rerun-2026-07-28.md)
-- Prompt 009 independent rerun after prompt corrections: [Passed](results/009-persist-to-reuse-rerun-2026-07-28.md)
+| [Evaluate to Classify](prompts/005-evaluate-to-classify.md) | Evaluation completion, classification semantics and provenance, multiple classifications, lifecycle ordering, negative cases, and repository mutation protection | Yes | 2026-07-27 | Yes | [View result](results/005-evaluate-to-classify.md) |
+| [Classify to Adapt](prompts/006-classify-to-adapt.md) | Classification completion, adaptation semantics and provenance, scope and approval boundaries, lifecycle ordering, negative cases, and repository mutation protection | Yes | 2026-07-27 | Yes | [View result](results/006-classify-to-adapt.md) |
+| [Adapt to Validate](prompts/007-adapt-to-validate.md) | Adapt completion, validation semantics and provenance, evidence sufficiency, lifecycle ordering, negative cases, and repository mutation protection | Yes | 2026-07-28 | Yes | [View result](results/007-adapt-to-validate.md) |
+| [Validate to Persist](prompts/008-validate-to-persist.md) | Validate completion, evidence-backed outcomes, persistence semantics, canonical locations, immutable history, partial-persistence recovery, and repository mutation protection | Yes | 2026-07-28 | Yes | [View result](results/008-validate-to-persist.md) |
+| [Persist to Reuse](prompts/009-persist-to-reuse.md) | Persist completion, structured reuse assessments, knowledge qualification, duplicate/conflict handling, immutable supersession/deprecation, Reuse durability, and terminal completion boundaries | Yes | 2026-07-28 | Yes | [View result](results/009-persist-to-reuse.md) |
 
 ## Status Rules
 
 - **Run** indicates whether the prompt has been executed independently against the target framework repository.
 - **Last Run** records the most recent independent framework execution date.
-- **Passed** indicates whether the most recent independent framework execution met the expected result.
-- **Test Result** links to the latest independent framework result. Prompt self-tests are recorded separately and do not change framework-test status.
+- **Passed** indicates whether the current retained result met the expected result.
+- **Test Result** links to the retained result for the test.
