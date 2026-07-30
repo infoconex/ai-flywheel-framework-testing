@@ -1,122 +1,58 @@
-# AI Flywheel Approval Boundary Verification
+# Prompt 013 — Enforce Approval Boundary
 
-## Canonical Prompt 013 Launcher
+## Purpose
 
-Use this file as the authoritative entrypoint for Prompt 013.
+Verify, without modifying the framework repository, that a fresh operator session enforces exact durable approval before any material dependency action begins, including authority, scope, persistence, delegation, revocation, expiry, and invalid authorization cases.
 
-# Detailed Test Specification
+## Authorization
 
-Read the complete immutable Prompt 013 specification at:
+Use the immutable framework revision and fixture identities supplied by the canonical runner. Read the manifest first and all required files in manifest order. Resolve durable state, mission, goal, execution, decisions, approvals, findings, and authority records only from pinned repository artifacts. Construct all fixtures in memory and label displayed artifacts `PROPOSED ONLY — NOT WRITTEN`.
 
-https://raw.githubusercontent.com/Infoconex/ai-flywheel-framework-testing/d8d8e8e3af3e8f3ea448f318f7746f04f20065e3/test/ai/prompts/013-enforce-approval-boundary.md
+Do not perform the dependency action, invent approval, alter durable records, inspect an application repository, create framework commits, or push changes.
 
-Follow every instruction in that detailed specification except where this launcher explicitly replaces or clarifies it.
+## Required fixture
 
-The overrides below are authoritative. Apply them before executing the detailed specification. Do not use the obsolete framework revision or obsolete harness-materialization instructions contained in the detailed specification.
+Construct one material dependency action that requires approval and one complete approval chain. The chain must include stable identities, approving authority, subject, action and resource scope, decision provenance, evidence, issuance time, effective time, expiry when applicable, delegation lineage when applicable, revocation status, and durable canonical location.
 
-# Final Immutable Framework Revision
+Construct the proposed execution and state behavior for both authorized and unauthorized conditions. Unauthorized work must remain blocked without beginning implementation, validation, persistence, or reuse.
 
-**Repository:** `Infoconex/ai-flywheel-framework`
+## Required verification
 
-**Immutable revision:** `7d18c1dacf02f341f0c464571bc2f99e78a4b4de`
+Verify:
 
-Use this exact revision for every framework read and validation. Do not resolve or substitute a branch head or later commit.
+- The exact action requires approval under governance and goal constraints.
+- Approval exists durably before the action begins.
+- Approver authority covers the subject, action, resources, risk, and time window.
+- Decision, approval, delegation, and evidence references resolve.
+- Approval is not expired, revoked, superseded, reused outside scope, or inferred from chat text.
+- Execution, state, adaptation, decision, and approval statuses agree.
+- Approval-required work cannot be marked approved or started without the exact authorization.
+- Retained-SHA compare-and-swap, deterministic write order, final verification, and partial-write recovery are valid for any proposed durable update.
+- Verification performs no framework mutation.
 
-# Deterministic Fixture Harness
+## Negative validation
 
-Read the immutable base generator through the GitHub connector at:
+Demonstrate deterministic rejection of at least 32 invalid cases covering missing approval, wrong approver, missing authority, wrong subject/action/resource scope, stale or future approval, expiry, revocation, supersession, invalid delegation, missing decision or evidence, non-durable approval, chat-only consent, approval reuse, scope expansion, approval after action start, mismatched execution or adaptation status, stale CAS, incomplete final verification, partial transition without recovery, and actual framework mutation.
 
-https://raw.githubusercontent.com/Infoconex/ai-flywheel-framework-testing/2fd99b86df229890f8eb53152ea825906c658fe7/test/ai/tools/verify_prompt_013_fixtures.py
+## Result requirements
 
-Expected Git blob SHA:
+Produce exactly 16 numbered top-level sections:
 
-```text
-30b004f49b663e062126551bb1d8958c0a226298
-```
+1. Verification Summary
+2. Validation Trace
+3. Durable Operating Context
+4. Material Dependency Action
+5. Approval Requirement Decision
+6. Authority and Delegation Findings
+7. Durable Approval Record
+8. Approval Scope and Validity Results
+9. Authorized Execution and State Behavior
+10. Unauthorized and Revoked Behavior
+11. Schema and Cross-Artifact Results
+12. Compare-and-Swap and Recovery Results
+13. Negative Validation Results
+14. Framework Defects
+15. Repository Mutation Confirmation
+16. Next Authorized Action
 
-Do not require the connector-returned source to be downloaded, mounted, or written as a file.
-
-Execute the retrieved source directly in the Python runtime using this exact in-memory procedure:
-
-1. Preserve the connector-returned UTF-8 source text exactly.
-2. Verify its Git blob SHA equals `30b004f49b663e062126551bb1d8958c0a226298` using the Git blob formula `sha1("blob <byte-count>\0" + bytes)`.
-3. Replace exactly one occurrence of:
-
-```text
-FRAMEWORK_REVISION = "ea8f72fd194973f033553f46c59b400ab36c8868"
-```
-
-with:
-
-```text
-FRAMEWORK_REVISION = "7d18c1dacf02f341f0c464571bc2f99e78a4b4de"
-```
-
-4. Assert that exactly one replacement occurred.
-5. Execute the resulting source in memory with `__name__` set to `__main__`.
-6. Capture the complete standard output as JSON.
-
-Conceptually, the execution is equivalent to:
-
-```python
-source = connector_returned_source
-old = 'FRAMEWORK_REVISION = "ea8f72fd194973f033553f46c59b400ab36c8868"'
-new = 'FRAMEWORK_REVISION = "7d18c1dacf02f341f0c464571bc2f99e78a4b4de"'
-assert source.count(old) == 1
-source = source.replace(old, new, 1)
-exec(compile(source, "verify_prompt_013_fixtures.py", "exec"), {"__name__": "__main__"})
-```
-
-The immutable helper runner at commit `fffc5874dc0cd4df7e6b833574eb9a9ba4ba6ea6` documents the same revision substitution but is no longer required to be materialized or imported at runtime.
-
-The harness is valid only when:
-
-- The source Git blob SHA matches the expected value.
-- The revision substitution count is exactly one.
-- Execution completes successfully.
-- The output parses as JSON.
-- `framework_revision` equals `7d18c1dacf02f341f0c464571bc2f99e78a4b4de`.
-- `result` equals `passed`.
-- All 11 artifact entries contain complete normalized YAML, SHA-256, Git blob SHA, and byte count.
-- Every harness check is true.
-- Every reported fixture rejection is true.
-- `classification_before_approval` is `approval-required action blocked`.
-- `classification_after_durable_approval` is `exact approved action authorized`.
-
-Do not invent, approximate, or manually replace fixture bytes or identities.
-
-An inability to download or mount GitHub files is not a valid reason to skip the harness because connector-returned source can be executed in memory. If the source cannot be read through the connector or the Python runtime itself is unavailable, report the run as incomplete rather than as a framework defect.
-
-# Approval Schema Routing Clarification
-
-For new structured approval records:
-
-- Validate `kind: approval` only against `.flywheel/operating-model/schemas/approval-record.schema.yaml`.
-- Do not apply the legacy approval branch in `record.schema.yaml` as a second validator.
-- Continue to validate evidence, decision, and finding records against `record.schema.yaml`.
-- Apply all cross-artifact approval rules from `approval-boundaries.md` and `approval-validation.yaml` after schema validation.
-
-This routing is required by the final framework revision and replaces any ambiguous interpretation of the detailed specification.
-
-# Evidence and Decision Durability Clarification
-
-For the positive owner-approval fixture, treat `EVID-940` and `DECISION-940` as already durable, canonically located, re-read, schema-valid, and reference-valid before constructing `PERSIST-20260730T021000Z-001`.
-
-The approval persistence plan governs only create-only creation of `APPROVAL-940` because its evidence and decision dependencies are already durable.
-
-A decision record remains distinct from an approval record and does not authorize the action by itself.
-
-# Required Output and Evaluation
-
-Use the exact 22-section output contract, exact 29 validation-result rows, exact 46 negative cases, summary field order, mutation confirmation, and final-action choices defined by the detailed immutable specification.
-
-The result must identify:
-
-```text
-Framework revision tested: 7d18c1dacf02f341f0c464571bc2f99e78a4b4de
-Base fixture harness commit: 2fd99b86df229890f8eb53152ea825906c658fe7
-Base fixture harness blob: 30b004f49b663e062126551bb1d8958c0a226298
-Harness execution mode: in-memory connector source
-```
-
-A result that uses the obsolete framework revision, skips the in-memory harness, fails to verify the base source blob, validates a structured approval against the legacy generic approval shape, omits the required output structure, or reports unsupported fixture identities fails Prompt 013.
+Report only reusable framework defects. Stop after the next authorized action.
