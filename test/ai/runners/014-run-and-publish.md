@@ -22,31 +22,21 @@ Detailed specification commit: 087c97c6f95ce36555a5c77aff95eeb16e19c8d3
 Fixture harness commit: e5f47e50b092a44858bf5a1daea22cfcc85f8c94
 Fixture harness blob: d264dcce92e5e06ee06801eb15d3e1f8a64a1843
 Canonical launcher commit: aead473368cd2f7243ba473af08d9656d21950a2
+Result-format contract commit: 594b195c514ab434406989af4e67db927d1164d1
+Format-validator commit: 891f0d240c15bed3c175639808ff3f3b77f7aab1
 ```
 
 Do not substitute a branch head, newer framework revision, alternate prompt, or modified fixture source.
 
 # Execute the Fixture Harness
 
-Retrieve the exact harness source through the GitHub connector.
+Retrieve the exact harness source through the GitHub connector and verify its Git blob SHA equals `d264dcce92e5e06ee06801eb15d3e1f8a64a1843`.
 
-Verify its Git blob SHA equals:
-
-```text
-d264dcce92e5e06ee06801eb15d3e1f8a64a1843
-```
-
-Execute the source directly in memory with Python 3 using `exec`. Capture the complete JSON output.
-
-PyYAML is required. Do not require network access from Python, do not download the harness from Python, and do not require connector-to-filesystem materialization.
-
-The harness run is valid only when every condition in the canonical launcher passes.
+Execute the source directly in memory with Python 3 using `exec`. Capture the complete JSON output. PyYAML is required. Do not require Python network access or connector-to-filesystem materialization.
 
 # Complete Prompt 014 Verification
 
-Follow every instruction in the launcher and detailed specification.
-
-In particular:
+Follow every instruction in the launcher and detailed specification. In particular:
 
 1. Read all 12 focused framework files from the pinned revision.
 2. Resolve the active mission and goal for context.
@@ -54,40 +44,44 @@ In particular:
 4. Validate the retained and optional blocked states against `state.schema.yaml`.
 5. Validate the startup-failure record against `startup-failure.schema.yaml`.
 6. Represent only `approval-validation.yaml` as absent in the isolated fixture.
-7. Prove Operating Validation fails while Repository Validation remains pending and Implementation Validation remains not-applicable.
-8. Prove no execution is created or resumed.
-9. Prove no target-repository inspection occurs.
-10. Prove the missing artifact is not invented, substituted, or copied from an unapproved revision.
-11. Produce the exact 14-heading startup report.
-12. Prove create-only startup-failure persistence and optional blocked-state behavior.
-13. Reject all 30 negative cases deterministically.
-14. Produce exactly 22 top-level sections.
-15. Produce exactly 24 validation-result rows.
-16. Preserve the exact summary, mutation-confirmation, and final-action forms.
+7. Prove the required failed, pending, and not-applicable startup validation states.
+8. Prove no execution creation, resume, target-repository inspection, invention, or unauthorized substitution occurs.
+9. Produce the exact 14-heading startup report.
+10. Prove create-only startup-failure persistence and optional blocked-state behavior.
+11. Reject all 30 negative cases deterministically.
+12. Produce exactly 22 numbered top-level sections and 24 validation-result rows.
+13. Preserve the exact summary, mutation-confirmation, and final-action values.
 
-Treat `Infoconex/ai-flywheel-framework` as read-only. Do not modify its files, branch, state, records, schemas, or lifecycle.
+Treat `Infoconex/ai-flywheel-framework` as read-only. Do not repair defects during the independent run; report them.
 
-Do not repair any framework, prompt, or fixture defect during the independent run. Report it in the result.
+# Canonical Result Formatting
+
+Read and follow:
+
+https://raw.githubusercontent.com/Infoconex/ai-flywheel-framework-testing/594b195c514ab434406989af4e67db927d1164d1/test/ai/RESULT_FORMAT.md
+
+The formatting contract is mandatory. Before committing, verify:
+
+- One level-one Prompt 014 document title.
+- All 22 numbered sections use level-two headings.
+- Verification Summary is inside a fenced `text` block.
+- Each summary metadata item is its own paragraph separated by one blank line.
+- Complete synthetic artifacts use fenced `yaml` blocks.
+- Repository Mutation Confirmation is inside a fenced `text` block.
+
+Run the format validator from commit `891f0d240c15bed3c175639808ff3f3b77f7aab1` against the completed result with expected section count `22`. A formatting-validator failure makes the result incomplete even when substantive evidence passes.
 
 # Overwrite the Canonical Result
 
-Write the complete result to:
+Write only:
 
 ```text
 test/ai/results/014-recover-missing-required-artifact.md
 ```
 
-This is the only retained Prompt 014 result path. When it already exists, overwrite it in place.
+Overwrite it in place. Do not create another result or modify `test/ai/README.md`.
 
-Do not:
-
-- Create a rerun result.
-- Add a date, suffix, counter, revision, or alternate filename.
-- Retain an additional result-history file.
-- Create a second Prompt 014 result.
-- Modify `test/ai/README.md`.
-
-Commit only the canonical result file with:
+Commit only the result with:
 
 ```text
 Replace Prompt 014 verification result
@@ -95,7 +89,7 @@ Replace Prompt 014 verification result
 
 # Required Final Response
 
-After committing the result, respond with only:
+Respond only with:
 
 ```text
 Prompt: 014-recover-missing-required-artifact
@@ -113,9 +107,9 @@ Validation-result rows: 24
 Negative cases reported: 30
 Result path: test/ai/results/014-recover-missing-required-artifact.md
 Result commit: <commit SHA>
-Result file overwritten: Yes | No
+Result file overwritten: Yes
 README modified: No
 Notes: <one concise statement identifying anything requiring review, or None>
 ```
 
-Do not paste the complete result into the final chat response. The committed canonical result is the review evidence.
+Do not paste the complete result into the final chat response.
