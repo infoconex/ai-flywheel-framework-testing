@@ -10,7 +10,7 @@
 
 **Repository:** `Infoconex/ai-flywheel-framework`
 
-**Immutable revision:** `406f570d76a44ced727992d11576f162f9bc999f`
+**Immutable revision:** `fdb270be55d77b2588b7d589021479c5f6e3097f`
 
 Use this exact revision. Do not resolve or substitute a later branch head.
 
