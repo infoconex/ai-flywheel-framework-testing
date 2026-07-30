@@ -1,5 +1,8 @@
-# 1. Verification Summary
+# Prompt 015 — Recover Broken Active Reference Verification
 
+## 1. Verification Summary
+
+```text
 Operating Validation: Passed
 Verification Result: Passed
 Fixture Harness Result: Passed
@@ -8,26 +11,35 @@ Files Written: 0
 Commit Required: False
 Framework Defects Found: 0
 Prompt or Fixture Defects Found: 0
+```
 
 Framework revision tested: `291f87fb4485a2cfaa4f1580a8157a2842d08317`
+
 Detailed specification commit: `1f8ace648e262fffbae17fb6cd441c8eeb54ffe4`
+
 Fixture harness commit: `446f9cf6d5b59780141d09d3754d5fc8d69506b3`
+
 Fixture harness blob: `76692b26583b933ba2eb7e613c7d65840edfac2c`
-Harness execution mode: in-memory connector source with one revision replacement
+
+Harness execution mode: `in-memory connector source with one revision replacement`
+
 Focused framework resolution: `13/13`
+
 Fixture artifacts: `5/5`
+
 Validation-result rows: `25`
+
 Negative cases: `34`
 
-# 2. Validation Trace
+## 2. Validation Trace
 
 The canonical launcher and detailed specification were read at their immutable commits. The harness was retrieved through the GitHub connector; its blob SHA matched `76692b26583b933ba2eb7e613c7d65840edfac2c`. Exactly one obsolete framework-revision assignment was replaced with `291f87fb4485a2cfaa4f1580a8157a2842d08317`; no other source text changed. Python 3 executed the corrected source directly in memory with `exec`. The harness returned `result: passed`, five complete artifact snapshots, every check true, and every harness negative case true.
 
-# 3. Durable Operating Context
+## 3. Durable Operating Context
 
 The corrected framework revision was used for all 13 focused reads. The active mission `establish-ai-flywheel-operations` and active goal `001-discover-repository-and-gather-context` were resolved for context. No application-repository content was read. The synthetic retained fixture is isolated from durable framework state.
 
-# 4. Primary Broken Active-Execution Fixture
+## 4. Primary Broken Active-Execution Fixture
 
 > **PROPOSED ONLY — NOT WRITTEN**
 
@@ -53,20 +65,29 @@ Snapshot: SHA-256 `7a584609e9b09ae3573d8d51fb9e384e50653137d90dfd40032f5bc53590c
 
 The retained state validates against the corrected state schema.
 
-# 5. Reference Resolution Evidence
+## 5. Reference Resolution Evidence
 
 Source artifact path: `.flywheel/state.yaml`
+
 Source field: `active_execution`
+
 Reference type: `execution`
+
 Referenced ID: `EX-20260730T050000Z-001`
+
 Expected canonical path: `.flywheel/operations/records/establish-ai-flywheel-operations/001-discover-repository-and-gather-context/executions/EX-20260730T050000Z-001.yaml`
+
 Resolution cardinality: `zero`
+
 Observed candidate paths: `[]`
+
 Identity mismatches: `[]`
+
 Selection prohibited: `true`
 
-# 6. Required Startup Classification
+## 6. Required Startup Classification
 
+```text
 Failure Classification: broken active execution reference
 Failed Rules: STARTUP-REFERENCE-RESOLUTION-001, STARTUP-REFERENCE-BOUNDARY-001, STARTUP-REFERENCE-EVIDENCE-001
 Operating Validation: failed
@@ -75,56 +96,71 @@ Implementation Validation: not-applicable
 Execution Decision: no execution created or resumed
 Target Repository Inspection: not performed
 Candidate Selection: prohibited
+```
 
-# 7. Required Opening Report
+## 7. Required Opening Report
 
-## Current Phase
+### Current Phase
+
 onboarding
 
-## Status
+### Status
+
 active in the retained synthetic fixture; startup is blocked by an unresolved active-execution reference.
 
-## Readiness
+### Readiness
+
 not-ready-for-missions
 
-## Application Missions Permitted
+### Application Missions Permitted
+
 No
 
-## Active Mission
+### Active Mission
+
 `establish-ai-flywheel-operations`
 
-## Active Goal
+### Active Goal
+
 `001-discover-repository-and-gather-context`
 
-## Active Execution
+### Active Execution
+
 Referenced as `EX-20260730T050000Z-001` but unresolved; not resumed.
 
-## Lifecycle Stage
+### Lifecycle Stage
+
 Observed as `execute` and preserved as evidence; it cannot authorize work until the execution resolves.
 
-## Known Blockers
+### Known Blockers
+
 Broken `state.active_execution` reference to `EX-20260730T050000Z-001`; expected canonical path `.flywheel/operations/records/establish-ai-flywheel-operations/001-discover-repository-and-gather-context/executions/EX-20260730T050000Z-001.yaml` has cardinality zero.
 
-## Required Approvals
+### Required Approvals
+
 Authorized restoration or reconciliation is required before startup can continue.
 
-## Operating Validation
+### Operating Validation
+
 failed
 
-## Repository Validation
+### Repository Validation
+
 pending
 
-## Implementation Validation
+### Implementation Validation
+
 not-applicable
 
-## Next Authorized Action
+### Next Authorized Action
+
 Restore the exact referenced artifact at its canonical path from an authorized, reviewed revision or obtain an authorized reconciliation that updates the source reference, then restart startup validation from the manifest.
 
-# 8. Execution, Inspection, and Selection Boundary
+## 8. Execution, Inspection, and Selection Boundary
 
 No execution was created or resumed. No target-repository content was inspected. No candidate was selected. Recency, filename similarity, case collision, chat history, and convenience were not used as authority.
 
-# 9. Structured Startup-Failure Record
+## 9. Structured Startup-Failure Record
 
 > **PROPOSED ONLY — NOT WRITTEN**
 
@@ -161,21 +197,21 @@ reference_failure:
 
 Snapshot: SHA-256 `ebdf35fdfeba8bc9c90ed65e6d165446863b138b3a57a969d0b33ecc13035717`; Git blob SHA `eba0811f360b12d46210b57431f8ab49b839cf51`; bytes `1520`.
 
-# 10. Startup-Failure Schema Validation
+## 10. Startup-Failure Schema Validation
 
 The complete record validated against `startup-failure.schema.yaml` using Draft 2020-12 semantics with format checking.
 
-# 11. Broken-Reference Semantic Validation
+## 11. Broken-Reference Semantic Validation
 
 The zero-cardinality fixture preserves the exact source artifact and field, referenced ID, canonical path, empty candidate and mismatch lists, and `selection_prohibited: true`. Persistence is evidence, not reconciliation.
 
-# 12. Startup-Failure Persistence Boundary
+## 12. Startup-Failure Persistence Boundary
 
 > **PROPOSED ONLY — NOT WRITTEN**
 
 Canonical path: `.flywheel/operations/records/startup-failures/SF-20260730T050500Z-001.yaml`. The complete record was constructed and validated in memory. The hypothetical write is create-only after an immediate absence check, followed by exact re-read, digest comparison, and schema verification. Existing history remains immutable. No framework write was performed.
 
-# 13. Optional Blocked-State Update
+## 13. Optional Blocked-State Update
 
 > **PROPOSED ONLY — NOT WRITTEN**
 
@@ -202,9 +238,9 @@ Snapshot: SHA-256 `ad0908e49b687a99b7ec7b53ff7a3964f741aac4104c6ec888add4480f041
 
 The blocked state validates against the corrected state schema, preserves all active references and lifecycle stage, and may be proposed only with retained-revision compare-and-swap and direct proof that the failure prevents active work.
 
-# 14. Alternate Deterministic Reference Failures
+## 14. Alternate Deterministic Reference Failures
 
-## Multiple
+### Multiple
 
 > **PROPOSED ONLY — NOT WRITTEN**
 
@@ -238,7 +274,7 @@ reference_failure:
 
 Snapshot: SHA-256 `d9d0e2a443405753d86b81501d04b44354607ffc539adf8b8ca1b7a02b79c594`; Git blob SHA `eb884ba4c74407e8e5cac3fd7c36b0dc5c78dfc0`; bytes `1823`.
 
-## Identity mismatch
+### Identity mismatch
 
 > **PROPOSED ONLY — NOT WRITTEN**
 
@@ -274,15 +310,15 @@ Snapshot: SHA-256 `47d9b0ca4c12b1aca85fefeb0cd1a491f8115072c44e985154b42ec32dbe2
 
 Missing active mission, missing active goal, and missing active-stage record reference were evaluated as separate isolated states; each stops startup without inferred selection.
 
-# 15. Recovery and Restart Boundary
+## 15. Recovery and Restart Boundary
 
 Writing failure evidence does not recover startup. After authorized correction, a new session must restart from the manifest and repeat required-file, schema, canonical-path, uniqueness, identity, reciprocal-reference, and execution-boundary checks.
 
-# 16. Next Authorized Action
+## 16. Next Authorized Action
 
 Restore the exact referenced artifact at its canonical path from an authorized, reviewed revision or obtain an authorized reconciliation that updates the source reference, then restart startup validation from the manifest.
 
-# 17. Acceptance-Criterion Evidence Mapping
+## 17. Acceptance-Criterion Evidence Mapping
 
 | Criterion | Evidence | Result |
 |---|---|---|
@@ -295,7 +331,7 @@ Restore the exact referenced artifact at its canonical path from an authorized, 
 | Validation rows | 25/25 passed | Passed |
 | Immutability | Framework unchanged | Passed |
 
-# 18. Validation Results
+## 18. Validation Results
 
 | Validation | Expected condition | Actual condition | Result | Enforcing source |
 |---|---|---|---|---|
@@ -325,7 +361,7 @@ Restore the exact referenced artifact at its canonical path from an authorized, 
 | Negative validation cases | 34 reject | 34 reject | Passed | Specification |
 | Repository immutability | No mutation | No mutation | Passed | Authorization |
 
-# 19. Negative Validation Results
+## 19. Negative Validation Results
 
 | # | Negative case | Result |
 |---:|---|---|
@@ -366,15 +402,17 @@ Restore the exact referenced artifact at its canonical path from an authorized, 
 
 Negative cases reported: `34`; rejected: `34/34`.
 
-# 20. Framework Defects
+## 20. Framework Defects
 
 No reusable framework defects were found during broken active reference recovery verification.
 
 Framework defects found: `0`
+
 Prompt or fixture defects found: `0`
 
-# 21. Repository Mutation Confirmation
+## 21. Repository Mutation Confirmation
 
+```text
 Target Framework Repository Changes: None
 Target Framework Files Written: 0
 Target Framework Commits Created: 0
@@ -382,7 +420,8 @@ Target Framework Pushes Performed: 0
 Durable Lifecycle Transitions Performed: 0
 Testing Repository Canonical Result Overwritten: Yes
 Testing Repository README Modified: No
+```
 
-# 22. Next Test Action
+## 22. Next Test Action
 
 Request an independent private-session run of Prompt 015 when verification passes with no reusable defect.
