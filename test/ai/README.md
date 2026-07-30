@@ -18,6 +18,7 @@ This directory catalogs the reusable AI prompts used to verify the AI Flywheel F
 | [End-to-End Execution](prompts/010-end-to-end-execution.md) | One stable execution across all lifecycle stages, checkpoint persistence, transaction commit markers, planned-to-completed reuse assessments, and terminal closure | Yes | 2026-07-28 | Yes | [View result](results/010-end-to-end-execution.md) |
 | [Resume Interrupted Execution](prompts/011-resume-interrupted-execution.md) | Fresh-session discovery and safe CAS resume of a durable interrupted execution without identity loss, repeated work, stale overwrites, or repository mutation | Yes | 2026-07-28 | Yes | [View result](results/011-resume-interrupted-execution.md) |
 | [Recover Partial Lifecycle Transition](prompts/012-recover-partial-lifecycle-transition.md) | Fresh-session detection and recovery of an execution-first, state-not-written lifecycle transition using a durable transition plan, exact rollback, and structured recovery evidence | Yes | 2026-07-29 | Yes | [View result](results/012-recover-partial-lifecycle-transition.md) |
+| [Enforce Approval Boundary](prompts/013-enforce-approval-boundary.md) | Fresh-session enforcement of exact durable approval before a material dependency action, including authority, scope, persistence, delegation, revocation, and invalid authorization cases | No | — | No | Pending independent result |
 
 ## Status Rules
 
