@@ -6,9 +6,11 @@ Use the GitHub repositories as the sources of truth.
 
 Read and execute exactly:
 
-https://raw.githubusercontent.com/Infoconex/ai-flywheel-framework-testing/8b523d61754fa359a8b12f05a1d80a7e9223dd95/test/ai/prompts/017-self-host-certification.md
+https://raw.githubusercontent.com/Infoconex/ai-flywheel-framework-testing/3975fbcf47a90f050a4f7df4c0a7cba1d6b05d4d/test/ai/prompts/017-self-host-certification-launcher.md
 
 Do not use a copied, summarized, cached, or earlier version.
+
+The launcher directs you to the immutable detailed specification and applies the final fixture-runner and evidence-deduplication corrections. Follow the launcher before following the detailed specification.
 
 ## Required immutable sources
 
@@ -16,10 +18,11 @@ Do not use a copied, summarized, cached, or earlier version.
 Framework revision: 18335e57165a8984adab4790d3a6210355b484ba
 Historical evidence revision: aceda4a01c27abcdca96bed3319cfa987a0272b5
 Detailed specification commit: 8b523d61754fa359a8b12f05a1d80a7e9223dd95
+Canonical launcher commit: 3975fbcf47a90f050a4f7df4c0a7cba1d6b05d4d
 Base fixture commit: e032b9ed23aca4476c2d4c95557c1fc32121d669
 Base fixture blob: ea34857e39da0440a5d6f4d555475c91161aac24
-Correction runner commit: 9f995a90f95ba87b1301b286a4ea2683dab1e8e3
-Correction runner blob: 1106d396ab13aeb4c79451ed96c6f3e367cec657
+Correction runner commit: cf989e59d8822645cff4d3fde109f5e9e871b7e0
+Correction runner blob: 74137e6d8aac5997efea75c832dfebc2cf3629d9
 Self-hosting fixture commit: 42461bcc86ea75c3752082b33d7c24dd18a8bd62
 Self-hosting fixture blob: 4a14008db5ef906999e3f41570192fe3efcc378a
 Result-format contract commit: 43b35bd896554793a3142ddf6f654ffdf8bec7f2
@@ -36,11 +39,13 @@ Do not publish a result until all of these are complete:
 - Durable active mission and goal context resolve.
 - Historical certification evidence reads are `16/16`.
 - Self-hosting fixture blob matches.
-- Base fixture and correction runner blobs match.
+- Base fixture and final correction runner blobs match.
 - The corrected harness executes successfully in memory.
+- The correction count is `17`.
 - All 11 snapshots are complete.
 - All 16 fixture checks are true.
 - All 44 fixture negative cases are true.
+- The scenario audit evidence source references are unique.
 - All individual schema validations complete.
 - All cross-artifact semantic validations complete.
 - Exactly 32 validation-result rows are reported.
@@ -91,7 +96,7 @@ framework_revision: 18335e57165a8984adab4790d3a6210355b484ba
 evidence_revision: aceda4a01c27abcdca96bed3319cfa987a0272b5
 self_host_evidence_revision: 42461bcc86ea75c3752082b33d7c24dd18a8bd62
 execution_mode: in-memory connector source with deterministic correction runner
-correction_count: 16
+correction_count: 17
 result: passed
 ```
 
@@ -121,7 +126,7 @@ Do not modify:
 
 - The framework branch or any framework file.
 - Durable framework state, missions, goals, executions, records, or lifecycle.
-- The detailed prompt, fixture, correction runner, format contract, or validator.
+- The detailed prompt, canonical launcher, fixture, correction runner, format contract, or validator.
 - `test/ai/README.md`.
 
 Do not repair Prompt 001 or Prompt 002 during this run. Report the expected corrective actions only.
@@ -153,10 +158,11 @@ Prompt: 017-self-host-certification
 Framework revision tested: 18335e57165a8984adab4790d3a6210355b484ba
 Historical evidence revision: aceda4a01c27abcdca96bed3319cfa987a0272b5
 Detailed specification commit: 8b523d61754fa359a8b12f05a1d80a7e9223dd95
+Canonical launcher commit: 3975fbcf47a90f050a4f7df4c0a7cba1d6b05d4d
 Base fixture commit: e032b9ed23aca4476c2d4c95557c1fc32121d669
 Base fixture blob: ea34857e39da0440a5d6f4d555475c91161aac24
-Correction runner commit: 9f995a90f95ba87b1301b286a4ea2683dab1e8e3
-Correction runner blob: 1106d396ab13aeb4c79451ed96c6f3e367cec657
+Correction runner commit: cf989e59d8822645cff4d3fde109f5e9e871b7e0
+Correction runner blob: 74137e6d8aac5997efea75c832dfebc2cf3629d9
 Self-hosting fixture commit: 42461bcc86ea75c3752082b33d7c24dd18a8bd62
 Self-hosting fixture blob: 4a14008db5ef906999e3f41570192fe3efcc378a
 Harness execution mode: in-memory connector source with deterministic correction runner
