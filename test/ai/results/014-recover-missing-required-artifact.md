@@ -2,6 +2,7 @@
 
 ## 1. Verification Summary
 
+```text
 Operating Validation: Passed
 Verification Result: Passed
 Fixture Harness Result: Passed
@@ -10,12 +11,18 @@ Files Written: 0
 Commit Required: False
 Framework Defects Found: 0
 Prompt or Fixture Defects Found: 0
+```
 
 Framework revision tested: 923c46baf8d4bb400eef71a3507e07d797dcab87
+
 Detailed specification commit: 087c97c6f95ce36555a5c77aff95eeb16e19c8d3
+
 Fixture harness commit: e5f47e50b092a44858bf5a1daea22cfcc85f8c94
+
 Fixture harness blob: d264dcce92e5e06ee06801eb15d3e1f8a64a1843
+
 Canonical launcher commit: aead473368cd2f7243ba473af08d9656d21950a2
+
 Harness execution mode: in-memory connector source
 
 `Operating Validation: Passed` means the framework correctly detected and handled the intentionally invalid isolated fixture. The fixture's operating validation state is `failed`.
