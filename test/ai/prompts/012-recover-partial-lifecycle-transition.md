@@ -4,13 +4,13 @@
 
 > **Purpose**
 >
-> Verify that a lifecycle transition interrupted after the execution update but before the state update can be discovered and recovered deterministically by a fresh operator session using only durable repository artifacts.
+> Verify that a lifecycle transition interrupted after the execution update but before the state update can be discovered and recovered deterministically by a fresh operator session using only durable repository artifacts, including deterministic validation of the complete structured recovery finding.
 
 # Repository
 
 **Repository:** `Infoconex/ai-flywheel-framework`
 
-**Immutable revision:** `41eba79d29e9d047cecf25792a871380371a9dfa`
+**Immutable revision:** `406f570d76a44ced727992d11576f162f9bc999f`
 
 Use this exact revision. Do not resolve or substitute a later branch head.
 
@@ -59,7 +59,7 @@ Construct complete schema-valid in-memory mission and goal artifacts using:
 - Mission criterion: `MSC-930`
 - Goal criteria in exact order: `AC-930`, `AC-931`, `AC-932`, `AC-933`, `AC-934`, `AC-935`, `AC-936`
 
-The seven goal criteria must respectively cover durable transition-plan reconstruction, deterministic partial-state recognition, exact execution rollback, durable recovery finding and recovery plan, original-plan finalization and continuation boundary, negative fixtures, and repository immutability.
+The seven goal criteria must respectively cover durable transition-plan reconstruction, deterministic partial-state recognition, exact execution rollback, durable structured recovery finding and recovery plan, original-plan finalization and continuation boundary, negative fixtures, and repository immutability.
 
 Include all required fields, one evidence requirement per acceptance criterion, read-only constraints, and no required approvals. Construct sufficient in-memory evidence mappings for all seven criteria.
 
@@ -191,9 +191,9 @@ Demonstrate the complete non-persistent rollback sequence:
 9. Verify both exactly equal the retained pre-transition pair.
 10. Do not update, retry, or roll back state.
 
-A rollback that reconstructs, normalizes semantically, retimes, or otherwise changes the retained execution content fails. Exact retained bytes after the framework's specified normalization boundary are required.
+A rollback that reconstructs, semantically normalizes, retimes, or otherwise changes the retained execution content fails. Exact retained bytes after the framework's specified normalization boundary are required.
 
-# Recovery Finding and Recovery Plan
+# Structured Recovery Finding
 
 Use finding identity:
 
@@ -201,9 +201,48 @@ Use finding identity:
 FIND-930
 ```
 
-Construct a complete schema-valid create-only finding containing all required transition-recovery information, including original plan identity and path, target paths, retained SHAs and digests, proposed digests, observed current revisions, successful execution write, failed or absent state write, rollback attempt and result, restored-pair verification, continuation disposition, and required recovery action.
+Construct a complete schema-valid create-only finding with:
 
-The finding must identify the synthetic execution and reference the original transition plan through `source_refs` or `artifact_refs`.
+- `kind: finding`
+- `finding.finding_type: partial-lifecycle-transition`
+- A complete `finding.transition_recovery` object.
+
+The structured recovery payload must include:
+
+- `original_plan_id` and canonical `original_plan_path`.
+- `transition_operator`, `transition_at`, and recovery `observed_at`.
+- Exactly one target snapshot for each original-plan target.
+- Each target's ID, artifact type, path, operation, retained SHA and digest, proposed digest, observed SHA and digest, write result, and failure detail.
+- At least one target with `write_result: succeeded`.
+- At least one target with `write_result: failed` or `not-attempted`.
+- A nonempty `failure_condition`.
+- Structured rollback data: attempted status, target IDs, exact result, restored content digest, `state_mutated`, and detail.
+- `original_pair_restored`.
+- `continuation_prohibited: true` and a nonempty reason.
+- A nonempty `recovery_action`.
+- `human_reconciliation_required`.
+
+For the successful exact-rollback fixture:
+
+- Execution target write result is `succeeded`.
+- State target write result is `failed` or `not-attempted`, with a nonempty failure detail.
+- Rollback is attempted against the execution target.
+- Rollback result is `succeeded`.
+- Restored content digest equals the retained execution digest.
+- `state_mutated: false`.
+- `original_pair_restored: true`.
+- `human_reconciliation_required: false`.
+
+Validate the finding against `record.schema.yaml`, then perform the semantic cross-checks required by `transition-recovery.md` and `validation.yaml`:
+
+- Top-level mission, goal, and execution agree with the original plan.
+- Plan ID, canonical path, and source/artifact references resolve to the same plan.
+- Every target maps exactly once to the original plan.
+- Target paths, operations, retained SHAs and digests, and proposed digests equal the original plan.
+- Observed SHAs and digests equal the synthetic durable recovery revisions.
+- Write results, failure, rollback, restoration, continuation, and recovery action agree with the durable trace.
+
+# Recovery Persistence Plan
 
 Use recovery plan identity:
 
@@ -213,7 +252,7 @@ PERSIST-20260729T051500Z-001
 
 Construct a complete schema-valid recovery persistence plan that:
 
-- Governs creation of the finding at its canonical path.
+- Governs creation of `FIND-930` at its canonical path.
 - Uses create-only semantics and confirmed absence.
 - Contains the finding's exact normalized content digest.
 - Excludes itself from targets and write order.
@@ -239,7 +278,7 @@ Update the original plan only through retained-SHA CAS. Re-read the original pla
 Report the transition not applied only after:
 
 - The original execution/state pair is exactly restored.
-- The recovery finding is durable.
+- The structured recovery finding is schema-valid, semantically valid, and durable.
 - The recovery plan is terminal `applied` and verified.
 - The original transition plan is terminal `rolled-back` and verified.
 - No unexplained mutable target change exists.
@@ -258,11 +297,11 @@ The rolled-back transition plan must not be reused, returned to `planned`, or ch
 
 # Alternate Deterministic States
 
-Construct and evaluate these additional plan-governed states:
+Construct and evaluate:
 
-1. **No target written:** Plan is `planned` or `applying`, and execution and state both match retained preconditions. Finalize it as `rolled-back` with `recovery.mode: not-started`, null finding reference, no blocker, and final verification `passed`; verify the pair remains original. No recovery finding is required because no governed target changed.
-2. **Both targets written, plan still applying:** Both targets exactly match proposed digests. Treat values as transaction-pending, complete whole-set verification, and finalize the exact plan to `applied`; do not roll back merely because a new session began.
-3. **Rollback cannot be proven:** Persist a blocking finding when safely possible, finalize the original plan to `blocked` when its revision remains owned, and require human reconciliation.
+1. **No target written:** Finalize as `rolled-back` with `recovery.mode: not-started`, null finding, no blocker, and final verification `passed`; verify the pair remains original. No recovery finding is required.
+2. **Both targets written, plan still applying:** Verify the complete proposed set and finalize the exact plan to `applied`; do not roll back solely because a new session began.
+3. **Rollback cannot be proven:** Persist a schema-valid structured blocking recovery finding when safely possible, finalize the original plan to `blocked` when its revision remains owned, and require human reconciliation.
 
 # Negative Validation
 
@@ -275,30 +314,44 @@ Construct invalid fixtures and demonstrate deterministic rejection of:
 5. Plan orders state before execution.
 6. Plan lacks retained precondition SHA, proposed digest, or retained rollback digest.
 7. Plan includes itself as a target or write-order item.
-8. Current execution does not match either retained precondition content or proposed digest.
+8. Current execution matches neither retained content nor proposed digest.
 9. Current state no longer matches its retained precondition.
-10. Operator retries state against the retained or a newer SHA after execution success.
+10. Operator retries state after execution success.
 11. Operator rolls back state.
-12. Rollback uses reconstructed or modified execution content rather than exact retained content.
+12. Rollback uses reconstructed or modified execution content.
 13. Resolved retained content digest does not match the plan.
 14. Rollback uses a stale post-write execution SHA or force update.
 15. Recovery is claimed without final execution/state pair re-read.
-16. Recovery finding omits required revisions, writes, failure, rollback, or continuation disposition.
-17. Finding is written without a recovery persistence plan.
-18. Restored execution is modified solely to add the recovery finding reference.
-19. Original plan is marked `rolled-back` before the finding and recovery plan are durable.
-20. Original plan finalization uses a stale plan SHA.
-21. Original plan returns from `rolled-back` to `planned`, `applying`, or `applied`.
-22. Classify work begins while the original plan remains `planned`, `applying`, `failed`, or `blocked`.
-23. Pre-transition Evaluate work is repeated after successful rollback.
-24. State was written while execution remained at its retained version and automatic recovery is attempted.
-25. Both targets match proposed content but the operator rolls back without checking whether exact-plan finalization is valid.
-26. Plan is terminal `applied` while either target differs from proposed content.
-27. Recovery finding or plan exists only in chat or memory.
-28. A terminal or unrelated plan is used as recovery authority.
-29. Repository artifacts are actually written during this synthetic verification.
-30. A no-target-written plan is finalized as `failed` and lifecycle continuation is allowed without reconciliation.
-31. Classify begins after rollback by reusing the rolled-back plan instead of creating a new transition plan.
+16. `finding_type: partial-lifecycle-transition` omits `transition_recovery`.
+17. Structured recovery payload omits any required plan, timestamp, target, failure, rollback, restoration, continuation, recovery-action, or reconciliation field.
+18. Target list lacks a succeeded write or lacks a failed/not-attempted write.
+19. Update target omits retained SHA or retained digest.
+20. Successful target omits observed SHA/digest or supplies non-null failure detail.
+21. Failed/not-attempted target omits failure detail.
+22. Successful rollback omits restored digest or records `state_mutated: true`.
+23. Original pair is not restored but human reconciliation is false.
+24. Finding plan ID/path/reference does not resolve to the original plan.
+25. Finding target is missing, duplicated, extra, or does not map to the original plan.
+26. Finding target path, operation, retained SHA/digest, or proposed digest differs from the original plan.
+27. Observed SHA/digest differs from the durable artifact used for recovery.
+28. Write result, failure, rollback, restoration, continuation, or recovery action contradicts the durable recovery trace.
+29. Finding is written without a recovery persistence plan.
+30. Restored execution is modified solely to add the recovery finding reference.
+31. Original plan is marked `rolled-back` before the finding and recovery plan are durable.
+32. Original plan finalization uses a stale plan SHA.
+33. Original plan returns from `rolled-back` to `planned`, `applying`, or `applied`.
+34. Classify work begins while the original plan remains `planned`, `applying`, `failed`, or `blocked`.
+35. Pre-transition Evaluate work is repeated after successful rollback.
+36. State was written while execution remained retained and automatic recovery is attempted.
+37. Both targets match proposed content but rollback occurs without checking exact-plan finalization.
+38. Plan is terminal `applied` while either target differs from proposed content.
+39. Recovery finding or plan exists only in chat or memory.
+40. A terminal or unrelated plan is used as recovery authority.
+41. Repository artifacts are actually written during this synthetic verification.
+42. A no-target-written plan is finalized as `failed` and continuation is allowed.
+43. Classify begins after rollback by reusing the rolled-back plan.
+
+For cases 16 through 23, report whether rejection is enforced directly by `record.schema.yaml`. For cases 24 through 28, report the specific semantic rule that rejects the fixture.
 
 A case that cannot be rejected deterministically is a reusable framework defect.
 
@@ -320,17 +373,18 @@ Report separately:
 12. Exact retained-content resolution and digest verification.
 13. Execution rollback CAS and state non-mutation.
 14. Restored-pair verification.
-15. Recovery finding schema, content, and references.
-16. Recovery plan target derivation, ordering, commit marker, and verification.
-17. Original transition-plan rolled-back finalization.
-18. Fresh-session reconstruction without chat history.
-19. Next authorized action and non-repetition.
-20. No-target-written alternate state.
-21. Both-targets-written alternate state.
-22. Unrecoverable rollback blocking state.
-23. Negative validation cases.
-24. Acceptance-criterion evidence mapping.
-25. Repository immutability.
+15. Structured recovery finding schema validation.
+16. Structured recovery finding semantic cross-checks.
+17. Recovery plan target derivation, ordering, commit marker, and verification.
+18. Original transition-plan rolled-back finalization.
+19. Fresh-session reconstruction without chat history.
+20. Next authorized action and non-repetition.
+21. No-target-written alternate state.
+22. Both-targets-written alternate state.
+23. Unrecoverable rollback blocking state.
+24. Negative validation cases.
+25. Acceptance-criterion evidence mapping.
+26. Repository immutability.
 
 For each include expected condition, actual condition, result, and enforcing source.
 
@@ -357,7 +411,7 @@ Use these sections in order:
 9. Startup Recovery Classification
 10. Exact Execution Rollback
 11. Restored Execution and State
-12. Recovery Finding
+12. Structured Recovery Finding
 13. Recovery Persistence Plan
 14. Original Plan Finalization
 15. Alternate Deterministic States
