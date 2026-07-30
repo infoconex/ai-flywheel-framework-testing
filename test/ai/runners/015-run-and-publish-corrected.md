@@ -15,6 +15,7 @@ Fixture harness commit: 446f9cf6d5b59780141d09d3754d5fc8d69506b3
 Fixture harness blob: 76692b26583b933ba2eb7e613c7d65840edfac2c
 Canonical launcher commit: 48bd23b1c35585afe22e3a88e782b2204ed1b8c9
 Result-format contract commit: 594b195c514ab434406989af4e67db927d1164d1
+Format-validator commit: 891f0d240c15bed3c175639808ff3f3b77f7aab1
 ```
 
 Retrieve the exact harness source through the GitHub connector and verify its blob SHA. Apply exactly the one framework-revision replacement required by the launcher, then run the resulting source in memory with Python 3. Make no other source changes.
@@ -41,6 +42,8 @@ Before committing, perform a formatting review and verify all of the following:
 - Complete synthetic artifacts use fenced `yaml` blocks.
 - The Repository Mutation Confirmation is inside a fenced `text` block.
 - Required tables and case counts are unchanged.
+
+Run `test/ai/tools/validate_result_format.py` from commit `891f0d240c15bed3c175639808ff3f3b77f7aab1` against the completed result with expected section count `22`. A validator failure makes the result incomplete and it must not be self-reported as passed.
 
 Write only:
 
