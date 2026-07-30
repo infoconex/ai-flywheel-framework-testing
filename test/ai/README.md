@@ -17,7 +17,7 @@ This directory catalogs the reusable AI prompts used to verify the AI Flywheel F
 | [Persist to Reuse](prompts/009-persist-to-reuse.md) | Persist completion, structured reuse assessments, knowledge qualification, duplicate/conflict handling, immutable supersession/deprecation, Reuse durability, and terminal completion boundaries | Yes | 2026-07-28 | Yes | [View result](results/009-persist-to-reuse.md) |
 | [End-to-End Execution](prompts/010-end-to-end-execution.md) | One stable execution across all lifecycle stages, checkpoint persistence, transaction commit markers, planned-to-completed reuse assessments, and terminal closure | Yes | 2026-07-28 | Yes | [View result](results/010-end-to-end-execution.md) |
 | [Resume Interrupted Execution](prompts/011-resume-interrupted-execution.md) | Fresh-session discovery and safe CAS resume of a durable interrupted execution without identity loss, repeated work, stale overwrites, or repository mutation | Yes | 2026-07-28 | Yes | [View result](results/011-resume-interrupted-execution.md) |
-| [Recover Partial Lifecycle Transition](prompts/012-recover-partial-lifecycle-transition.md) | Fresh-session detection and recovery of an execution-first, state-not-written lifecycle transition using a durable transition plan, exact rollback, and recovery evidence | Yes | 2026-07-29 | Yes | [View result](results/012-recover-partial-lifecycle-transition.md) |
+| [Recover Partial Lifecycle Transition](prompts/012-recover-partial-lifecycle-transition.md) | Fresh-session detection and recovery of an execution-first, state-not-written lifecycle transition using a durable transition plan, exact rollback, and structured recovery evidence | No | — | No | Pending independent result against corrected revision |
 
 ## Status Rules
 
