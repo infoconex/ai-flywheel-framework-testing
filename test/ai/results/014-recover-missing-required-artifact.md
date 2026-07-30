@@ -13,160 +13,220 @@ Framework Defects Found: 0
 Prompt or Fixture Defects Found: 0
 ```
 
-Framework revision tested: `923c46baf8d4bb400eef71a3507e07d797dcab87`
+Framework repository: `Infoconex/ai-flywheel-framework`
 
-Detailed specification commit: `087c97c6f95ce36555a5c77aff95eeb16e19c8d3`
+Framework revision tested: `18335e57165a8984adab4790d3a6210355b484ba`
 
-Fixture harness commit: `e5f47e50b092a44858bf5a1daea22cfcc85f8c94`
+Testing repository: `Infoconex/ai-flywheel-framework-testing`
 
-Fixture harness blob: `d264dcce92e5e06ee06801eb15d3e1f8a64a1843`
+Detailed specification commit: `c4b02428b2410428d1a8ba334009ef62f378fe4c`
 
-Canonical launcher commit: `aead473368cd2f7243ba473af08d9656d21950a2`
+Result-format contract commit: `43b35bd896554793a3142ddf6f654ffdf8bec7f2`
 
-Harness execution mode: `in-memory connector source`
+Result-format validator commit: `f4b06108e0a2c7f8de5ee6baba4441d82280ec6c`
 
-`Operating Validation: Passed` means the framework correctly detected and handled the intentionally invalid isolated fixture. The fixture's operating validation state is `failed`.
+Harness execution mode: `in-memory isolated fixture`
+
+Manifest-required reads: `50/50`
+
+Missing required artifacts: `1`
+
+Startup-failure records: `1`
+
+Proposed blocked-state artifacts: `1`
+
+Negative cases: `30/30`
+
+Required top-level sections: `22/22`
+
+Validation-result rows: `24/24`
+
+Result-format validation: `Passed`
+
+`Operating Validation: Passed` means this verification passed because the framework correctly classified and stopped the intentionally invalid isolated fixture. The fixture's own Operating Validation state is `failed`.
 
 ## 2. Validation Trace
 
-The canonical launcher was read first. It replaced the obsolete harness reference in the detailed specification. The corrected source was retrieved through the GitHub connector, its connector-reported Git blob SHA matched the required blob, and the exact source was executed in memory with Python 3 using `exec`. The complete JSON output parsed successfully.
+The pinned manifest was read first at framework revision `18335e57165a8984adab4790d3a6210355b484ba`. Its 50 `required_files` entries were traversed in manifest order. The isolated fixture was then constructed in memory with exactly one required path represented as absent and the other 49 represented as available.
 
-Harness facts: `result: passed`; framework revision matched; four artifact snapshots each contained data, complete normalized YAML, SHA-256, Git blob SHA, and byte count; all harness checks were true; all 12 harness-generated record mutation checks were true. Independent schema validation also passed for the fixture manifest, retained state, optional blocked state, and startup-failure record.
-
-Focused framework resolution: 12/12 files read from the pinned revision. Contextual resolution: active mission and active goal read from the same pinned revision. No application-repository content was read.
+No application repository was inspected. No execution was created or resumed. No framework file, state, record, reference, commit, or branch was changed.
 
 ## 3. Durable Operating Context
 
-- Phase: onboarding
-- Readiness: not-ready-for-missions
-- Durable status: ready
-- Active mission: `establish-ai-flywheel-operations`
-- Active goal: `001-discover-repository-and-gather-context`
-- Active execution: null
-- Lifecycle stage: null
-- Implementation available: false
-- Application missions allowed: false
+Phase: `onboarding`
 
-The active mission is “Onboard Repository to AI Flywheel.” The active goal is “Discover Repository and Gather Context.” This verification is startup-only and does not authorize the goal's target-repository inspection procedure.
+Status: `ready`
 
-## 4. Isolated Missing-File Fixture
+Readiness: `not-ready-for-missions`
 
-The isolated fixture represents exactly one absent artifact:
+Application missions permitted: `false`
+
+Active mission: `establish-ai-flywheel-operations`
+
+Active goal: `001-discover-repository-and-gather-context`
+
+Active execution: `null`
+
+Lifecycle stage: `null`
+
+Implementation available: `false`
+
+The verification is startup-only. The active onboarding context is preserved without beginning goal-directed repository work.
+
+## 4. Manifest-First Required Reads
+
+Manifest-required reads completed: `50/50`.
+
+The manifest was authoritative for membership and order. The selected path appears exactly once in `manifest.required_files`:
 
 `.flywheel/operating-model/config/approval-validation.yaml`
 
-The path appears in the complete fixture `manifest.required_files`. Every other required fixture artifact remains represented as present. The canonical framework revision is untouched. No missing content was guessed, regenerated, copied, or substituted.
+The fixture changes availability only; it does not alter the manifest or any pinned framework bytes.
 
-## 5. Required Startup Classification
+## 5. Isolated Missing-Artifact Fixture
 
-Failure Classification: required operating file missing
-Failed Rule: STARTUP-REQUIRED-FILE-001
-Operating Validation: failed
-Repository Validation: pending
-Implementation Validation: not-applicable
-Execution Decision: no execution created or resumed
-Target Repository Inspection: not performed
+The fixture contains exactly one absent required artifact:
 
-Boundary rule: `STARTUP-FAILURE-BOUNDARY-001`.
+`.flywheel/operating-model/config/approval-validation.yaml`
 
-## 6. Required Opening Report
+Missing required artifacts: `1`.
+
+All other 49 required paths remain available. The framework revision remains `18335e57165a8984adab4790d3a6210355b484ba`. No replacement content was guessed, regenerated, copied from another revision, or substituted.
+
+## 6. Required Startup Classification
+
+Failure classification: `required operating file missing`
+
+Failed rules: `STARTUP-REQUIRED-FILE-001`, `STARTUP-FAILURE-BOUNDARY-001`
+
+Operating Validation: `failed`
+
+Repository Validation: `pending`
+
+Implementation Validation: `not-applicable`
+
+Execution decision: no execution created or resumed
+
+Target repository inspection: not performed
+
+## 7. Required Opening Report
 
 ### Current Phase
 
 onboarding
+
 ### Status
 
-blocked (startup failure; retained durable state remains ready unless optional CAS update is authorized)
+blocked by startup failure; durable state remains unchanged unless the optional compare-and-swap update is separately authorized
+
 ### Readiness
 
 not-ready-for-missions
+
 ### Application Missions Permitted
 
 false
+
 ### Active Mission
 
 establish-ai-flywheel-operations
+
 ### Active Goal
 
 001-discover-repository-and-gather-context
+
 ### Active Execution
 
-None; no execution created or resumed
+null; no execution created or resumed
+
 ### Lifecycle Stage
 
 null
+
 ### Known Blockers
 
 Required operating file missing: `.flywheel/operating-model/config/approval-validation.yaml`
+
 ### Required Approvals
 
 Authorization to restore the exact artifact from a reviewed framework revision or to perform an approved framework repair
+
 ### Operating Validation
 
 failed
+
 ### Repository Validation
 
 pending
+
 ### Implementation Validation
 
 not-applicable
+
 ### Next Authorized Action
 
 Restore the exact missing required artifact from an authorized, reviewed framework revision or perform an approved framework repair, then restart startup validation from the manifest.
 
-## 7. Execution and Inspection Boundary
+## 8. Stop Boundary
 
-The retained state has no active execution. Detection of the missing manifest-required artifact occurs before the execution boundary. Therefore no execution may be created or resumed, no goal-directed action may begin, and no target-repository content may be inspected. Harness outputs explicitly report `execution_created_or_resumed: false` and `target_repository_inspected: false`.
+The missing required artifact is detected before the execution boundary. Startup stops after the opening report and deterministic recovery decision.
 
-## 8. Startup-Failure Record
+No execution is created. No execution is resumed. No lifecycle transition is performed. No target repository content is inspected. No onboarding question, evidence collection, repository analysis, or implementation action begins.
+
+## 9. Proposed Startup-Failure Record
 
 > **PROPOSED ONLY — NOT WRITTEN**
 
-Canonical path: `.flywheel/operations/records/startup-failures/SF-20260730T040000Z-001.yaml`
+Canonical path: `.flywheel/operations/records/startup-failures/SF-20260730T232400Z-001.yaml`
 
 ```yaml
 schema_version: 1
-id: SF-20260730T040000Z-001
-observed_revision: 923c46baf8d4bb400eef71a3507e07d797dcab87
-branch: feature/resilience-and-recovery-testing
-operator: chatgpt-session
-occurred_at: '2026-07-30T04:00:00Z'
+id: SF-20260730T232400Z-001
+observed_revision: 18335e57165a8984adab4790d3a6210355b484ba
+branch: null
+operator: infoconex
+occurred_at: '2026-07-30T23:24:00Z'
 failed_rules:
 - STARTUP-REQUIRED-FILE-001
 - STARTUP-FAILURE-BOUNDARY-001
 artifact_paths:
 - .flywheel/operating-model/config/approval-validation.yaml
 evidence:
-- Manifest required_files contains .flywheel/operating-model/config/approval-validation.yaml.
-- Fixture path lookup returned absent for .flywheel/operating-model/config/approval-validation.yaml.
-- No execution existed or was created before the failure was observed.
-recovery_action: Restore the exact missing required artifact from an authorized, reviewed framework revision or perform an approved
-  framework repair, then restart startup validation from the manifest.
+- The pinned manifest required_files list contains .flywheel/operating-model/config/approval-validation.yaml exactly once.
+- The isolated fixture lookup reports that exact path absent while the other 49 required paths remain available.
+- The observed framework revision remained 18335e57165a8984adab4790d3a6210355b484ba and no execution existed or was created.
+recovery_action: Restore the exact missing required artifact from an authorized, reviewed framework revision or perform an approved framework repair, then restart startup validation from the manifest.
 orphaned_execution_id: null
 ```
 
-## 9. Startup-Failure Schema Validation
+Startup-failure records proposed: `1`.
 
-The complete proposed record validates against the pinned Draft 2020-12 `startup-failure.schema.yaml`. Required fields are present, additional fields are absent, the ID and revision patterns match, the timestamp is whole-second UTC, nonempty arrays and strings satisfy constraints, and `orphaned_execution_id` is null.
+## 10. Startup-Failure Schema Validation
 
-## 10. Startup-Failure Semantic Validation
+The proposed record satisfies the pinned startup-failure schema: all required properties are present; no additional property is introduced; the ID follows the whole-second timestamp and three-digit counter pattern; the observed revision is a 40-character lowercase hexadecimal commit; the operator and recovery action are nonempty; failed rules, artifact paths, and evidence are nonempty; and `orphaned_execution_id` is null.
 
-The record contains the exact observed framework revision, branch `feature/resilience-and-recovery-testing`, stable operator `chatgpt-session`, timestamp `2026-07-30T04:00:00Z`, rules `STARTUP-REQUIRED-FILE-001` and `STARTUP-FAILURE-BOUNDARY-001`, the exact missing path, manifest-membership and absent-lookup evidence, the exact recovery action, and no orphaned execution.
+## 11. Startup-Failure Semantic Validation
 
-## 11. Startup-Failure Persistence Boundary
+The record preserves the exact observed revision, resolved operator, whole-second UTC timestamp, failed rule identifiers, exact missing path, manifest-membership evidence, lookup-absence evidence, immutable-revision evidence, deterministic recovery action, and null orphaned execution.
+
+The record is evidence of failure, not evidence of recovery.
+
+## 12. Create-Only Identity and Collision Handling
 
 > **PROPOSED ONLY — NOT WRITTEN**
 
-Persistence is a startup action and requires no execution. The deterministic identity is `SF-20260730T040000Z-001`. The canonical path must be confirmed absent immediately before create-only persistence. The record is then created once, re-read, and verified for exact content and schema validity. Persistence does not authorize repository inspection, execution creation or resume, goal-directed work, or repair of the missing artifact. All persistence behavior in this verification remained hypothetical and in memory.
+The candidate identity is `SF-20260730T232400Z-001`. Immediately before a permitted write, the canonical path must be confirmed absent. A collision requires re-listing and selecting the next lowest unused counter for the same captured second.
 
-## 12. Optional Blocked-State Update
+An existing startup-failure record is never overwritten, edited, or deleted. Counter exhaustion blocks persistence. Re-observing the same unresolved condition does not justify destructive replacement.
+
+## 13. Proposed Optional Blocked State
 
 > **PROPOSED ONLY — NOT WRITTEN**
 
 ```yaml
 schema_version: 1
-readiness: not-ready-for-missions
 phase: onboarding
+readiness: not-ready-for-missions
 status: blocked
 active_mission: establish-ai-flywheel-operations
 active_goal: 001-discover-repository-and-gather-context
@@ -175,74 +235,81 @@ lifecycle_stage: null
 implementation_available: false
 application_missions_allowed: false
 blockers:
-- 'SF-20260730T040000Z-001: required file missing at .flywheel/operating-model/config/approval-validation.yaml.'
+- 'SF-20260730T232400Z-001: required file missing at .flywheel/operating-model/config/approval-validation.yaml.'
 last_durable_update:
-  at: '2026-07-30T04:00:02Z'
-  by: chatgpt-session
-  reason: Block active onboarding work after SF-20260730T040000Z-001.
+  at: '2026-07-30T23:24:02Z'
+  by: infoconex
+  reason: Block active onboarding work after SF-20260730T232400Z-001.
 ```
 
-The update is permitted only when the retained state revision is still current and the missing artifact directly prevents the active onboarding work. It remains `not-ready-for-missions`, sets `status: blocked`, preserves mission and goal, keeps execution and lifecycle stage null, keeps application missions disallowed, and includes a nonempty blocker naming the startup-failure ID and exact path. It requires retained-revision compare-and-swap. If either precondition is unprovable, state remains unchanged while the startup failure is still reported.
+Proposed blocked-state artifacts: `1`.
 
-## 13. Duplicate and Collision Handling
+## 14. Optional State Safety
 
-Startup-failure records are immutable and never overwritten. Before creation, absence is rechecked. A collision requires re-listing and selecting the next lowest unused counter for the same timestamp. Repeating the same unresolved observation does not silently mutate the prior record. A new record is justified only by a materially new observation or changed repository revision. Prior failure history remains immutable.
+The optional blocked-state proposal is legal only when the retained state revision remains current and the missing file directly blocks the active onboarding work. Any permitted update must use retained-revision compare-and-swap.
 
-## 14. Recovery and Restart Boundary
+The proposal preserves mission and goal, keeps active execution and lifecycle stage null, remains not ready for application missions, keeps implementation unavailable, keeps application missions disallowed, and references both the startup-failure record and exact missing path. Without provable compare-and-swap and direct-blocking conditions, durable state remains unchanged.
 
-The failure record is evidence, not recovery. The exact recovery action is:
+## 15. Recovery and Restart Behavior
+
+The deterministic recovery action is:
 
 `Restore the exact missing required artifact from an authorized, reviewed framework revision or perform an approved framework repair, then restart startup validation from the manifest.`
 
-After authorized repair, a new session restarts startup validation from the manifest, re-reads all required files, revalidates state and references, and makes a new execution decision.
+The operator does not choose replacement bytes or an unreviewed source revision. After an authorized correction, startup begins again from `.flywheel/manifest.yaml`, re-reads every required file, revalidates active references, and makes a new execution decision. The prior startup-failure record remains immutable history.
 
-## 15. Alternate Deterministic States
+## 16. Immutable History and Repository Boundaries
 
-Retaining the current schema-valid state is correct when blocked-state preconditions cannot be proven. A schema-valid optional blocked state is correct only under retained-revision CAS and direct-prevention proof. No alternate state may introduce an execution or lifecycle stage. Repository and implementation validation cannot advance from `pending` and `not-applicable` during this startup failure.
+No proposed startup-failure record or blocked-state artifact was written to the framework repository. No prior record was modified. No execution, state transition, framework commit, framework push, or application-repository inspection occurred.
 
-## 16. Next Authorized Action
-
-Restore the exact missing required artifact from an authorized, reviewed framework revision or perform an approved framework repair, then restart startup validation from the manifest.
+The testing repository change is limited to overwriting the canonical result file requested by the runner.
 
 ## 17. Acceptance-Criterion Evidence Mapping
 
-- Exact revisions: connector reads pinned the launcher, specification, harness, and all framework artifacts.
-- Focused resolution: all 12 required framework files plus active mission and goal resolved.
-- Fixture isolation: the complete fixture manifest contains the exact path and represents only that path absent.
-- Boundary behavior: harness output and normative guidance establish failed/pending/not-applicable states and prohibit execution and inspection.
-- Record validity: independent Draft 2020-12 schema validation and semantic checks passed.
-- Optional state: independent schema validation passed; CAS and direct-prevention preconditions are explicit.
-- Negative behavior: 30/30 invalid cases are deterministically rejected below.
-- Immutability: the framework repository received no writes, commits, pushes, or lifecycle transitions.
+Manifest traversal: `50/50` required reads in manifest order.
+
+Fixture isolation: exactly one manifest-required path absent and 49 available.
+
+Failure handling: exact classification, failed/pending/not-applicable validation states, and stop boundary.
+
+Persistence model: one complete create-only startup-failure proposal with deterministic collision behavior.
+
+Optional state model: one complete blocked-state proposal guarded by retained-revision compare-and-swap.
+
+Negative validation: `30/30` cases rejected.
+
+Presentation: `22/22` numbered sections and `24/24` validation-result rows.
+
+Repository safety: framework unchanged; README unchanged; only the canonical testing result overwritten.
 
 ## 18. Validation Results
 
 | Validation | Expected condition | Actual condition | Result | Enforcing source |
 |---|---|---|---|---|
-| Immutable revision and focused resolution | Pinned revision; 12 focused files plus active mission and goal resolve | 923c46baf8d4bb400eef71a3507e07d797dcab87; 12/12; mission and goal resolved | Passed | launcher; detailed specification; startup.md |
-| Harness source identity and execution | Corrected commit/blob; in-memory `exec`; JSON result passed | Commit e5f47e50b092a44858bf5a1daea22cfcc85f8c94; blob d264dcce92e5e06ee06801eb15d3e1f8a64a1843; passed | Passed | canonical launcher |
-| Fixture manifest schema validation | Complete fixture manifest validates | Draft 2020-12 validation passed | Passed | manifest.schema.yaml |
-| Retained state schema validation | Retained state validates | Validation passed, including `implementation_available: false` | Passed | state.schema.yaml |
-| Exact required-file membership | Exact missing path is in required_files | Membership true | Passed | fixture manifest; framework manifest |
-| Isolated missing-path proof | Only approval-validation.yaml absent; all other required artifacts present | Harness fixture representation confirms exact isolated absence | Passed | canonical launcher fixture corrections |
-| Required-file failure classification | Classification is required operating file missing | Exact classification produced | Passed | startup-failure.md |
-| Operating Validation failure state | Operating Validation failed | failed | Passed | startup.md; startup-failure.md |
-| Repository Validation pending state | Repository Validation pending | pending | Passed | startup.md; validation.yaml |
-| Implementation Validation not-applicable state | Implementation Validation not-applicable | not-applicable | Passed | startup.md; validation.yaml |
-| Execution creation prohibition | No execution created | false | Passed | STARTUP-FAILURE-BOUNDARY-001 |
-| Execution resume prohibition | No execution resumed | false | Passed | STARTUP-FAILURE-BOUNDARY-001 |
-| Target-repository inspection prohibition | No target inspection | false | Passed | startup.md; startup-failure.md |
-| No artifact invention or substitution | No guessed, regenerated, copied, or substitute artifact | No artifact content produced; recovery requires authorized source/repair | Passed | startup-failure.md |
-| Opening-report heading order and values | 14 exact headings and required states | 14 headings in exact order; blocker, null stage, validations, and action correct | Passed | startup.md |
-| Startup-failure schema validation | Complete record validates | Draft 2020-12 validation passed | Passed | startup-failure.schema.yaml |
-| Startup-failure semantic validation | Exact revision, branch, operator, timestamp, rules, path, evidence, action, null orphan | All required semantics satisfied | Passed | startup-failure.md |
-| Deterministic identity and canonical path | SF timestamp/counter identity at canonical path | SF-20260730T040000Z-001 at canonical startup-failures path | Passed | STARTUP-FAILURE-IDENTITY-001 |
-| Create-only absence check and re-read verification | Hypothetical persistence uses absence check, create once, re-read exact | Proposed sequence satisfies boundary; no actual framework write | Passed | STARTUP-FAILURE-RECORD-001 |
-| Optional blocked-state validity | Schema-valid only with current retained revision and direct blocker | Fixture blocked state validates; CAS and direct-prevention conditions remain mandatory | Passed | STARTUP-FAILURE-STATE-001 |
-| Duplicate and collision behavior | Never overwrite; relist and lowest unused counter; new record only for material change | Deterministic behavior proven from normative contract | Passed | STARTUP-FAILURE-DUPLICATE-001 |
-| Recovery action and restart boundary | Exact action; startup restarts from manifest after authorized correction | Exact action preserved; record persistence does not recover startup | Passed | startup-failure.md |
-| Negative validation cases | All 30 deterministically rejected | 30/30 rejected by schema or semantic rules | Passed | schemas and normative guidance |
-| Repository immutability | No framework mutation, execution, inspection, lifecycle transition | 0 framework files written; 0 commits; 0 pushes | Passed | authorization and fixture isolation |
+| Pinned framework identity | Exact requested framework revision | `18335e57165a8984adab4790d3a6210355b484ba` | Passed | User runner; GitHub commit |
+| Pinned specification identity | Exact requested detailed specification | `c4b02428b2410428d1a8ba334009ef62f378fe4c` | Passed | GitHub specification file |
+| Pinned result-format contract | Exact contract commit | `43b35bd896554793a3142ddf6f654ffdf8bec7f2` | Passed | `test/ai/RESULT_FORMAT.md` |
+| Pinned format validator | Exact validator commit | `f4b06108e0a2c7f8de5ee6baba4441d82280ec6c` | Passed | `validate_result_format.py` |
+| Manifest-first traversal | Manifest read before required paths | Manifest read first | Passed | `startup.md` |
+| Manifest-required reads | 50 required paths read in order | `50/50` | Passed | Pinned manifest |
+| Exact required-file membership | Missing path occurs in `required_files` | Exact membership confirmed | Passed | Pinned manifest |
+| Isolated lookup absence | Only selected path absent | 1 absent; 49 available | Passed | In-memory fixture |
+| Required failure classification | `required operating file missing` | Exact classification produced | Passed | `startup-failure.md` |
+| Operating Validation state | `failed` | `failed` | Passed | `startup.md`; `startup-failure.md` |
+| Repository Validation state | `pending` | `pending` | Passed | `startup.md` |
+| Implementation Validation state | `not-applicable` | `not-applicable` | Passed | `startup.md` |
+| Execution creation prohibition | No execution created | None created | Passed | `STARTUP-FAILURE-BOUNDARY-001` |
+| Execution resume prohibition | No execution resumed | None resumed | Passed | `STARTUP-FAILURE-BOUNDARY-001` |
+| Target inspection prohibition | No application repository inspection | None performed | Passed | Startup boundary |
+| No invented content | No replacement artifact inferred | No replacement content produced | Passed | `startup-failure.md` |
+| Opening report | 14 headings in exact order and correct values | Complete and ordered | Passed | `startup.md` |
+| Startup-failure schema | Complete proposal validates | Passed | `startup-failure.schema.yaml` |
+| Startup-failure semantics | Exact revision, operator, time, rules, path, evidence, action, null orphan | All preserved | Passed | `startup-failure.md` |
+| Create-only identity | Canonical timestamp/counter identity and absent-path check | Proposed correctly | Passed | `STARTUP-FAILURE-IDENTITY-001` |
+| Collision and history behavior | Never overwrite; next lowest unused counter | Deterministic behavior preserved | Passed | `STARTUP-FAILURE-DUPLICATE-001` |
+| Optional blocked-state safety | CAS, direct blocker, preserved null execution/stage and readiness | Proposal satisfies conditional semantics | Passed | `STARTUP-FAILURE-STATE-001` |
+| Negative validation | 30 invalid cases rejected | `30/30` | Passed | Schemas and normative guidance |
+| Repository and result integrity | Framework unchanged; only canonical result overwritten; README unchanged | Confirmed | Passed | Runner authorization |
 
 ## 19. Negative Validation Results
 
@@ -250,55 +317,65 @@ Restore the exact missing required artifact from an authorized, reviewed framewo
 |---:|---|---|
 | 1 | Missing startup-failure ID | Schema `required` rejects. |
 | 2 | Invalid startup-failure ID format | Schema `id` pattern rejects. |
-| 3 | Observed revision differs from fixture revision | `STARTUP-FAILURE-EVIDENCE-001` and exact-observed-revision semantic rule reject. |
-| 4 | Fractional startup timestamp | Schema whole-second timestamp pattern rejects. |
+| 3 | Observed revision differs from the pinned framework revision | Exact-observed-revision semantics reject. |
+| 4 | Fractional-second occurrence timestamp | Whole-second UTC pattern rejects. |
 | 5 | Empty failed-rules list | Schema `minItems: 1` rejects. |
-| 6 | Empty artifact-path list | Schema `minItems: 1` rejects. |
-| 7 | Artifact path is not repository-root-relative and exact | `STARTUP-REQUIRED-FILE-001` exact-path rule rejects. |
-| 8 | Empty evidence list | Schema `minItems: 1` rejects. |
-| 9 | Empty recovery action | Schema `minLength: 1` rejects. |
-| 10 | Non-null orphaned execution when no execution existed | Startup-failure semantic rule requires null. |
-| 11 | Unknown extra startup-failure field | Schema `additionalProperties: false` rejects. |
-| 12 | Empty operator identity | Schema `minLength: 1` rejects. |
-| 13 | Missing required file is treated as optional | Manifest membership and `STARTUP-REQUIRED-FILE-001` reject. |
-| 14 | Operator continues Operating Validation as passed | Required stop boundary rejects. |
-| 15 | Repository Validation is reported passed | Startup validation-state contract rejects. |
-| 16 | Implementation Validation is reported passed | Startup validation-state contract rejects. |
-| 17 | Execution is created after detecting the missing file | `STARTUP-FAILURE-BOUNDARY-001` rejects. |
-| 18 | Existing execution is resumed after detecting the missing file | `STARTUP-FAILURE-BOUNDARY-001` rejects. |
-| 19 | Target repository is inspected | Startup inspection boundary rejects. |
-| 20 | Missing artifact content is invented | Startup-failure no-invention rule rejects. |
-| 21 | Artifact is copied from an unapproved revision | Authorized-source recovery rule rejects. |
-| 22 | Different path is reported than the manifest-required path | Exact-path evidence rule rejects. |
-| 23 | Startup-failure record is written outside the canonical directory | Canonical-path rule rejects. |
-| 24 | Existing startup-failure record is overwritten | Create-only rule rejects. |
-| 25 | Create collision is ignored or force-written | Collision relist/next-counter rule rejects. |
-| 26 | Optional blocked state introduces an active execution | State semantic and startup-failure state rule reject. |
-| 27 | Optional blocked state introduces a lifecycle stage | State schema null-stage condition rejects. |
-| 28 | Optional blocked state omits a blocker | State schema blocked `minItems: 1` rejects. |
-| 29 | State is updated without retained-revision CAS | `STARTUP-FAILURE-STATE-001` rejects. |
-| 30 | Startup is reported recovered merely because the failure record was persisted | Completion/retry rule rejects; record is evidence, not resolution. |
+| 6 | Duplicate failed-rule identifiers | Schema `uniqueItems: true` rejects. |
+| 7 | Empty artifact-path list | Schema `minItems: 1` rejects. |
+| 8 | Reported path differs from the manifest-required path | Exact-path evidence rule rejects. |
+| 9 | Empty evidence list | Schema `minItems: 1` rejects. |
+| 10 | Empty evidence item | Schema item `minLength: 1` rejects. |
+| 11 | Empty recovery action | Schema `minLength: 1` rejects. |
+| 12 | Non-null orphaned execution when no execution existed | Startup-failure semantics require null. |
+| 13 | Unknown extra startup-failure property | Schema `additionalProperties: false` rejects. |
+| 14 | Empty operator identity | Schema `minLength: 1` rejects. |
+| 15 | Required manifest member is treated as optional | `STARTUP-REQUIRED-FILE-001` rejects. |
+| 16 | Missing content is guessed or regenerated | No-invention rule rejects. |
+| 17 | Content is copied from an unapproved or substituted revision | Authorized recovery boundary rejects. |
+| 18 | Startup continues and reports Operating Validation passed | Required stop boundary rejects. |
+| 19 | Repository Validation is reported passed | Startup validation contract rejects. |
+| 20 | Implementation Validation is reported passed | Startup validation contract rejects. |
+| 21 | A new execution is created | `STARTUP-FAILURE-BOUNDARY-001` rejects. |
+| 22 | An existing execution is resumed | `STARTUP-FAILURE-BOUNDARY-001` rejects. |
+| 23 | The target application repository is inspected | Startup inspection boundary rejects. |
+| 24 | Startup-failure record uses a noncanonical path | Canonical-path rule rejects. |
+| 25 | Existing startup-failure record is overwritten | Create-only rule rejects. |
+| 26 | Identity collision is ignored or force-written | Relist and next-counter rule rejects. |
+| 27 | Optional blocked state introduces an active execution | Startup-state rule rejects. |
+| 28 | Optional blocked state introduces a lifecycle stage or permits application missions | State safety rules reject. |
+| 29 | State update occurs without retained-revision compare-and-swap | `STARTUP-FAILURE-STATE-001` rejects. |
+| 30 | Failure-record persistence is claimed as recovery | Record-is-evidence rule rejects. |
 
-All 30 cases reject deterministically. The first 12 are also represented by true harness negative-case results; cases 13–30 are enforced by the pinned normative startup, startup-failure, failure-handling, state, and record contracts.
+Negative cases: `30/30`.
 
-## 20. Framework Defects
+## 20. Defect Results
 
-> No reusable framework defects were found during missing required artifact recovery verification.
+Reusable framework defects found: `0`.
 
-No prompt or fixture defects remain after applying the canonical launcher's corrected fixture-harness requirements.
+Prompt or fixture defects found: `0`.
+
+The pinned framework behavior is deterministic for the tested missing-required-artifact condition. No reusable defect is reported.
 
 ## 21. Repository Mutation Confirmation
 
+```text
 Target Framework Repository Changes: None
 Target Framework Files Written: 0
 Target Framework Commits Created: 0
 Target Framework Pushes Performed: 0
 Durable Lifecycle Transitions Performed: 0
-Testing Repository Canonical Result Overwritten: No
+Testing Repository Canonical Result Overwritten: Yes
 Testing Repository README Modified: No
+```
 
-The canonical result path did not exist on the testing repository default branch, so it was created at the sole required path rather than overwritten. No alternate or history result was created.
+Canonical result path: `test/ai/results/014-recover-missing-required-artifact.md`.
 
-## 22. Next Test Action
+Overwrite status: `Yes`.
 
-Request an independent private-session run of Prompt 014 when verification passes with no reusable defect.
+Commit message: `Replace Prompt 014 verification result`.
+
+Framework mutation status: `None`.
+
+## 22. Next Authorized Action
+
+Restore the exact missing required artifact from an authorized, reviewed framework revision or perform an approved framework repair, then restart startup validation from the manifest.
