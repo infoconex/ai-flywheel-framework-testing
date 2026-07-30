@@ -60,9 +60,29 @@ The following rules remain mandatory:
 
 Validate the harness-provided blocked state against the corrected schema. It must pass.
 
+# Canonical Result Formatting
+
+Read and follow the canonical result-format contract at:
+
+https://raw.githubusercontent.com/Infoconex/ai-flywheel-framework-testing/594b195c514ab434406989af4e67db927d1164d1/test/ai/RESULT_FORMAT.md
+
+This contract is mandatory and replaces any looser formatting interpretation in the detailed specification.
+
+In particular:
+
+- Begin with one level-one document title.
+- Render all 22 numbered top-level sections as level-two headings.
+- Render the completed Verification Summary inside one fenced `text` block.
+- Put each revision, commit, blob, execution-mode, and count statement after the summary in its own paragraph separated by exactly one blank line.
+- Render complete YAML artifacts inside fenced `yaml` blocks.
+- Render the Repository Mutation Confirmation inside one fenced `text` block.
+- Preserve all substantive section, row, and case counts.
+
+A result with correct facts but nonconforming presentation is incomplete until reformatted.
+
 # Required Output and Evaluation
 
-Use the exact 22-section output contract, exact 25 validation-result rows, exact 34 negative cases, summary field order, mutation confirmation, and final-action choices defined by the detailed specification.
+Use the exact 22-section output contract, exact 25 validation-result rows, exact 34 negative cases, summary values, mutation confirmation, and final-action choices defined by the detailed specification, presented according to the canonical result-format contract.
 
 The result must identify:
 
@@ -73,4 +93,4 @@ Fixture harness commit: 446f9cf6d5b59780141d09d3754d5fc8d69506b3
 Fixture harness blob: 76692b26583b933ba2eb7e613c7d65840edfac2c
 ```
 
-A result that uses the obsolete framework revision, fails to perform exactly one in-memory revision replacement, rejects the corrected blocked-state fixture, modifies the framework repository, omits the required output structure, or reports unsupported fixture identities fails Prompt 015.
+A result that uses the obsolete framework revision, fails to perform exactly one in-memory revision replacement, rejects the corrected blocked-state fixture, modifies the framework repository, omits the required output structure, violates the canonical result-format contract, or reports unsupported fixture identities fails Prompt 015.
