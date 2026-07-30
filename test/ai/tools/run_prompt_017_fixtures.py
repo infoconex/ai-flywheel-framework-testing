@@ -101,6 +101,15 @@ def run(base_source: str) -> dict[str, Any]:
         1,
     )
 
+    duplicate_source_refs = '        "source_refs": [item for scenario in scenario_specs for item in scenario["evidence_refs"]],'
+    if corrected.count(duplicate_source_refs) != 1:
+        raise ValueError("expected one non-deduplicated scenario evidence source list")
+    corrected = corrected.replace(
+        duplicate_source_refs,
+        '        "source_refs": list(dict.fromkeys(item for scenario in scenario_specs for item in scenario["evidence_refs"])),',
+        1,
+    )
+
     old_negative = '"scenario_source_revision_not_immutable"'
     if corrected.count(old_negative) != 1:
         raise ValueError("expected one obsolete scenario revision negative case")
@@ -136,8 +145,12 @@ def run(base_source: str) -> dict[str, Any]:
     if scenarios[9]["evidence_revision"] != SELF_HOST_EVIDENCE_REVISION:
         raise ValueError("self-hosting scenario must use the fixture-definition revision")
 
+    evidence_audit = parsed["artifacts"]["evidence_records"]["data"][0]
+    if len(evidence_audit["source_refs"]) != len(set(evidence_audit["source_refs"])):
+        raise ValueError("scenario evidence audit source references must be unique")
+
     parsed["execution_mode"] = "in-memory connector source with deterministic correction runner"
     parsed["base_framework_revision"] = BASE_FRAMEWORK_REVISION
     parsed["self_host_evidence_revision"] = SELF_HOST_EVIDENCE_REVISION
-    parsed["correction_count"] = 16
+    parsed["correction_count"] = 17
     return parsed
