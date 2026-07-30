@@ -71,7 +71,7 @@ Harness execution mode: `in-memory connector source`
 
 ## Repository Mutation Confirmation
 
-Render the complete mutation confirmation inside one fenced `text` block:
+Render the complete mutation confirmation inside one fenced `text` block under the numbered section titled `Repository Mutation Confirmation`:
 
 ```text
 Target Framework Repository Changes: None
@@ -82,6 +82,8 @@ Durable Lifecycle Transitions Performed: 0
 Testing Repository Canonical Result Overwritten: Yes | No
 Testing Repository README Modified: No
 ```
+
+The prompt defines the section number and position. This shared format contract does not require a fixed section number for Repository Mutation Confirmation.
 
 ## Final section
 
@@ -96,6 +98,6 @@ A canonical result conforms only when:
 - The verification summary is inside a fenced `text` block.
 - Metadata items are separated by one blank line.
 - Complete YAML artifacts use `yaml` fences.
-- The repository mutation confirmation is inside a fenced `text` block.
+- The repository mutation confirmation is inside a fenced `text` block under its prompt-defined numbered heading.
 - Tables, lists, and paragraphs use consistent blank-line separation.
 - The required substantive section, row, and case counts remain unchanged.
