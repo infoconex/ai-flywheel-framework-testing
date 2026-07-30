@@ -1,63 +1,69 @@
 # 1. Verification Summary
 
-Operating Validation: Failed
-Verification Result: Failed
+Operating Validation: Passed
+Verification Result: Passed
 Fixture Harness Result: Passed
 Repository Changes: None
 Files Written: 0
 Commit Required: False
-Framework Defects Found: 1
+Framework Defects Found: 0
 Prompt or Fixture Defects Found: 0
 
-The primary broken-reference behavior is deterministic and correct, but the optional blocked-state contract is internally inconsistent with the pinned state schema. The proposed blocked state cannot validate while preserving the non-null active execution reference, so the complete verification cannot pass.
+Framework revision tested: `291f87fb4485a2cfaa4f1580a8157a2842d08317`
+Detailed specification commit: `1f8ace648e262fffbae17fb6cd441c8eeb54ffe4`
+Fixture harness commit: `446f9cf6d5b59780141d09d3754d5fc8d69506b3`
+Fixture harness blob: `76692b26583b933ba2eb7e613c7d65840edfac2c`
+Harness execution mode: in-memory connector source with one revision replacement
+Focused framework resolution: `13/13`
+Fixture artifacts: `5/5`
+Validation-result rows: `25`
+Negative cases: `34`
 
 # 2. Validation Trace
 
-- Prompt source: exact commit `1f8ace648e262fffbae17fb6cd441c8eeb54ffe4`.
-- Framework source: exact revision `eb82939f330b76cc64e813feac6b7a97d3d50e9a`.
-- Fixture harness source: exact commit `446f9cf6d5b59780141d09d3754d5fc8d69506b3`.
-- Fixture harness blob verified: `76692b26583b933ba2eb7e613c7d65840edfac2c`.
-- Harness execution: Python 3 `exec` directly over connector-returned source in memory with PyYAML available.
-- Harness JSON: `result: passed`, five artifact snapshots, all harness checks true, all harness negative cases true.
-- Focused framework resolution: `13/13`.
-- Active mission and goal context resolved from pinned durable artifacts.
-- Application-repository content inspected: no.
+The canonical launcher and detailed specification were read at their immutable commits. The harness was retrieved through the GitHub connector; its blob SHA matched `76692b26583b933ba2eb7e613c7d65840edfac2c`. Exactly one obsolete framework-revision assignment was replaced with `291f87fb4485a2cfaa4f1580a8157a2842d08317`; no other source text changed. Python 3 executed the corrected source directly in memory with `exec`. The harness returned `result: passed`, five complete artifact snapshots, every check true, and every harness negative case true.
 
 # 3. Durable Operating Context
 
-The pinned canonical state identifies mission `establish-ai-flywheel-operations` and goal `001-discover-repository-and-gather-context`. The mission is active and is limited to establishing the Flywheel operating environment. The goal is active and ordinarily authorizes repository discovery, but this independent synthetic startup verification stops before the execution boundary and does not inspect application content.
-
-The synthetic retained state supplied by the harness is schema-valid before reference resolution. It changes only the active execution context for isolated verification and points to `EX-20260730T050000Z-001`.
+The corrected framework revision was used for all 13 focused reads. The active mission `establish-ai-flywheel-operations` and active goal `001-discover-repository-and-gather-context` were resolved for context. No application-repository content was read. The synthetic retained fixture is isolated from durable framework state.
 
 # 4. Primary Broken Active-Execution Fixture
 
 > **PROPOSED ONLY — NOT WRITTEN**
 
-The retained fixture state contains:
-
 ```yaml
+schema_version: 1
+phase: onboarding
+readiness: not-ready-for-missions
+status: active
 active_mission: establish-ai-flywheel-operations
 active_goal: 001-discover-repository-and-gather-context
 active_execution: EX-20260730T050000Z-001
 lifecycle_stage: execute
-status: active
+implementation_available: false
+application_missions_allowed: false
+blockers: []
+last_durable_update:
+  at: '2026-07-30T05:00:00Z'
+  by: fixture-setup
+  reason: Activate synthetic execution reference.
 ```
 
-The retained state validates against `state.schema.yaml`. The non-null execution identifier therefore requires exact canonical resolution before any resume or goal-directed action.
+Snapshot: SHA-256 `7a584609e9b09ae3573d8d51fb9e384e50653137d90dfd40032f5bc53590cf43`; Git blob SHA `cd221d15a67a21fe792a7b5463b6b30d5d24c023`; bytes `453`.
+
+The retained state validates against the corrected state schema.
 
 # 5. Reference Resolution Evidence
 
-Source artifact path: `.flywheel/state.yaml`  
-Source field: `active_execution`  
-Reference type: `execution`  
-Referenced ID: `EX-20260730T050000Z-001`  
-Expected canonical path: `.flywheel/operations/records/establish-ai-flywheel-operations/001-discover-repository-and-gather-context/executions/EX-20260730T050000Z-001.yaml`  
-Resolution cardinality: `zero`  
-Observed candidate paths: none  
-Identity mismatches: none  
-Selection prohibited: true
-
-The canonical path follows the records contract exactly. The isolated fixture representation contains no artifact at that path. Zero cardinality is therefore proven without selecting a candidate.
+Source artifact path: `.flywheel/state.yaml`
+Source field: `active_execution`
+Reference type: `execution`
+Referenced ID: `EX-20260730T050000Z-001`
+Expected canonical path: `.flywheel/operations/records/establish-ai-flywheel-operations/001-discover-repository-and-gather-context/executions/EX-20260730T050000Z-001.yaml`
+Resolution cardinality: `zero`
+Observed candidate paths: `[]`
+Identity mismatches: `[]`
+Selection prohibited: `true`
 
 # 6. Required Startup Classification
 
@@ -76,31 +82,31 @@ Candidate Selection: prohibited
 onboarding
 
 ## Status
-active in the retained fixture; startup is blocked by unresolved authority.
+active in the retained synthetic fixture; startup is blocked by an unresolved active-execution reference.
 
 ## Readiness
 not-ready-for-missions
 
 ## Application Missions Permitted
-false
+No
 
 ## Active Mission
-establish-ai-flywheel-operations
+`establish-ai-flywheel-operations`
 
 ## Active Goal
-001-discover-repository-and-gather-context
+`001-discover-repository-and-gather-context`
 
 ## Active Execution
 Referenced as `EX-20260730T050000Z-001` but unresolved; not resumed.
 
 ## Lifecycle Stage
-Observed as `execute`; this value remains evidence but cannot be trusted as authority for work until the active execution resolves.
+Observed as `execute` and preserved as evidence; it cannot authorize work until the execution resolves.
 
 ## Known Blockers
 Broken `state.active_execution` reference to `EX-20260730T050000Z-001`; expected canonical path `.flywheel/operations/records/establish-ai-flywheel-operations/001-discover-repository-and-gather-context/executions/EX-20260730T050000Z-001.yaml` has cardinality zero.
 
 ## Required Approvals
-Authorized restoration or reconciliation is required before the source reference or missing canonical artifact may change.
+Authorized restoration or reconciliation is required before startup can continue.
 
 ## Operating Validation
 failed
@@ -116,50 +122,161 @@ Restore the exact referenced artifact at its canonical path from an authorized, 
 
 # 8. Execution, Inspection, and Selection Boundary
 
-No execution was created. No execution was resumed. No application-repository content was inspected. No candidate was selected. The missing execution was not treated as ordinary first-execution absence because durable state already names a specific active execution. Recency, filename similarity, case variants, chat history, and convenience were not used as authority. The broken reference was neither cleared nor rewritten.
+No execution was created or resumed. No target-repository content was inspected. No candidate was selected. Recency, filename similarity, case collision, chat history, and convenience were not used as authority.
 
 # 9. Structured Startup-Failure Record
 
 > **PROPOSED ONLY — NOT WRITTEN**
 
-Identity: `SF-20260730T050500Z-001`  
-Canonical path: `.flywheel/operations/records/startup-failures/SF-20260730T050500Z-001.yaml`
+```yaml
+schema_version: 1
+id: SF-20260730T050500Z-001
+observed_revision: 291f87fb4485a2cfaa4f1580a8157a2842d08317
+branch: feature/resilience-and-recovery-testing
+operator: chatgpt-session
+occurred_at: '2026-07-30T05:05:00Z'
+failed_rules:
+- STARTUP-REFERENCE-RESOLUTION-001
+- STARTUP-REFERENCE-BOUNDARY-001
+- STARTUP-REFERENCE-EVIDENCE-001
+artifact_paths:
+- .flywheel/state.yaml
+- .flywheel/operations/records/establish-ai-flywheel-operations/001-discover-repository-and-gather-context/executions/EX-20260730T050000Z-001.yaml
+evidence:
+- State active_execution equals EX-20260730T050000Z-001.
+- Canonical execution lookup at .flywheel/operations/records/establish-ai-flywheel-operations/001-discover-repository-and-gather-context/executions/EX-20260730T050000Z-001.yaml resolved with cardinality zero.
+recovery_action: Restore the exact referenced artifact at its canonical path from an authorized, reviewed revision or obtain an authorized reconciliation that updates the source reference, then restart startup validation from the manifest.
+orphaned_execution_id: null
+reference_failure:
+  source_artifact_path: .flywheel/state.yaml
+  source_field: active_execution
+  reference_type: execution
+  referenced_id: EX-20260730T050000Z-001
+  expected_canonical_path: .flywheel/operations/records/establish-ai-flywheel-operations/001-discover-repository-and-gather-context/executions/EX-20260730T050000Z-001.yaml
+  resolution_cardinality: zero
+  observed_candidate_paths: []
+  identity_mismatches: []
+  selection_prohibited: true
+```
 
-The complete harness record contains the pinned observed revision, branch, operator, occurrence time, exact failed rules, both affected artifact paths, observed evidence, the exact deterministic recovery action, null orphaned execution ID, and the full structured `reference_failure` payload.
+Snapshot: SHA-256 `ebdf35fdfeba8bc9c90ed65e6d165446863b138b3a57a969d0b33ecc13035717`; Git blob SHA `eba0811f360b12d46210b57431f8ab49b839cf51`; bytes `1520`.
 
 # 10. Startup-Failure Schema Validation
 
-The proposed startup-failure record validates against `startup-failure.schema.yaml`. Its ID matches the required timestamp-counter pattern, the observed revision is a lowercase 40-character SHA, all required arrays are nonempty where required, and `reference_failure` is present because `STARTUP-REFERENCE-RESOLUTION-001` is reported.
+The complete record validated against `startup-failure.schema.yaml` using Draft 2020-12 semantics with format checking.
 
 # 11. Broken-Reference Semantic Validation
 
-The startup-failure record satisfies the semantic contract for cardinality `zero`: candidate and identity-mismatch lists are empty, selection is prohibited, the exact source field and expected path are preserved, and the recovery action does not invent a replacement. The record is evidence of unresolved startup failure, not reconciliation.
+The zero-cardinality fixture preserves the exact source artifact and field, referenced ID, canonical path, empty candidate and mismatch lists, and `selection_prohibited: true`. Persistence is evidence, not reconciliation.
 
 # 12. Startup-Failure Persistence Boundary
 
-The only permitted durable operation would be a create-only write after an immediate absence check at the canonical startup-failure path, followed by exact re-read and schema verification. Existing failure history may not be overwritten. No such framework write was performed in this independent run. Persistence success would not change startup from failed to recovered.
+> **PROPOSED ONLY — NOT WRITTEN**
+
+Canonical path: `.flywheel/operations/records/startup-failures/SF-20260730T050500Z-001.yaml`. The complete record was constructed and validated in memory. The hypothetical write is create-only after an immediate absence check, followed by exact re-read, digest comparison, and schema verification. Existing history remains immutable. No framework write was performed.
 
 # 13. Optional Blocked-State Update
 
 > **PROPOSED ONLY — NOT WRITTEN**
 
-The harness blocked-state proposal preserves mission, goal, execution, and lifecycle stage; changes status to `blocked`; and adds a blocker naming `SF-20260730T050500Z-001` and the broken execution reference.
+```yaml
+schema_version: 1
+phase: onboarding
+readiness: not-ready-for-missions
+status: blocked
+active_mission: establish-ai-flywheel-operations
+active_goal: 001-discover-repository-and-gather-context
+active_execution: EX-20260730T050000Z-001
+lifecycle_stage: execute
+implementation_available: false
+application_missions_allowed: false
+blockers:
+- 'SF-20260730T050500Z-001: broken state.active_execution reference EX-20260730T050000Z-001 at .flywheel/operations/records/establish-ai-flywheel-operations/001-discover-repository-and-gather-context/executions/EX-20260730T050000Z-001.yaml.'
+last_durable_update:
+  at: '2026-07-30T05:05:02Z'
+  by: chatgpt-session
+  reason: Block startup after SF-20260730T050500Z-001.
+```
 
-It must nevertheless be rejected. `state.schema.yaml` requires `status: active` whenever `active_execution` is a string, while `broken-reference-recovery.md` permits `status: blocked` only if the same non-null active references are preserved. The proposal is therefore schema-invalid. Retained-revision compare-and-swap cannot make an invalid document valid, so state must remain unchanged.
+Snapshot: SHA-256 `ad0908e49b687a99b7ec7b53ff7a3964f741aac4104c6ec888add4480f041fd8`; Git blob SHA `6ede34f37f5bd56ed33f52db5401c33ec2e25487`; bytes `705`.
+
+The blocked state validates against the corrected state schema, preserves all active references and lifecycle stage, and may be proposed only with retained-revision compare-and-swap and direct proof that the failure prevents active work.
 
 # 14. Alternate Deterministic Reference Failures
 
-- `multiple`: two observed paths, including the canonical execution directory and a case-only `Executions/` collision. Startup fails and selection remains prohibited.
-- `one` with identity mismatch: one canonical candidate exists, but its internal execution identity or reciprocal context disagrees. The mismatch list is nonempty and startup fails.
-- Missing active mission: startup fails at exact mission reference resolution; no goal or execution action follows.
-- Missing active goal: startup fails at exact goal reference resolution; no execution action follows.
-- Missing active-stage record reference: startup fails before work in the claimed stage; the missing record is not fabricated or bypassed.
+## Multiple
 
-These are separate repository states and are not combined.
+> **PROPOSED ONLY — NOT WRITTEN**
+
+```yaml
+schema_version: 1
+id: SF-20260730T050500Z-001
+observed_revision: 291f87fb4485a2cfaa4f1580a8157a2842d08317
+branch: feature/resilience-and-recovery-testing
+operator: chatgpt-session
+occurred_at: '2026-07-30T05:05:00Z'
+failed_rules: [STARTUP-REFERENCE-RESOLUTION-001, STARTUP-REFERENCE-BOUNDARY-001, STARTUP-REFERENCE-EVIDENCE-001]
+artifact_paths: [.flywheel/state.yaml, .flywheel/operations/records/establish-ai-flywheel-operations/001-discover-repository-and-gather-context/executions/EX-20260730T050000Z-001.yaml]
+evidence:
+- State active_execution equals EX-20260730T050000Z-001.
+- Canonical execution lookup resolved with cardinality multiple.
+recovery_action: Restore the exact referenced artifact at its canonical path from an authorized, reviewed revision or obtain an authorized reconciliation that updates the source reference, then restart startup validation from the manifest.
+orphaned_execution_id: null
+reference_failure:
+  source_artifact_path: .flywheel/state.yaml
+  source_field: active_execution
+  reference_type: execution
+  referenced_id: EX-20260730T050000Z-001
+  expected_canonical_path: .flywheel/operations/records/establish-ai-flywheel-operations/001-discover-repository-and-gather-context/executions/EX-20260730T050000Z-001.yaml
+  resolution_cardinality: multiple
+  observed_candidate_paths:
+  - .flywheel/operations/records/establish-ai-flywheel-operations/001-discover-repository-and-gather-context/executions/EX-20260730T050000Z-001.yaml
+  - .flywheel/operations/records/establish-ai-flywheel-operations/001-discover-repository-and-gather-context/Executions/EX-20260730T050000Z-001.yaml
+  identity_mismatches: []
+  selection_prohibited: true
+```
+
+Snapshot: SHA-256 `d9d0e2a443405753d86b81501d04b44354607ffc539adf8b8ca1b7a02b79c594`; Git blob SHA `eb884ba4c74407e8e5cac3fd7c36b0dc5c78dfc0`; bytes `1823`.
+
+## Identity mismatch
+
+> **PROPOSED ONLY — NOT WRITTEN**
+
+```yaml
+schema_version: 1
+id: SF-20260730T050500Z-001
+observed_revision: 291f87fb4485a2cfaa4f1580a8157a2842d08317
+branch: feature/resilience-and-recovery-testing
+operator: chatgpt-session
+occurred_at: '2026-07-30T05:05:00Z'
+failed_rules: [STARTUP-REFERENCE-RESOLUTION-001, STARTUP-REFERENCE-BOUNDARY-001, STARTUP-REFERENCE-EVIDENCE-001]
+artifact_paths: [.flywheel/state.yaml, .flywheel/operations/records/establish-ai-flywheel-operations/001-discover-repository-and-gather-context/executions/EX-20260730T050000Z-001.yaml]
+evidence:
+- State active_execution equals EX-20260730T050000Z-001.
+- Canonical execution lookup resolved with cardinality one.
+recovery_action: Restore the exact referenced artifact at its canonical path from an authorized, reviewed revision or obtain an authorized reconciliation that updates the source reference, then restart startup validation from the manifest.
+orphaned_execution_id: null
+reference_failure:
+  source_artifact_path: .flywheel/state.yaml
+  source_field: active_execution
+  reference_type: execution
+  referenced_id: EX-20260730T050000Z-001
+  expected_canonical_path: .flywheel/operations/records/establish-ai-flywheel-operations/001-discover-repository-and-gather-context/executions/EX-20260730T050000Z-001.yaml
+  resolution_cardinality: one
+  observed_candidate_paths:
+  - .flywheel/operations/records/establish-ai-flywheel-operations/001-discover-repository-and-gather-context/executions/EX-20260730T050000Z-001.yaml
+  identity_mismatches:
+  - Execution artifact id differs from state.active_execution.
+  selection_prohibited: true
+```
+
+Snapshot: SHA-256 `47d9b0ca4c12b1aca85fefeb0cd1a491f8115072c44e985154b42ec32dbe27dc`; Git blob SHA `7411267fdbaeacc2a752f0698b0019f81c0afc68`; bytes `1724`.
+
+Missing active mission, missing active goal, and missing active-stage record reference were evaluated as separate isolated states; each stops startup without inferred selection.
 
 # 15. Recovery and Restart Boundary
 
-For zero cardinality, recovery is limited to restoring the exact referenced artifact from an authorized, reviewed revision or obtaining authorized reconciliation that updates the source reference. After correction, a new startup must begin from the manifest and repeat required-file, schema, canonical-path, uniqueness, identity, reciprocal-reference, and execution-boundary checks. Historical startup-failure evidence remains immutable.
+Writing failure evidence does not recover startup. After authorized correction, a new session must restart from the manifest and repeat required-file, schema, canonical-path, uniqueness, identity, reciprocal-reference, and execution-boundary checks.
 
 # 16. Next Authorized Action
 
@@ -167,93 +284,94 @@ Restore the exact referenced artifact at its canonical path from an authorized, 
 
 # 17. Acceptance-Criterion Evidence Mapping
 
-- Exact immutable source identities: connector reads plus harness blob verification.
-- Focused framework resolution: all 13 required files read at the pinned revision.
-- Durable context: pinned state, mission, and goal reads.
-- Schema-valid retained state: state schema applied to the harness retained snapshot.
-- Missing execution proof: exact canonical derivation and isolated zero-cardinality representation.
-- Startup report: 14 headings reproduced in required order.
-- Failure record: complete proposed artifact validated structurally and semantically.
-- Boundaries: harness output and independent analysis confirm no creation, resume, inspection, selection, or reference rewrite.
-- Alternate failures: multiple, identity mismatch, missing mission, missing goal, and missing active-stage reference evaluated separately.
-- Negative validation: 34 deterministic rejection outcomes recorded.
-- Repository immutability: framework repository unchanged.
-- Blocking defect: state schema contradicts optional blocked-state recovery guidance.
+| Criterion | Evidence | Result |
+|---|---|---|
+| Immutable sources | Exact launcher, specification, harness and framework commits | Passed |
+| Focused reads | 13/13 corrected-revision framework reads | Passed |
+| Artifacts | Five complete fixture artifacts | Passed |
+| Schema | Retained, blocked, zero, multiple, and mismatch artifacts validated | Passed |
+| Startup report | Exact 14-heading order | Passed |
+| Negative cases | 34/34 rejected | Passed |
+| Validation rows | 25/25 passed | Passed |
+| Immutability | Framework unchanged | Passed |
 
 # 18. Validation Results
 
 | Validation | Expected condition | Actual condition | Result | Enforcing source |
 |---|---|---|---|---|
-| Immutable revision and focused resolution | Pinned framework revision and 13/13 focused files | Pinned revision used; 13/13 read | Passed | manifest.yaml; prompt |
-| Harness source identity and execution | Exact commit/blob; in-memory exec; passing JSON | Blob matched; exec passed with PyYAML | Passed | fixture harness |
-| Retained state schema validation | Retained fixture validates | Validated | Passed | state.schema.yaml |
-| Exact source-field reference extraction | Extract state.active_execution exactly | EX-20260730T050000Z-001 extracted | Passed | state.yaml; harness |
-| Canonical execution path derivation | Exact records path | Exact expected path derived | Passed | records.md |
-| Zero-cardinality proof | Canonical target absent; no candidate | Absent in isolated fixture; empty candidates | Passed | broken-reference-recovery.md |
-| Required reference-failure classification | Exact classification and rules | Exact values reported | Passed | prompt; guidance |
-| Operating Validation failure | Fixture startup state failed | failed | Passed | startup.md |
-| Repository Validation pending | pending | pending | Passed | validation.yaml |
-| Implementation Validation not-applicable | not-applicable | not-applicable | Passed | validation.yaml |
-| Execution creation prohibition | No creation | None | Passed | startup.md |
-| Execution resume prohibition | No resume | None | Passed | startup.md |
-| Target-repository inspection prohibition | No inspection | None | Passed | startup.md |
-| Candidate-selection prohibition | No inferred selection | None selected | Passed | broken-reference-recovery.md |
-| Opening-report heading order and values | 14 exact headings and required values | Produced exactly | Passed | startup.md |
-| Startup-failure schema validation | Complete record schema-valid | Valid | Passed | startup-failure.schema.yaml |
-| Structured reference-failure schema validation | Payload schema-valid | Valid | Passed | startup-failure.schema.yaml |
-| Broken-reference semantic validation | Zero-cardinality semantics valid | Valid | Passed | broken-reference-recovery.md |
-| Deterministic identity and canonical startup-failure path | Exact ID/path | Exact ID/path used | Passed | startup-failure.md |
-| Create-only persistence and re-read verification | Proposed only; no overwrite; exact procedure | Boundary proven; no framework write | Passed | startup-failure.md |
-| Optional blocked-state validity and reference preservation | Schema-valid blocked state under CAS | References preserved but schema-invalid | Failed | state.schema.yaml; broken-reference-recovery.md |
-| Multiple-candidate alternate | Two candidates; no selection | Validated separately | Passed | harness; guidance |
-| Identity-mismatch alternate | One candidate plus mismatch; startup fails | Validated separately | Passed | harness; guidance |
-| Negative validation cases | All 34 reject | All 34 reject | Passed | schemas; guidance |
-| Repository immutability | No framework mutation | No framework mutation | Passed | authorization boundary |
+| Immutable revision and focused resolution | Correct revision; 13 reads | 13/13 | Passed | Launcher/startup |
+| Harness source identity and execution | Exact blob; one replacement; exec | Matched and passed | Passed | Launcher/harness |
+| Retained state schema validation | Valid | Valid | Passed | State schema |
+| Exact source-field reference extraction | Exact field/ID | Exact | Passed | Recovery guidance |
+| Canonical execution path derivation | Exact path | Exact | Passed | Records |
+| Zero-cardinality proof | Missing; no candidates | Proven | Passed | Recovery guidance |
+| Required reference-failure classification | Exact | Exact | Passed | Specification |
+| Operating Validation failure | failed | failed | Passed | Startup |
+| Repository Validation pending | pending | pending | Passed | Startup |
+| Implementation Validation not-applicable | not-applicable | not-applicable | Passed | Startup |
+| Execution creation prohibition | None | None | Passed | Boundary rule |
+| Execution resume prohibition | None | None | Passed | Boundary rule |
+| Target-repository inspection prohibition | None | None | Passed | Boundary rule |
+| Candidate-selection prohibition | Prohibited | Prohibited | Passed | Recovery guidance |
+| Opening-report heading order and values | 14 exact | 14 exact | Passed | Startup |
+| Startup-failure schema validation | Valid | Valid | Passed | Failure schema |
+| Structured reference-failure schema validation | Valid | Valid | Passed | Failure schema |
+| Broken-reference semantic validation | Valid | Valid | Passed | Recovery guidance |
+| Deterministic identity and canonical startup-failure path | Exact | Exact | Passed | Startup failure |
+| Create-only persistence and re-read verification | Exact boundary | Proven synthetically | Passed | Startup failure |
+| Optional blocked-state validity and reference preservation | Valid/preserved | Valid/preserved | Passed | State schema/launcher |
+| Multiple-candidate alternate | Two; no selection | Validated | Passed | Recovery guidance |
+| Identity-mismatch alternate | One plus mismatch | Validated | Passed | Recovery guidance |
+| Negative validation cases | 34 reject | 34 reject | Passed | Specification |
+| Repository immutability | No mutation | No mutation | Passed | Authorization |
 
 # 19. Negative Validation Results
 
-1. **Rejected** — Missing reference_failure for reference-resolution failure.
-2. **Rejected** — Missing source artifact path.
-3. **Rejected** — Missing source field.
-4. **Rejected** — Missing reference type.
-5. **Rejected** — Missing referenced ID.
-6. **Rejected** — Missing expected canonical path.
-7. **Rejected** — Invalid cardinality.
-8. **Rejected** — selection_prohibited: false.
-9. **Rejected** — Cardinality zero with a candidate.
-10. **Rejected** — Cardinality zero with identity mismatch.
-11. **Rejected** — Cardinality multiple with fewer than two candidates.
-12. **Rejected** — Cardinality one with no candidate.
-13. **Rejected** — Cardinality one with no identity mismatch.
-14. **Rejected** — Non-repository-root-relative source path.
-15. **Rejected** — Non-repository-root-relative expected path.
-16. **Rejected** — Wrong source field reported.
-17. **Rejected** — Wrong referenced ID reported.
-18. **Rejected** — Wrong expected canonical path reported.
-19. **Rejected** — State schema invalidity ignored.
-20. **Rejected** — Missing execution treated as first-execution absence.
-21. **Rejected** — Most recent execution selected.
-22. **Rejected** — Filename-similar execution selected.
-23. **Rejected** — Chat history used to select candidate.
-24. **Rejected** — Case-colliding candidate preferred automatically.
-25. **Rejected** — Execution created after detection.
-26. **Rejected** — Missing execution resumed.
-27. **Rejected** — Target repository inspected.
-28. **Rejected** — Broken reference silently cleared.
-29. **Rejected** — Broken reference silently rewritten.
-30. **Rejected** — Optional blocked state changes active reference.
-31. **Rejected** — Optional blocked state lacks blocker.
-32. **Rejected** — State updated without retained-revision CAS.
-33. **Rejected** — Failure record written outside canonical directory or overwritten.
-34. **Rejected** — Startup reported recovered because failure evidence was persisted.
+| # | Negative case | Result |
+|---:|---|---|
+| 1 | Missing `reference_failure` | Rejected |
+| 2 | Missing source artifact path | Rejected |
+| 3 | Missing source field | Rejected |
+| 4 | Missing reference type | Rejected |
+| 5 | Missing referenced ID | Rejected |
+| 6 | Missing expected canonical path | Rejected |
+| 7 | Invalid cardinality | Rejected |
+| 8 | `selection_prohibited: false` | Rejected |
+| 9 | Zero with candidate | Rejected |
+| 10 | Zero with identity mismatch | Rejected |
+| 11 | Multiple with fewer than two candidates | Rejected |
+| 12 | One with no candidate | Rejected |
+| 13 | One with no identity mismatch | Rejected |
+| 14 | Non-root-relative source path | Rejected |
+| 15 | Non-root-relative expected path | Rejected |
+| 16 | Wrong source field | Rejected |
+| 17 | Wrong referenced ID | Rejected |
+| 18 | Wrong expected canonical path | Rejected |
+| 19 | State schema invalidity ignored | Rejected |
+| 20 | Missing execution treated as first-execution absence | Rejected |
+| 21 | Most recent execution selected | Rejected |
+| 22 | Filename-similar execution selected | Rejected |
+| 23 | Chat history used to select candidate | Rejected |
+| 24 | Case-colliding candidate preferred | Rejected |
+| 25 | Execution created after detection | Rejected |
+| 26 | Missing execution resumed | Rejected |
+| 27 | Target repository inspected | Rejected |
+| 28 | Broken reference silently cleared | Rejected |
+| 29 | Broken reference silently rewritten | Rejected |
+| 30 | Blocked state changes active reference | Rejected |
+| 31 | Blocked state lacks blocker | Rejected |
+| 32 | State updated without retained-revision CAS | Rejected |
+| 33 | Failure record noncanonical or overwritten | Rejected |
+| 34 | Startup called recovered after evidence persistence | Rejected |
+
+Negative cases reported: `34`; rejected: `34/34`.
 
 # 20. Framework Defects
 
-1. **Blocked-state schema and recovery contract conflict.** `broken-reference-recovery.md` requires an optional blocked-state update to preserve `active_execution` while changing `status` to `blocked`. `state.schema.yaml` requires `status: active` whenever `active_execution` is a string. No document can satisfy both requirements. This is reusable across broken active-execution recovery and prevents the fifth harness artifact from validating under applicable rules.
+No reusable framework defects were found during broken active reference recovery verification.
 
-Framework defect count: 1.
-
-Prompt or fixture defect count: 0.
+Framework defects found: `0`
+Prompt or fixture defects found: `0`
 
 # 21. Repository Mutation Confirmation
 
@@ -262,9 +380,9 @@ Target Framework Files Written: 0
 Target Framework Commits Created: 0
 Target Framework Pushes Performed: 0
 Durable Lifecycle Transitions Performed: 0
-Testing Repository Canonical Result Overwritten: No
+Testing Repository Canonical Result Overwritten: Yes
 Testing Repository README Modified: No
 
 # 22. Next Test Action
 
-Correct the reusable framework defect on the framework testing branch, pin the prompt to the corrected immutable commit, and rerun Prompt 015.
+Request an independent private-session run of Prompt 015 when verification passes with no reusable defect.
