@@ -1,5 +1,6 @@
 # 1. Verification Summary
 
+```text
 Operating Validation: Passed
 Verification Result: Passed
 Fixture Harness Result: Passed
@@ -8,11 +9,16 @@ Files Written: 0
 Commit Required: False
 Framework Defects Found: 0
 Prompt or Fixture Defects Found: 0
+```
 
 Framework revision tested: `7d18c1dacf02f341f0c464571bc2f99e78a4b4de`
+
 Detailed specification commit: `d8d8e8e3af3e8f3ea448f318f7746f04f20065e3`
+
 Base fixture harness commit: `2fd99b86df229890f8eb53152ea825906c658fe7`
+
 Base fixture harness blob: `30b004f49b663e062126551bb1d8958c0a226298`
+
 Harness execution mode: `in-memory connector source`
 
 # 2. Validation Trace
