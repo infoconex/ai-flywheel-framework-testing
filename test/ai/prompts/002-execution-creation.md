@@ -1,244 +1,165 @@
 # AI Flywheel Execution-Creation Verification
 
-## Repository
+## Execution Input
 
-**Repository:** `Infoconex/ai-flywheel-framework`
+The revision-specific runner supplies the target framework repository and exact immutable framework commit.
 
-**Branch:** `feature/self-contained-operating-model`
+Use only that immutable revision. Do not substitute a branch head, later commit, cached content, or prior conversational knowledge.
 
-## Cold-Start Instructions
+## Cold-Start Boundary
 
-Ignore all previous conversations, memory, and prior knowledge.
+Treat the repository as newly encountered. The repository and the pinned Prompt 002 specification are the only authoritative sources.
 
-Treat this as the first time you have encountered this repository.
+Complete the manifest-declared startup protocol before constructing an execution. Read every manifest-required file in order, resolve durable state, active mission, active goal, applicable records, and any active execution.
 
-The repository itself is the only authoritative source.
+Prompt 002 is valid only when startup proves that no resumable active execution exists and that first-execution creation is the next authorized action.
 
 ## Objective
 
 Perform a non-persistent verification of first-execution creation and activation.
 
-Validate that the operating model can deterministically construct a schema-valid execution artifact and matching state transition without modifying the repository.
+Construct and validate, entirely in memory:
 
-Do not perform repository discovery or any goal-directed work after activation.
+1. One proposed execution activation snapshot.
+2. One matching proposed state update.
+3. The deterministic create-only and compare-and-swap sequence that would persist them.
 
-## Repository Mutation Rules
+Do not persist either artifact and do not begin repository inspection or other goal-directed work.
 
-You may:
+## Repository Mutation Boundary
 
-- Read repository files.
-- Resolve repository state.
-- Construct proposed artifacts in memory.
-- Validate proposed artifacts.
-- Report proposed artifacts.
+You may read immutable repository content, construct proposed artifacts in memory, validate them, and report reusable framework defects.
 
-You must not:
+You must not create, update, delete, stage, commit, or push framework files. You must not activate an execution, update durable state, inspect the target application repository, gather goal evidence, or begin lifecycle work.
 
-- Create files.
-- Modify files.
-- Delete files.
-- Stage files.
-- Commit changes.
-- Push changes.
-- Activate an execution.
-- Update persisted state.
-- Perform repository discovery.
-- Gather execution evidence.
+Every proposed artifact must be labeled:
 
-All artifacts shown in the report are **PROPOSED ONLY — NOT WRITTEN**.
+> **PROPOSED ONLY — NOT WRITTEN**
 
 ## Required Procedure
 
-1. Resolve the repository and requested branch.
-2. Pin all inputs to one immutable revision.
-3. Follow the manifest-declared startup protocol completely.
-4. Validate the manifest, state, active mission, active goal, required files, schemas, records, and cross-artifact invariants.
-5. Confirm that no active execution exists and that first-execution creation is the next required action.
-6. Resolve the normative execution model and execution template.
-7. Resolve the canonical execution record directory.
-8. Resolve a stable operator identity from the authenticated repository actor when available; otherwise use `chatgpt-session`.
-9. Capture one UTC creation timestamp at whole-second precision.
-10. Generate the execution identifier using `EX-YYYYMMDDTHHMMSSZ-NNN` and the lowest unused same-second counter beginning with `001`.
-11. Verify that the exact proposed path does not already exist.
-12. Retain the original state version for compare-and-swap protection.
-13. Construct the complete proposed execution artifact in memory.
-14. Construct the complete proposed updated state in memory.
-15. Validate both proposed artifacts against their schemas.
-16. Validate all cross-artifact, lifecycle, timestamp, identity, canonical-path, authorization, and transition invariants.
-17. Re-read state and verify stale-state protection.
-18. Perform post-transition validation in memory.
-19. Run the required negative validation scenarios.
-20. Stop without persistence.
+1. Resolve the repository and runner-supplied immutable framework revision.
+2. Follow the manifest startup protocol completely.
+3. Read every manifest-required file in order.
+4. Validate the manifest, state, active mission, active goal, applicable records, and all cross-artifact invariants.
+5. Confirm `active_execution: null`, `lifecycle_stage: null`, and that no resumable execution exists for the active goal.
+6. Resolve the normative execution model, execution schema, state schema, canonical record paths, and execution template when present.
+7. Resolve one stable operator identity: authenticated repository actor when exposed, otherwise `chatgpt-session`.
+8. Capture one UTC creation instant at whole-second precision.
+9. Derive `EX-YYYYMMDDTHHMMSSZ-NNN` using the lowest unused same-second counter beginning with `001`.
+10. Derive the canonical path `.flywheel/operations/records/executions/<execution-id>.yaml` and prove it does not exist.
+11. Retain the original state content and blob SHA for compare-and-swap protection.
+12. Construct the complete proposed execution activation snapshot.
+13. Construct the complete proposed state update.
+14. Validate each proposed artifact against YAML 1.2 and JSON Schema Draft 2020-12 with format enforcement.
+15. Validate all cross-artifact, lifecycle, timestamp, identity, canonical-path, authorization, and state-execution invariants.
+16. Model the create-only execution write, same-second collision retry, retained-state recheck, state compare-and-swap, and final pair verification without performing writes.
+17. Model the required orphaned-execution startup-failure behavior when execution creation would succeed but state compare-and-swap would fail.
+18. Execute all required negative validations.
+19. Stop without persistence.
 
-## Proposed Activation Requirements
+## Proposed Execution Requirements
 
 The proposed execution must:
 
+- Use `schema_version: 1`.
 - Belong to the active mission and active goal.
 - Use the active goal objective exactly as `intended_outcome`.
-- Copy acceptance-criterion identifiers exactly in goal order.
+- Copy acceptance-criterion IDs exactly in goal order.
 - Use `status: in-progress`.
-- Set `started_at` to the captured creation instant.
-- Set `completed_at: null`.
-- Mark `execute` as the sole `in-progress` lifecycle stage.
-- Give `execute` the same start timestamp as the execution.
-- Leave all later lifecycle stages `pending` with null timestamps, summaries, and reasons.
-- Initialize actions, observations, classifications, adaptations, blockers, approvals, evidence, decisions, findings, and validation results as empty arrays.
-- Keep outcome and completion values null.
+- Set `started_at` to the captured whole-second UTC instant.
+- Set `completed_at: null` and `outcome: null`.
+- Set `completion.disposition: null` and `completion.rationale: null`.
+- Mark `lifecycle.execute.status: in-progress` with the same `started_at` as the execution.
+- Set the other seven lifecycle stages to `pending` with null timestamps, summaries, and reasons and empty refs.
+- Initialize `actions`, `observations`, `evaluations`, `classifications`, `adaptations`, `blockers`, `approval_refs`, `evidence_refs`, `decision_refs`, `finding_refs`, and `validation_results` as empty arrays.
+- Use a filename exactly equal to `<execution-id>.yaml` at the canonical execution path.
 
-The proposed state must:
+Required goal approvals remain requirements of the goal. `approval_refs` stays empty until durable approval records exist.
 
-- Preserve the active mission and goal.
+## Proposed State Requirements
+
+The proposed state must preserve every unrelated field and must:
+
+- Preserve the active mission and active goal.
 - Set `status: active`.
-- Set `active_execution` to the proposed execution identifier.
+- Set `active_execution` to the proposed execution ID.
 - Set `lifecycle_stage: execute`.
-- Preserve all unrelated fields.
-- Set `last_durable_update` to the captured timestamp and operator.
+- Set `last_durable_update.at` exactly equal to execution `started_at`.
+- Set `last_durable_update.by` to the resolved operator identity.
+- Set `last_durable_update.reason` to `Activated execution <execution-id> for goal <goal-id>.`.
 
-## Negative Validation
+## Persistence-Sequence Verification
 
-Demonstrate rejection of at least these invalid scenarios:
+Verify the following proposed sequence without writing:
 
-1. Two lifecycle stages marked in progress.
-2. Non-null outcome while execution remains in progress.
-3. Terminal execution with incomplete lifecycle stages.
-4. Interrupted execution without the required interruption reason.
-5. Active execution with null lifecycle stage.
-6. Active execution while state status is not active.
-7. Proposed state referencing a nonexistent execution artifact.
-8. Reuse of an existing execution identifier.
-9. State changed after its original version was captured.
-10. Repository inspection beginning before execution creation is complete.
+1. Retain the current state blob SHA.
+2. Select the deterministic execution ID and canonical path.
+3. Create the fully valid execution using create-only semantics.
+4. On path collision, re-list the canonical directory and select the next lowest unused counter for the same second.
+5. Re-read state and require the retained SHA to remain current.
+6. Update state using compare-and-swap against the retained SHA.
+7. Re-read execution and state and require exact equality with the validated proposed pair.
 
-For each scenario report:
+If execution creation would succeed but state compare-and-swap would fail, verify that the operator must not overwrite current state, must identify the execution as orphaned in a startup-failure record, and must stop.
 
-- Invalid condition
-- Expected rejection
-- Actual result
-- Rule enforcing rejection
+## Required Negative Validations
+
+Demonstrate deterministic rejection of exactly these 16 cases:
+
+1. Two lifecycle stages are `in-progress`.
+2. No lifecycle stage is `in-progress` for an in-progress execution.
+3. Execution `outcome` is non-null while status is `in-progress`.
+4. Execution `completed_at` is non-null while status is `in-progress`.
+5. Completion disposition or rationale is non-null while status is `in-progress`.
+6. Execute stage timestamp differs from execution `started_at`.
+7. A successor lifecycle stage is not pending at activation.
+8. Acceptance criteria differ from the active goal or are out of order.
+9. Intended outcome differs from the active goal objective.
+10. Proposed state references a nonexistent execution artifact.
+11. Proposed state lifecycle stage is null or differs from `execute`.
+12. Proposed state status is not `active`.
+13. The execution identifier or filename does not follow the canonical pattern.
+14. The selected execution path already exists and the operator does not retry with the next counter.
+15. State changes after its retained revision is captured and the operator attempts to overwrite it.
+16. Repository inspection or goal-directed work begins before durable activation would complete.
+
+For each case report the invalid condition, expected rejection, observed result, and enforcing schema or semantic rule.
 
 ## Framework Defects
 
-Only report reusable framework defects.
+Report only reusable framework defects. Do not treat the expected absence of a first execution or lazily created record directories as defects. Do not recommend persisting execution details into the framework-development repository during this verification.
 
-Do not report missing first-execution records or lazy record directories as defects.
+For every defect include identifier, severity, artifact, rule, observed behavior, expected behavior, deterministic impact, and framework-only correction.
 
-Do not recommend persisting execution details into this framework-development branch.
+## Required Result
 
-## Final Report
+Follow `test/ai/RESULT_FORMAT.md` and produce exactly these 11 numbered level-two sections beneath one level-one title:
 
-Produce exactly these sections.
+1. Verification Summary
+2. Validation Trace
+3. Durable Operating Context
+4. Execution-Creation Decision
+5. Proposed Execution Artifact
+6. Proposed State Artifact
+7. Schema and Invariant Results
+8. Persistence-Sequence Results
+9. Negative Validation Results
+10. Framework Defects
+11. Repository Mutation Confirmation
 
-### 1. Verification Summary
+The Verification Summary and Repository Mutation Confirmation must use fenced `text` blocks. Complete proposed artifacts must use fenced `yaml` blocks.
 
-Include:
+The result must record the exact framework revision, Prompt 002 specification commit, result-format contract commit, result-format validator commit, `50/50` manifest-required reads, `16/16` negative cases, 11 numbered sections, result-format validation, and mutation status.
 
-- Repository
-- Branch
-- Immutable Revision
-- Operating Validation
-- Verification Result
-- Repository Changes
-- Files Written
-- Commit Required
-- Framework Defects Found
-
-### 2. Validation Trace
-
-Provide a complete step-by-step trace of observable actions.
-
-Do not include hidden reasoning.
-
-For every step include:
-
-- Action
-- Artifact
-- Rule
-- Observed
-- Result
-- Next
-
-### 3. Current Operating State
-
-Include:
-
-- Active Mission
-- Active Goal
-- Active Execution
-- Lifecycle Stage
-- Readiness
-- Status
-
-### 4. Execution-Creation Decision
-
-Include:
-
-- Decision
-- Creation Authorized
-- Verification Only
-- Persistence Authorized
-- Reason
-
-### 5. Proposed Execution Artifact
-
-Display the complete proposed execution YAML.
-
-Precede it with:
-
-> **PROPOSED ONLY — NOT WRITTEN**
-
-### 6. Proposed State Artifact
-
-Display the complete proposed state YAML.
-
-Precede it with:
-
-> **PROPOSED ONLY — NOT WRITTEN**
-
-### 7. Schema and Invariant Results
-
-Report:
-
-- Execution schema validation
-- State schema validation
-- Cross-artifact validation
-- Lifecycle validation
-- Identity validation
-- Collision validation
-- Compare-and-swap validation
-- Post-transition validation
-
-### 8. Negative Validation Results
-
-Report every required invalid scenario and whether it was correctly rejected.
-
-### 9. Framework Defects
-
-If none exist, state exactly:
+If no defect exists, state exactly:
 
 > No reusable framework defects were found during the non-persistent execution-creation verification.
 
-### 10. Repository Mutation Confirmation
+Write or overwrite only:
 
-State explicitly:
+```text
+test/ai/results/002-execution-creation.md
+```
 
-- No files were created.
-- No files were modified.
-- No files were deleted.
-- No files were staged.
-- No commits were created.
-- No changes were pushed.
-- No execution was activated.
-- No repository discovery was performed.
-
-### 11. Next Authorized Action
-
-If no framework defect exists, state:
-
-> Run the next non-persistent lifecycle verification without committing execution details to this framework-development branch.
-
-If a framework defect exists, state:
-
-> Correct only the reusable framework defect before repeating this verification.
-
-Stop after this section.
+Do not create alternate, dated, corrected, rerun, backup, or history results. Do not modify `test/ai/README.md` during the independent run.
