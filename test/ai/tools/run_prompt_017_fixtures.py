@@ -56,6 +56,42 @@ def run(base_source: str) -> dict[str, Any]:
         1,
     )
 
+    old_evidence_fixture_refs = (
+        '        "fixture_definition_refs": ["test/ai/prompts/010-end-to-end-execution.md", '
+        '"test/ai/prompts/016-run-representative-proving-mission-launcher.md"],'
+    )
+    if corrected.count(old_evidence_fixture_refs) != 1:
+        raise ValueError("expected one combined evidence-completeness fixture reference")
+    corrected = corrected.replace(
+        old_evidence_fixture_refs,
+        '        "fixture_definition_refs": ["test/ai/prompts/016-run-representative-proving-mission-launcher.md"],',
+        1,
+    )
+
+    old_evidence_result_refs = (
+        '        "evidence_refs": ["test/ai/results/010-end-to-end-execution.md", '
+        '"test/ai/results/016-run-representative-proving-mission.md"],'
+    )
+    if corrected.count(old_evidence_result_refs) != 1:
+        raise ValueError("expected one combined evidence-completeness result reference")
+    corrected = corrected.replace(
+        old_evidence_result_refs,
+        '        "evidence_refs": ["test/ai/results/016-run-representative-proving-mission.md"],',
+        1,
+    )
+
+    old_evidence_actual = (
+        '        "actual_result": "Acceptance-criterion evidence mapping passed in the end-to-end lifecycle '
+        'and representative proving mission results.",'
+    )
+    if corrected.count(old_evidence_actual) != 1:
+        raise ValueError("expected one combined evidence-completeness actual result")
+    corrected = corrected.replace(
+        old_evidence_actual,
+        '        "actual_result": "Acceptance-criterion evidence mapping passed in the representative proving mission result.",',
+        1,
+    )
+
     old_fixture_ref = '        "fixture_definition_refs": ["test/ai/prompts/017-self-host-certification.md"],'
     if corrected.count(old_fixture_ref) != 1:
         raise ValueError("expected exactly one obsolete self-hosting fixture reference")
@@ -91,6 +127,10 @@ def run(base_source: str) -> dict[str, Any]:
         raise ValueError("every scenario must identify its immutable evidence revision")
     if any(item["result"] == "passed" and not item["tested_framework_revision"] for item in scenarios):
         raise ValueError("every passed scenario must identify its tested framework revision")
+    if scenarios[7]["fixture_definition_refs"] != ["test/ai/prompts/016-run-representative-proving-mission-launcher.md"]:
+        raise ValueError("evidence-completeness scenario must use one revision-consistent fixture")
+    if scenarios[7]["evidence_refs"] != ["test/ai/results/016-run-representative-proving-mission.md"]:
+        raise ValueError("evidence-completeness scenario must use one revision-consistent result")
     if scenarios[9]["fixture_definition_refs"] != [SELF_HOST_FIXTURE_PATH]:
         raise ValueError("self-hosting scenario must reference the immutable fixture definition")
     if scenarios[9]["evidence_revision"] != SELF_HOST_EVIDENCE_REVISION:
@@ -99,5 +139,5 @@ def run(base_source: str) -> dict[str, Any]:
     parsed["execution_mode"] = "in-memory connector source with deterministic correction runner"
     parsed["base_framework_revision"] = BASE_FRAMEWORK_REVISION
     parsed["self_host_evidence_revision"] = SELF_HOST_EVIDENCE_REVISION
-    parsed["correction_count"] = 13
+    parsed["correction_count"] = 16
     return parsed
