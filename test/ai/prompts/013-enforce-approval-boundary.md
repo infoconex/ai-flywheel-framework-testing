@@ -12,7 +12,7 @@ https://raw.githubusercontent.com/Infoconex/ai-flywheel-framework-testing/d8d8e8
 
 Follow every instruction in that detailed specification except where this launcher explicitly replaces or clarifies it.
 
-The overrides below are authoritative. Apply them before executing the detailed specification. Do not use the obsolete framework revision or obsolete single-harness execution instruction contained in the detailed specification.
+The overrides below are authoritative. Apply them before executing the detailed specification. Do not use the obsolete framework revision or obsolete harness-materialization instructions contained in the detailed specification.
 
 # Final Immutable Framework Revision
 
@@ -24,32 +24,57 @@ Use this exact revision for every framework read and validation. Do not resolve 
 
 # Deterministic Fixture Harness
 
-The fixture harness consists of two immutable files.
-
-Read the base generator at:
+Read the immutable base generator through the GitHub connector at:
 
 https://raw.githubusercontent.com/Infoconex/ai-flywheel-framework-testing/2fd99b86df229890f8eb53152ea825906c658fe7/test/ai/tools/verify_prompt_013_fixtures.py
 
-Read the final-revision runner at:
-
-https://raw.githubusercontent.com/Infoconex/ai-flywheel-framework-testing/fffc5874dc0cd4df7e6b833574eb9a9ba4ba6ea6/test/ai/tools/run_prompt_013_fixtures.py
-
-Place both files in the same temporary directory without changing their filenames. Execute:
+Expected Git blob SHA:
 
 ```text
-python run_prompt_013_fixtures.py
+30b004f49b663e062126551bb1d8958c0a226298
 ```
 
-The runner imports the immutable base generator and replaces only its framework revision constant with:
+Do not require the connector-returned source to be downloaded, mounted, or written as a file.
+
+Execute the retrieved source directly in the Python runtime using this exact in-memory procedure:
+
+1. Preserve the connector-returned UTF-8 source text exactly.
+2. Verify its Git blob SHA equals `30b004f49b663e062126551bb1d8958c0a226298` using the Git blob formula `sha1("blob <byte-count>\0" + bytes)`.
+3. Replace exactly one occurrence of:
 
 ```text
-7d18c1dacf02f341f0c464571bc2f99e78a4b4de
+FRAMEWORK_REVISION = "ea8f72fd194973f033553f46c59b400ab36c8868"
 ```
 
-The combined harness is valid only when:
+with:
 
-- The process exits successfully.
-- The JSON parses successfully.
+```text
+FRAMEWORK_REVISION = "7d18c1dacf02f341f0c464571bc2f99e78a4b4de"
+```
+
+4. Assert that exactly one replacement occurred.
+5. Execute the resulting source in memory with `__name__` set to `__main__`.
+6. Capture the complete standard output as JSON.
+
+Conceptually, the execution is equivalent to:
+
+```python
+source = connector_returned_source
+old = 'FRAMEWORK_REVISION = "ea8f72fd194973f033553f46c59b400ab36c8868"'
+new = 'FRAMEWORK_REVISION = "7d18c1dacf02f341f0c464571bc2f99e78a4b4de"'
+assert source.count(old) == 1
+source = source.replace(old, new, 1)
+exec(compile(source, "verify_prompt_013_fixtures.py", "exec"), {"__name__": "__main__"})
+```
+
+The immutable helper runner at commit `fffc5874dc0cd4df7e6b833574eb9a9ba4ba6ea6` documents the same revision substitution but is no longer required to be materialized or imported at runtime.
+
+The harness is valid only when:
+
+- The source Git blob SHA matches the expected value.
+- The revision substitution count is exactly one.
+- Execution completes successfully.
+- The output parses as JSON.
 - `framework_revision` equals `7d18c1dacf02f341f0c464571bc2f99e78a4b4de`.
 - `result` equals `passed`.
 - All 11 artifact entries contain complete normalized YAML, SHA-256, Git blob SHA, and byte count.
@@ -59,6 +84,8 @@ The combined harness is valid only when:
 - `classification_after_durable_approval` is `exact approved action authorized`.
 
 Do not invent, approximate, or manually replace fixture bytes or identities.
+
+An inability to download or mount GitHub files is not a valid reason to skip the harness because connector-returned source can be executed in memory. If the source cannot be read through the connector or the Python runtime itself is unavailable, report the run as incomplete rather than as a framework defect.
 
 # Approval Schema Routing Clarification
 
@@ -88,7 +115,8 @@ The result must identify:
 ```text
 Framework revision tested: 7d18c1dacf02f341f0c464571bc2f99e78a4b4de
 Base fixture harness commit: 2fd99b86df229890f8eb53152ea825906c658fe7
-Fixture runner commit: fffc5874dc0cd4df7e6b833574eb9a9ba4ba6ea6
+Base fixture harness blob: 30b004f49b663e062126551bb1d8958c0a226298
+Harness execution mode: in-memory connector source
 ```
 
-A result that uses the obsolete framework revision, executes only the base harness without the final-revision runner, validates a structured approval against the legacy generic approval shape, omits the required output structure, or reports unsupported fixture identities fails Prompt 013.
+A result that uses the obsolete framework revision, skips the in-memory harness, fails to verify the base source blob, validates a structured approval against the legacy generic approval shape, omits the required output structure, or reports unsupported fixture identities fails Prompt 013.
