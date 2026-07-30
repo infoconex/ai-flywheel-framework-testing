@@ -10,6 +10,8 @@ from typing import Any
 
 FINAL_FRAMEWORK_REVISION = "18335e57165a8984adab4790d3a6210355b484ba"
 BASE_FRAMEWORK_REVISION = "c0f779eedc97963283e2798a988c628df63ddcbe"
+SELF_HOST_EVIDENCE_REVISION = "42461bcc86ea75c3752082b33d7c24dd18a8bd62"
+SELF_HOST_FIXTURE_PATH = "test/ai/fixtures/017-self-host-certification.yaml"
 
 
 def run(base_source: str) -> dict[str, Any]:
@@ -47,7 +49,19 @@ def run(base_source: str) -> dict[str, Any]:
         raise ValueError("expected exactly one self-hosting framework revision")
     corrected = corrected.replace(
         self_host_pattern,
-        '        "tested_framework_revision": FRAMEWORK_REVISION,\n        "evidence_revision": EVIDENCE_REVISION,',
+        (
+            '        "tested_framework_revision": FRAMEWORK_REVISION,\n'
+            f'        "evidence_revision": "{SELF_HOST_EVIDENCE_REVISION}",'
+        ),
+        1,
+    )
+
+    old_fixture_ref = '        "fixture_definition_refs": ["test/ai/prompts/017-self-host-certification.md"],'
+    if corrected.count(old_fixture_ref) != 1:
+        raise ValueError("expected exactly one obsolete self-hosting fixture reference")
+    corrected = corrected.replace(
+        old_fixture_ref,
+        f'        "fixture_definition_refs": ["{SELF_HOST_FIXTURE_PATH}"],',
         1,
     )
 
@@ -77,8 +91,13 @@ def run(base_source: str) -> dict[str, Any]:
         raise ValueError("every scenario must identify its immutable evidence revision")
     if any(item["result"] == "passed" and not item["tested_framework_revision"] for item in scenarios):
         raise ValueError("every passed scenario must identify its tested framework revision")
+    if scenarios[9]["fixture_definition_refs"] != [SELF_HOST_FIXTURE_PATH]:
+        raise ValueError("self-hosting scenario must reference the immutable fixture definition")
+    if scenarios[9]["evidence_revision"] != SELF_HOST_EVIDENCE_REVISION:
+        raise ValueError("self-hosting scenario must use the fixture-definition revision")
 
     parsed["execution_mode"] = "in-memory connector source with deterministic correction runner"
     parsed["base_framework_revision"] = BASE_FRAMEWORK_REVISION
-    parsed["correction_count"] = 12
+    parsed["self_host_evidence_revision"] = SELF_HOST_EVIDENCE_REVISION
+    parsed["correction_count"] = 13
     return parsed
