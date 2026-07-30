@@ -5,7 +5,7 @@ import copy, hashlib, json, re, sys
 from typing import Any
 import yaml
 
-FRAMEWORK_REVISION='fdb270be55d77b2588b7d589021479c5f6e3097f'
+FRAMEWORK_REVISION='18335e57165a8984adab4790d3a6210355b484ba'
 MISSION='verify-transition-recovery'; GOAL='recover-partial-lifecycle-transition'
 EXEC='EX-20260729T050000Z-001'; PLAN='PERSIST-20260729T051000Z-001'
 RECOVERY_PLAN='PERSIST-20260729T051500Z-001'; FINDING='FIND-930'; OP='chatgpt-session'
