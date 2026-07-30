@@ -1,82 +1,34 @@
 # Run and Publish AI Flywheel Prompt 014
 
-Use the GitHub repositories as the sources of truth.
-
-## Read the specification
+Use GitHub repositories as the sources of truth.
 
 Read and execute exactly:
 
-https://raw.githubusercontent.com/Infoconex/ai-flywheel-framework-testing/087c97c6f95ce36555a5c77aff95eeb16e19c8d3/test/ai/prompts/014-recover-missing-required-artifact.md
-
-The runner requirements below replace obsolete fixture identities or execution details in the specification.
-
-## Immutable sources
-
 ```text
-Framework revision: 923c46baf8d4bb400eef71a3507e07d797dcab87
-Specification commit: 087c97c6f95ce36555a5c77aff95eeb16e19c8d3
-Fixture harness commit: e5f47e50b092a44858bf5a1daea22cfcc85f8c94
-Fixture harness blob: d264dcce92e5e06ee06801eb15d3e1f8a64a1843
-Result-format contract commit: 594b195c514ab434406989af4e67db927d1164d1
-Format-validator commit: 891f0d240c15bed3c175639808ff3f3b77f7aab1
+Repository: Infoconex/ai-flywheel-framework-testing
+Path: test/ai/prompts/014-recover-missing-required-artifact.md
+Specification commit: c4b02428b2410428d1a8ba334009ef62f378fe4c
+Framework repository: Infoconex/ai-flywheel-framework
+Framework revision: 18335e57165a8984adab4790d3a6210355b484ba
+Result-format contract commit: 43b35bd896554793a3142ddf6f654ffdf8bec7f2
+Result-format validator commit: f4b06108e0a2c7f8de5ee6baba4441d82280ec6c
 ```
 
-Do not substitute branch heads, later commits, alternate specifications, or modified fixture source.
+Do not substitute branch heads, newer commits, copied prompts, cached content, historical fixtures, or prior results.
 
-## Fixture corrections and execution
-
-Retrieve `test/ai/tools/verify_prompt_014_fixtures.py` at the pinned fixture commit, verify the Git blob SHA, and execute the exact connector-returned source in memory with Python 3 using `exec`. PyYAML is required.
-
-The authoritative fixture corrections are:
-
-1. Use the complete pinned manifest `required_files` list.
-2. Include `implementation_available: false` in retained and optional blocked states.
-3. Use nonempty string blockers.
-4. Represent only `.flywheel/operating-model/config/approval-validation.yaml` as absent.
-
-The harness must parse, report the pinned framework revision and `result: passed`, provide four complete artifact snapshots, and return all checks and all 30 negative cases as true.
-
-## Completion requirements
-
-Complete all specification requirements, including 12 focused framework reads, active mission and goal context, schema validation, exact 14-heading startup report, 24 validation-result rows, 30 negative cases, and exactly 22 numbered sections. Treat the framework repository as read-only.
-
-Validate the completed result with `test/ai/tools/validate_result_format.py` at the pinned validator commit using section count `22`.
-
-## Canonical result
-
-Write or overwrite only:
+The completed verification must report:
 
 ```text
-test/ai/results/014-recover-missing-required-artifact.md
+Manifest-required reads: 50/50
+Missing required artifacts: 1
+Startup-failure records: 1
+Proposed blocked-state artifacts: 1
+Negative cases: 30/30
+Required top-level sections: 22/22
+Validation-result rows: 24/24
+Result-format validation: Passed
 ```
 
-Do not create alternate results or modify `test/ai/README.md`. Commit only the canonical result with:
+Write or overwrite only `test/ai/results/014-recover-missing-required-artifact.md`. Do not modify `test/ai/README.md`, create alternate results, or modify the framework repository. Commit only the canonical result with message `Replace Prompt 014 verification result`.
 
-```text
-Replace Prompt 014 verification result
-```
-
-## Required final response
-
-Respond only with:
-
-```text
-Prompt: 014-recover-missing-required-artifact
-Framework revision tested: 923c46baf8d4bb400eef71a3507e07d797dcab87
-Detailed specification commit: 087c97c6f95ce36555a5c77aff95eeb16e19c8d3
-Fixture harness commit: e5f47e50b092a44858bf5a1daea22cfcc85f8c94
-Fixture harness blob: d264dcce92e5e06ee06801eb15d3e1f8a64a1843
-Harness execution mode: in-memory connector source
-Fixture harness result: Passed | Failed
-Self-reported verification result: Passed | Failed
-Framework defects reported: <number>
-Prompt or fixture defects reported: <number>
-Required top-level sections: 22
-Validation-result rows: 24
-Negative cases reported: 30
-Result path: test/ai/results/014-recover-missing-required-artifact.md
-Result commit: <commit SHA>
-Result file overwritten: Yes
-README modified: No
-Notes: <one concise statement identifying anything requiring review, or None>
-```
+The final response must report all pinned identities, verification and defect results, required counts, format validation, canonical path, overwrite status, commit, commit message, `README modified: No`, framework mutation status, and notes.
