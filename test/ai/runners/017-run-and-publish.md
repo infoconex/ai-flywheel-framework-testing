@@ -22,7 +22,7 @@ Base fixture line count: 503
 Transformation runner path: test/ai/tools/run_prompt_017_fixtures.py
 Transformation runner commit: f91548956e6220585d0554d7d4104b993579e282
 Transformation runner blob: 720109e3bb1e5c1ec9f9eafe98f0dbc76f6c6295
-Transformation runner line count: 222
+Transformation runner line count: 223
 Self-hosting fixture commit: 5f1b69df1b5e47f0bad874cbe03238ae3860920b
 Self-hosting fixture blob: 1ecc8a3adb14c09e9c804a3f2f2b70f60c0b63d0
 Result-format contract commit: 43b35bd896554793a3142ddf6f654ffdf8bec7f2
@@ -37,7 +37,7 @@ A complete-file connector response may be truncated. Retrieve each source using 
 
 ```text
 Base fixture: 1-175, 176-350, 351-503
-Transformation runner: 1-120, 121-222
+Transformation runner: 1-120, 121-223
 ```
 
 When a range is truncated, subdivide only that range until all requested lines are returned completely. Reject any response containing a truncation notice or omitted content.
