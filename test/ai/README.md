@@ -2,6 +2,15 @@
 
 This directory catalogs the reusable AI prompts used to verify the AI Flywheel Framework.
 
+## Repository Structure
+
+- `prompts/` contains one reusable specification per prompt number.
+- `runners/` contains one current revision-specific run-and-publish file per prompt number when a runner is required.
+- `results/` contains one canonical retained result per prompt number.
+- `fixtures/` and `tools/` contain supporting test implementation and validators.
+
+Do not create launcher files under `prompts/`, corrected runner copies, or alternate result files. Update the canonical runner or overwrite the canonical result instead.
+
 ## Test Prompt Status
 
 | Test | Focus Area | Run | Last Run | Passed | Test Result |
@@ -19,10 +28,10 @@ This directory catalogs the reusable AI prompts used to verify the AI Flywheel F
 | [Resume Interrupted Execution](prompts/011-resume-interrupted-execution.md) | Fresh-session discovery and safe CAS resume of a durable interrupted execution without identity loss, repeated work, stale overwrites, or repository mutation | Yes | 2026-07-28 | Yes | [View result](results/011-resume-interrupted-execution.md) |
 | [Recover Partial Lifecycle Transition](prompts/012-recover-partial-lifecycle-transition.md) | Fresh-session detection and recovery of an execution-first, state-not-written lifecycle transition using a durable transition plan, exact rollback, and structured recovery evidence | Yes | 2026-07-29 | Yes | [View result](results/012-recover-partial-lifecycle-transition.md) |
 | [Enforce Approval Boundary](prompts/013-enforce-approval-boundary.md) | Fresh-session enforcement of exact durable approval before a material dependency action, including authority, scope, persistence, delegation, revocation, and invalid authorization cases | Yes | 2026-07-29 | Yes | [View result](results/013-enforce-approval-boundary.md) |
-| [Recover Missing Required Artifact](prompts/014-recover-missing-required-artifact-launcher.md) | Isolated startup failure when a manifest-required operating file is absent, including exact stop boundaries, startup-failure evidence, optional blocked state, collision handling, and repository immutability | Yes | 2026-07-29 | Yes | [View result](results/014-recover-missing-required-artifact.md) |
-| [Recover Broken Active Reference](prompts/015-recover-broken-active-reference-launcher.md) | Isolated startup failure when state points to a missing, ambiguous, or identity-mismatched active artifact, including exact reference evidence, no-guess boundaries, startup-failure persistence, and safe reconciliation | Yes | 2026-07-29 | Yes | [View result](results/015-recover-broken-active-reference.md) |
-| [Run Representative Proving Mission](prompts/016-run-representative-proving-mission-launcher.md) | Representative non-destructive mission that inventories manifest-required framework artifacts, maps criterion evidence, applies the lifecycle, and proves useful terminal completion without repository mutation | Yes | 2026-07-29 | Yes | [View result](results/016-run-representative-proving-mission.md) |
-| [Self-Host Certification](prompts/017-self-host-certification-launcher.md) | Self-hosted certification assembly using the framework's own mission, goal, execution, evidence, validation, persistence, readiness, and authority contracts, including safe failure for insufficient historical evidence | Yes | 2026-07-30 | Yes | [View result](results/017-self-host-certification.md) |
+| [Recover Missing Required Artifact](prompts/014-recover-missing-required-artifact.md) | Isolated startup failure when a manifest-required operating file is absent, including exact stop boundaries, startup-failure evidence, optional blocked state, collision handling, and repository immutability | Yes | 2026-07-29 | Yes | [View result](results/014-recover-missing-required-artifact.md) |
+| [Recover Broken Active Reference](prompts/015-recover-broken-active-reference.md) | Isolated startup failure when state points to a missing, ambiguous, or identity-mismatched active artifact, including exact reference evidence, no-guess boundaries, startup-failure persistence, and safe reconciliation | Yes | 2026-07-29 | Yes | [View result](results/015-recover-broken-active-reference.md) |
+| [Run Representative Proving Mission](prompts/016-run-representative-proving-mission.md) | Representative non-destructive mission that inventories manifest-required framework artifacts, maps criterion evidence, applies the lifecycle, and proves useful terminal completion without repository mutation | Yes | 2026-07-29 | Yes | [View result](results/016-run-representative-proving-mission.md) |
+| [Self-Host Certification](prompts/017-self-host-certification.md) | Self-hosted certification assembly using the framework's own mission, goal, execution, evidence, validation, persistence, readiness, and authority contracts, including safe failure for insufficient historical evidence | Yes | 2026-07-30 | Yes | [View result](results/017-self-host-certification.md) |
 
 ## Status Rules
 
