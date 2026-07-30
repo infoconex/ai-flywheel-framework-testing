@@ -74,7 +74,47 @@ def manifest() -> dict[str, Any]:
             ".flywheel/operating-model/guidance/startup.md",
             ".flywheel/operating-model/guidance/startup-failure.md",
             ".flywheel/operating-model/guidance/authority.md",
+            ".flywheel/operating-model/guidance/approval-boundaries.md",
+            ".flywheel/operating-model/guidance/operator.md",
+            ".flywheel/operating-model/guidance/invariants.md",
+            ".flywheel/operating-model/guidance/principles.md",
+            ".flywheel/operating-model/guidance/lifecycle.md",
+            ".flywheel/operating-model/guidance/sop.md",
+            ".flywheel/operating-model/guidance/mission-model.md",
+            ".flywheel/operating-model/guidance/execution-model.md",
+            ".flywheel/operating-model/guidance/transition-recovery.md",
+            ".flywheel/operating-model/guidance/records.md",
+            ".flywheel/operating-model/guidance/evidence.md",
+            ".flywheel/operating-model/guidance/decisions.md",
+            ".flywheel/operating-model/guidance/failure-handling.md",
+            ".flywheel/operating-model/guidance/adaptation.md",
+            ".flywheel/operating-model/guidance/validation.md",
+            ".flywheel/operating-model/guidance/persistence.md",
+            ".flywheel/operating-model/guidance/reuse.md",
+            ".flywheel/operating-model/guidance/readiness.md",
+            ".flywheel/operating-model/guidance/certification.md",
+            ".flywheel/operating-model/guidance/classifications.md",
+            ".flywheel/operating-model/guidance/tool-usage.md",
+            ".flywheel/operating-model/config/repository-context.yaml",
+            ".flywheel/operating-model/config/flywheel-context.yaml",
+            ".flywheel/operating-model/config/governance.yaml",
             MISSING_PATH,
+            ".flywheel/operating-model/config/capabilities.yaml",
+            ".flywheel/operating-model/config/validation.yaml",
+            ".flywheel/operating-model/onboarding/process.md",
+            ".flywheel/operating-model/onboarding/interview.yaml",
+            ".flywheel/operating-model/onboarding/answer-model.yaml",
+            ".flywheel/operating-model/schemas/README.md",
+            ".flywheel/operating-model/schemas/manifest.schema.yaml",
+            ".flywheel/operating-model/schemas/state.schema.yaml",
+            ".flywheel/operating-model/schemas/mission.schema.yaml",
+            ".flywheel/operating-model/schemas/goal.schema.yaml",
+            ".flywheel/operating-model/schemas/execution.schema.yaml",
+            ".flywheel/operating-model/schemas/record.schema.yaml",
+            ".flywheel/operating-model/schemas/approval-record.schema.yaml",
+            ".flywheel/operating-model/schemas/knowledge.schema.yaml",
+            ".flywheel/operating-model/schemas/persistence-plan.schema.yaml",
+            ".flywheel/operating-model/schemas/reuse-assessment.schema.yaml",
             ".flywheel/operating-model/schemas/startup-failure.schema.yaml",
         ],
         "onboarding": {"mission": "establish-ai-flywheel-operations", "status": "active"},
@@ -96,6 +136,7 @@ def retained_state() -> dict[str, Any]:
         "active_goal": "001-discover-repository-and-gather-context",
         "active_execution": None,
         "lifecycle_stage": None,
+        "implementation_available": False,
         "application_missions_allowed": False,
         "blockers": [],
         "last_durable_update": {
@@ -135,13 +176,7 @@ def startup_failure() -> dict[str, Any]:
 def blocked_state() -> dict[str, Any]:
     value = retained_state()
     value["status"] = "blocked"
-    value["blockers"] = [
-        {
-            "id": "BLOCKER-STARTUP-001",
-            "description": f"Startup failure {FAILURE_ID}: required file missing at {MISSING_PATH}.",
-            "source_ref": FAILURE_ID,
-        }
-    ]
+    value["blockers"] = [f"{FAILURE_ID}: required file missing at {MISSING_PATH}."]
     value["last_durable_update"] = {
         "at": "2026-07-30T04:00:02Z",
         "by": OPERATOR,
@@ -191,7 +226,7 @@ def main() -> None:
         "retained_state_has_no_execution": artifacts["retained_state"]["data"]["active_execution"] is None,
         "blocked_state_has_no_execution": artifacts["optional_blocked_state"]["data"]["active_execution"] is None,
         "blocked_state_has_null_stage": artifacts["optional_blocked_state"]["data"]["lifecycle_stage"] is None,
-        "blocked_state_references_failure": FAILURE_ID in artifacts["optional_blocked_state"]["data"]["blockers"][0]["source_ref"],
+        "blocked_state_references_failure": FAILURE_ID in artifacts["optional_blocked_state"]["data"]["blockers"][0],
         "recovery_does_not_invent_content": "Restore the exact missing required artifact" in artifacts["startup_failure"]["data"]["recovery_action"],
     }
 
