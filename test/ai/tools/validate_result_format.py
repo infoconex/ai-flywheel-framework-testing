@@ -88,8 +88,15 @@ def main() -> None:
         if any("\n" in paragraph for paragraph in metadata_paragraphs):
             fail("summary metadata items must be separate one-line paragraphs")
 
+    mutation_heading_matches = list(
+        re.finditer(r"^## (?P<number>\d+)\. Repository Mutation Confirmation$", text, re.MULTILINE)
+    )
+    if len(mutation_heading_matches) != 1:
+        fail("expected exactly one numbered Repository Mutation Confirmation section")
+
+    mutation_number = mutation_heading_matches[0].group("number")
     mutation_match = re.search(
-        r"## 21\. Repository Mutation Confirmation\n\n```text\n(?P<body>.*?)\n```\n",
+        rf"## {mutation_number}\. Repository Mutation Confirmation\n\n```text\n(?P<body>.*?)\n```\n",
         text,
         re.DOTALL,
     )
@@ -120,7 +127,8 @@ def main() -> None:
 
     print(
         "PASSED: canonical result formatting; "
-        f"sections={expected_sections}; summary_fenced=true; mutation_fenced=true"
+        f"sections={expected_sections}; summary_fenced=true; "
+        f"mutation_section={mutation_number}; mutation_fenced=true"
     )
 
 
