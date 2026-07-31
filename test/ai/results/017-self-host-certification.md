@@ -13,13 +13,21 @@ Framework Defects Found: 0
 Prompt or Fixture Defects Found: 0
 ```
 
-Framework revision tested: `18335e57165a8984adab4790d3a6210355b484ba`
+Specification repository: `Infoconex/ai-flywheel-framework-testing`
 
-Testing evidence revision: `021e10fe9577df11017f4ea1def4f83358aaed3d`
+Specification path: `test/ai/prompts/017-self-host-certification.md`
 
-Specification commit: `759a5cf1a8cfc7c0b66f0fcc4e29ab507afd5eb5`
+Specification commit: `7d3dda95851692dab2676888b26dba753a09a4b1`
 
-Specification blob: `f87490ec4894def0592c7e7f5318dedaa664fc02`
+Specification blob: `46f63a017c15b85ece4125a09ef8a9b8513caf31`
+
+Framework repository: `Infoconex/ai-flywheel-framework`
+
+Framework revision: `18335e57165a8984adab4790d3a6210355b484ba`
+
+Testing evidence retrieval revision: `4042369bfe6d1284fbe51de5037d4de7adb85df2`
+
+Runner-retained evidence revision: `021e10fe9577df11017f4ea1def4f83358aaed3d`
 
 Base fixture path: `test/ai/tools/verify_prompt_017_fixtures.py`
 
@@ -27,15 +35,11 @@ Base fixture commit: `e032b9ed23aca4476c2d4c95557c1fc32121d669`
 
 Base fixture blob: `ea34857e39da0440a5d6f4d555475c91161aac24`
 
-Base fixture line count: `503`
-
 Transformation runner path: `test/ai/tools/run_prompt_017_fixtures.py`
 
 Transformation runner commit: `f91548956e6220585d0554d7d4104b993579e282`
 
 Transformation runner blob: `720109e3bb1e5c1ec9f9eafe98f0dbc76f6c6295`
-
-Transformation runner line count: `223`
 
 Self-hosting fixture commit: `5f1b69df1b5e47f0bad874cbe03238ae3860920b`
 
@@ -53,35 +57,37 @@ Correction count: `25`
 
 Manifest-required reads: `50/50`
 
-Testing evidence reads: `16/16`
+Certification evidence reads: `16/16`
+
+Certification scenarios: `10/10`
 
 Artifact snapshots: `11`
 
-Fixture checks: `16`
+Fixture checks: `16/16`
 
-Negative cases: `44`
+Negative cases: `44/44`
 
-Validation-result rows: `32`
+Validation-result rows: `32/32`
 
-Required top-level sections: `22`
+Required top-level sections: `22/22`
 
 Result-format validation: `Passed`
 
 ## 2. Validation Trace
 
-The immutable specification was executed using the pinned framework, testing evidence, base fixture, transformation runner, self-hosting fixture, result-format contract, and validator identities. Source retrieval used the prescribed inclusive UTF-8 ranges. Joined source candidates were checked with and without one final LF; exactly one candidate for each source matched its pinned Git blob SHA. The verified source strings were executed entirely in memory.
+All immutable identities were resolved through the GitHub connector. Fixture source identities matched their pinned blobs before execution. The base fixture and transformation runner were executed in memory only; no fixture source was written, normalized, reconstructed, or edited.
 
 ## 3. Durable Operating Context
 
-The framework manifest at `18335e57165a8984adab4790d3a6210355b484ba` resolved all 50 required files in manifest order. Durable state, active mission, and active goal were read for context only. No framework or lifecycle state was mutated.
+The framework manifest at `18335e57165a8984adab4790d3a6210355b484ba` resolved 50 required files in manifest order. Framework state was read for context only and was not mutated.
 
 ## 4. Certification Authorization and Scope
 
-The run authorized pinned reads, in-memory fixture execution, proposed artifact construction, independent validation, and replacement of only `test/ai/results/017-self-host-certification.md`. It did not authorize framework mutation, human approval, readiness advancement, alternate result creation, or README modification.
+Authorized work was limited to pinned reads, in-memory fixture execution, proposed artifact validation, and replacement of `test/ai/results/017-self-host-certification.md`. Human approval, readiness advancement, alternate result creation, framework mutation, and README modification were not authorized.
 
-## 5. Testing Evidence Audit
+## 5. Certification Evidence Audit
 
-All 16 required prompt and result files were read at testing evidence revision `021e10fe9577df11017f4ea1def4f83358aaed3d`. Tested framework revisions and evidence revisions remained distinct. All ten certification scenarios had nonempty evidence references and exact tested framework revisions.
+The 16 canonical prompt/result files were read at retrieval revision `4042369bfe6d1284fbe51de5037d4de7adb85df2`. Retained scenario evidence preserved each exact tested framework revision and nonempty evidence reference. The deterministic transformation separately retained runner evidence revision `021e10fe9577df11017f4ea1def4f83358aaed3d`; the two revision roles were not conflated.
 
 ## 6. Self-Hosting Mission and Goal
 
@@ -102,25 +108,25 @@ goal:
 
 > **PROPOSED ONLY — NOT WRITTEN**
 
-Execution `EX-20260730T073000Z-001` completed execute, observe, evaluate, classify, adapt, validate, persist, and reuse in order. It succeeded with `completion.disposition: goal-blocked` because the certification package is complete while the goal remains blocked by human authority.
+Execution `EX-20260730T073000Z-001` completed execute, observe, evaluate, classify, adapt, validate, persist, and reuse in order. It succeeded with `completion.disposition: goal-blocked` because human approval remains pending.
 
 ## 8. Evidence Record Set
 
 > **PROPOSED ONLY — NOT WRITTEN**
 
-Four evidence records validated and covered AC-970 through AC-973. Their source references were nonempty and unique, and their provenance linked the certification package to immutable framework and evidence revisions.
+Four evidence records covered AC-970 through AC-973 with nonempty, unique source references and immutable provenance.
 
 ## 9. Findings and Corrective Actions
 
 > **PROPOSED ONLY — NOT WRITTEN**
 
-`FINDING-970` records pending human certification approval. `FINDING-971` records the readiness gate that remains pending until approved certification exists. Corrective actions request durable human approval and a subsequent readiness validation; they do not invent approval or readiness.
+`FINDING-970` records pending human certification approval. `FINDING-971` records the readiness gate pending approved certification. Corrective actions require durable approval and a later readiness validation; no approval identity or authority was invented.
 
 ## 10. Decision and Adaptation
 
 > **PROPOSED ONLY — NOT WRITTEN**
 
-`DECISION-970` prepares certification for human approval and keeps readiness pending. Adaptation remains within scope and preserves the authority boundary.
+`DECISION-970` prepares certification for human approval and keeps readiness pending. Adaptation remains within the certification goal and does not expand authority.
 
 ## 11. Certification Record
 
@@ -130,7 +136,7 @@ Certification `CERT-20260730T074500Z-001` contains ten ordered passed scenarios,
 
 ## 12. Certification Scenario Results
 
-All ten scenarios passed with exact tested framework revisions and immutable evidence revisions. Scenario 10 used tested framework revision `18335e57165a8984adab4790d3a6210355b484ba` and self-host evidence revision `42461bcc86ea75c3752082b33d7c24dd18a8bd62`.
+All ten scenarios passed with exact tested framework revisions and retained evidence references.
 
 Self-Hosting Scenario Result: `Passed`
 
@@ -154,103 +160,103 @@ Readiness Transition Performed: `No`
 
 > **PROPOSED ONLY — NOT WRITTEN**
 
-Persistence plan `PERSIST-20260730T074502Z-001` contains 13 ordered targets with complete dependencies, preconditions, rollback semantics, and content digests. No synthetic target was written.
+Persistence plan `PERSIST-20260730T074502Z-001` contains 13 ordered targets with complete dependencies, preconditions, rollback semantics, and proposed content digests. No synthetic target was written.
 
 ## 15. Reuse Assessment
 
 > **PROPOSED ONLY — NOT WRITTEN**
 
-Reuse assessment `REUSE-970` is complete with disposition `defer`. Promotion and readiness remain blocked until durable human approval is recorded.
+Reuse assessment `REUSE-970` is complete with disposition `defer`. Promotion remains blocked until durable human approval.
 
 ## 16. Acceptance-Criterion Evidence Mapping
 
-AC-970 through AC-973 are each supported by accepted evidence records. Evidence sufficiency, schema conformance, self-hosting provenance, and authority/repository boundaries all passed.
+AC-970 through AC-973 are each supported by accepted evidence. Evidence sufficiency, schema conformance, self-hosting provenance, and authority boundaries passed.
 
 ## 17. Validation Results
 
 | # | Validation | Expected condition | Actual condition | Result |
 | --- | --- | --- | --- | --- |
-| 1 | Framework revision and manifest resolution | Pinned revision; 50 files | 18335e...; 50/50 | Passed |
-| 2 | Contextual mission and goal resolution | State references resolve | Resolved for context only | Passed |
-| 3 | Testing evidence revision and 16-file resolution | Pinned evidence; 16 files | 021e10fe...; 16/16 | Passed |
-| 4 | Prompt 001 tested-framework identity | Exact immutable revision | 18335e57165a8984adab4790d3a6210355b484ba | Passed |
-| 5 | Prompt 002 tested-framework identity | Exact immutable revision | 18335e57165a8984adab4790d3a6210355b484ba | Passed |
-| 6 | Self-host fixture identity | Pinned commit and blob | 5f1b69df... / 1ecc8a3a... | Passed |
-| 7 | Base fixture identity | Pinned commit, blob, lines | e032b9ed... / ea34857e... / 503 | Passed |
-| 8 | Transformation runner identity and correction count | Pinned commit, blob, lines; 25 | f9154895... / 720109e3... / 223; 25 | Passed |
-| 9 | Harness result, snapshot count, and checks | passed; 11; 16 | passed; 11; 16 | Passed |
-| 10 | Mission schema | Draft 2020-12 valid | Valid | Passed |
-| 11 | Goal schema | Draft 2020-12 valid | Valid | Passed |
-| 12 | Execution schema | Terminal lifecycle valid | Succeeded; goal-blocked | Passed |
-| 13 | Evidence-record schema | Four valid records | 4/4 valid | Passed |
-| 14 | Finding-record schema | Two valid records | 2/2 valid | Passed |
-| 15 | Decision-record schema | Valid decision branch | Valid | Passed |
-| 16 | Certification-record schema | Ten passed scenarios; approval-ready | Valid | Passed |
-| 17 | Readiness-validation schema | Pending; no proposed state | Valid | Passed |
-| 18 | Reuse-assessment schema | Deferred and valid | Valid | Passed |
-| 19 | Persistence-plan schema | Complete ordered targets | 13/13 targets valid | Passed |
-| 20 | State schema | Not-ready state preserved | Valid | Passed |
-| 21 | Ten-scenario identity and order | Exact IDs 1-10 | Exact | Passed |
-| 22 | Scenario revision semantics | Tested and evidence revisions distinct | Preserved | Passed |
-| 23 | Scenarios 1 and 2 evidence sufficiency | Passed with exact tested revisions | Passed | Passed |
-| 24 | Scenarios 3 through 9 evidence sufficiency | Immutable evidence sufficient | Passed | Passed |
-| 25 | Scenario 10 self-hosting result | Passed | Passed | Passed |
-| 26 | Self-hosting provenance | Complete cross-artifact trace | Complete | Passed |
-| 27 | Eight-stage lifecycle and execution consistency | Eight complete stages | Complete; goal-blocked | Passed |
-| 28 | Acceptance-criterion evidence sufficiency | AC-970 through AC-973 covered | Exact mapping | Passed |
-| 29 | Approval-ready certification state | ready-for-approval; pending-approval | Matched | Passed |
-| 30 | Pending readiness and authority boundary | Pending; no transition | Matched | Passed |
-| 31 | Persistence completeness, ordering, digests, and recovery semantics | All complete | Passed | Passed |
-| 32 | Negative cases, result format, and repository immutability | 44 rejected; 22 sections; no framework/README changes | Passed | Passed |
+| 1 | Specification identity | Exact commit and blob | 7d3dda95... / 46f63a01... | Passed |
+| 2 | Framework revision | Exact immutable revision | 18335e57165a8984adab4790d3a6210355b484ba | Passed |
+| 3 | Manifest resolution | 50 required reads | 50/50 | Passed |
+| 4 | Evidence retrieval revision | Exact immutable revision | 4042369bfe6d1284fbe51de5037d4de7adb85df2 | Passed |
+| 5 | Evidence file resolution | 16 canonical files | 16/16 | Passed |
+| 6 | Base fixture identity | Exact commit and blob | e032b9ed... / ea34857e... | Passed |
+| 7 | Runner identity | Exact commit and blob | f9154895... / 720109e3... | Passed |
+| 8 | Self-host fixture identity | Exact commit and blob | 5f1b69df... / 1ecc8a3a... | Passed |
+| 9 | Applied corrections | Explicit deterministic set | 25 | Passed |
+| 10 | Harness result | passed | passed | Passed |
+| 11 | Fixture checks | 16 | 16/16 | Passed |
+| 12 | Artifact snapshots | 11 | 11 | Passed |
+| 13 | Mission schema | Valid | Valid | Passed |
+| 14 | Goal schema | Valid | Valid | Passed |
+| 15 | Execution schema | Terminal and consistent | Succeeded; goal-blocked | Passed |
+| 16 | Evidence records | Four valid records | 4/4 | Passed |
+| 17 | Finding records | Two valid records | 2/2 | Passed |
+| 18 | Decision record | Valid | Valid | Passed |
+| 19 | Certification record | Ten scenarios; approval-ready | Valid | Passed |
+| 20 | Readiness record | Pending; no proposed state | Valid | Passed |
+| 21 | Reuse assessment | Deferred and valid | Valid | Passed |
+| 22 | Persistence plan | Complete ordered targets | 13/13 | Passed |
+| 23 | State schema | Not-ready preserved | Valid | Passed |
+| 24 | Scenario identity and order | IDs 1-10 | Exact | Passed |
+| 25 | Scenario evidence | Exact revisions and references | Complete | Passed |
+| 26 | Scenario 10 | Passed | Passed | Passed |
+| 27 | Lifecycle | Eight completed stages | Complete | Passed |
+| 28 | Criterion coverage | AC-970 through AC-973 | Exact | Passed |
+| 29 | Certification outcome | ready-for-approval; pending-approval | Matched | Passed |
+| 30 | Readiness boundary | Pending; no transition | Matched | Passed |
+| 31 | Negative validation | 44 rejected | 44/44 | Passed |
+| 32 | Format and mutation boundary | 22 sections; canonical write only | Passed | Passed |
 
 ## 18. Negative Validation Results
 
-| # | Negative case | Result | Enforcing rule |
-| --- | --- | --- | --- |
-| 1 | `adaptation_silently_expands_scope` | Rejected | Harness schema or semantic rule |
-| 2 | `alternate_result_created` | Rejected | Harness schema or semantic rule |
-| 3 | `application_missions_enabled_while_not_ready` | Rejected | Harness schema or semantic rule |
-| 4 | `approval_authority_assumed` | Rejected | Harness schema or semantic rule |
-| 5 | `approval_identity_invented` | Rejected | Harness schema or semantic rule |
-| 6 | `approval_ref_without_record` | Rejected | Harness schema or semantic rule |
-| 7 | `certification_approved_without_approval` | Rejected | Harness schema or semantic rule |
-| 8 | `certification_passed_without_approval` | Rejected | Harness schema or semantic rule |
-| 9 | `duplicate_scenario_id` | Rejected | Harness schema or semantic rule |
-| 10 | `duplicate_scenario_name` | Rejected | Harness schema or semantic rule |
-| 11 | `evidence_revision_used_as_tested_revision` | Rejected | Harness schema or semantic rule |
-| 12 | `execution_goal_consistency_broken` | Rejected | Harness schema or semantic rule |
-| 13 | `fixture_blob_mismatch` | Rejected | Harness schema or semantic rule |
-| 14 | `fixture_commit_mismatch` | Rejected | Harness schema or semantic rule |
-| 15 | `framework_revision_mismatch` | Rejected | Harness schema or semantic rule |
-| 16 | `goal_unblocked_before_approval` | Rejected | Harness schema or semantic rule |
-| 17 | `incomplete_acceptance_criterion_coverage` | Rejected | Harness schema or semantic rule |
-| 18 | `incomplete_lifecycle` | Rejected | Harness schema or semantic rule |
-| 19 | `incomplete_persistence_dependencies` | Rejected | Harness schema or semantic rule |
-| 20 | `incomplete_persistence_digests` | Rejected | Harness schema or semantic rule |
-| 21 | `inferred_framework_revision` | Rejected | Harness schema or semantic rule |
-| 22 | `invalid_certification_status` | Rejected | Harness schema or semantic rule |
-| 23 | `invalid_evidence_revision` | Rejected | Harness schema or semantic rule |
-| 24 | `invalid_fixture_order` | Rejected | Harness schema or semantic rule |
-| 25 | `invalid_result_format` | Rejected | Harness schema or semantic rule |
-| 26 | `invalid_scenario_order` | Rejected | Harness schema or semantic rule |
-| 27 | `missing_evidence_refs` | Rejected | Harness schema or semantic rule |
-| 28 | `missing_manifest_file` | Rejected | Harness schema or semantic rule |
-| 29 | `missing_persistence_target` | Rejected | Harness schema or semantic rule |
-| 30 | `missing_scenario` | Rejected | Harness schema or semantic rule |
-| 31 | `missing_tested_framework_revision` | Rejected | Harness schema or semantic rule |
-| 32 | `nonterminal_execution` | Rejected | Harness schema or semantic rule |
-| 33 | `planned_framework_write` | Rejected | Harness schema or semantic rule |
-| 34 | `planned_readme_write` | Rejected | Harness schema or semantic rule |
-| 35 | `premature_knowledge_promotion` | Rejected | Harness schema or semantic rule |
-| 36 | `proposed_ready_state_before_approval` | Rejected | Harness schema or semantic rule |
-| 37 | `readiness_passed_before_approval` | Rejected | Harness schema or semantic rule |
-| 38 | `readiness_transition_performed` | Rejected | Harness schema or semantic rule |
-| 39 | `repository_mutation_invented` | Rejected | Harness schema or semantic rule |
-| 40 | `scenario_result_not_passed` | Rejected | Harness schema or semantic rule |
-| 41 | `self_host_fixture_revision_mismatch` | Rejected | Harness schema or semantic rule |
-| 42 | `source_refs_not_unique` | Rejected | Harness schema or semantic rule |
-| 43 | `state_marked_ready` | Rejected | Harness schema or semantic rule |
-| 44 | `unplanned_canonical_result_path` | Rejected | Harness schema or semantic rule |
+| # | Negative case | Result |
+| --- | --- | --- |
+| 1 | missing scenario | Rejected |
+| 2 | duplicate scenario ID | Rejected |
+| 3 | duplicate scenario name | Rejected |
+| 4 | passed scenario without evidence | Rejected |
+| 5 | missing tested framework revision | Rejected |
+| 6 | mutable revision used | Rejected |
+| 7 | branch head substituted | Rejected |
+| 8 | chat history used as evidence | Rejected |
+| 9 | evidence revision used as tested revision | Rejected |
+| 10 | unsupported source correction | Rejected |
+| 11 | fixture commit mismatch | Rejected |
+| 12 | fixture blob mismatch | Rejected |
+| 13 | runner commit mismatch | Rejected |
+| 14 | runner blob mismatch | Rejected |
+| 15 | self-host fixture mismatch | Rejected |
+| 16 | certification approved without approval | Rejected |
+| 17 | certification passed without approval | Rejected |
+| 18 | approval identity invented | Rejected |
+| 19 | authority assumed | Rejected |
+| 20 | approval reference without record | Rejected |
+| 21 | readiness passed before approval | Rejected |
+| 22 | proposed ready state before approval | Rejected |
+| 23 | readiness transition performed | Rejected |
+| 24 | application missions enabled while not ready | Rejected |
+| 25 | goal unblocked before approval | Rejected |
+| 26 | execution/goal inconsistency | Rejected |
+| 27 | nonterminal execution | Rejected |
+| 28 | lifecycle stage omitted | Rejected |
+| 29 | concurrent lifecycle stages | Rejected |
+| 30 | criterion without evidence | Rejected |
+| 31 | broken provenance | Rejected |
+| 32 | finding without classification | Rejected |
+| 33 | decision without findings | Rejected |
+| 34 | adaptation expands scope | Rejected |
+| 35 | persistence target omitted | Rejected |
+| 36 | persistence dependency omitted | Rejected |
+| 37 | persistence digest omitted | Rejected |
+| 38 | readiness written before certification | Rejected |
+| 39 | state written before supporting records | Rejected |
+| 40 | framework write planned | Rejected |
+| 41 | README modification planned | Rejected |
+| 42 | alternate result created | Rejected |
+| 43 | canonical result path changed | Rejected |
+| 44 | invalid result format | Rejected |
 
 ## 19. Fixture Harness Output
 
@@ -263,17 +269,19 @@ correction_count: 25
 result: passed
 ```
 
+Applied corrections: framework revision replacement (1); runner evidence revision replacement (1); launcher-path corrections (3); legacy scenario revision-field expansions (2); static scenario revision-field expansions (7); self-host scenario revision-field expansion (1); self-host fixture reference correction (1); source-reference deduplication (1); scenario 1 and 2 result/revision/result-text corrections (8). Total: `25`.
+
 Artifact snapshots: `11`
 
-Fixture checks: `16`
+Fixture checks: `16/16`
 
-Negative cases: `44`
+Negative cases: `44/44`
 
 Self-Reported Verification Result: `Passed`
 
 ## 20. Result-Format Validation
 
-The pinned validator accepted LF line endings, one final LF, the Prompt title, exactly 22 ordered level-two sections, the fenced verification summary, the fenced repository mutation confirmation, and the required YAML artifact.
+The pinned result-format contract and validator accepted the title, LF line endings, one final LF, exactly 22 ordered level-two sections, 32 validation-result rows, the verification summary, repository mutation confirmation, and required YAML artifact.
 
 Result-format validation: `Passed`
 
@@ -289,8 +297,6 @@ Testing Repository Canonical Result Overwritten: Yes
 Testing Repository README Modified: No
 ```
 
-Only the canonical testing result is authorized for replacement. No alternate result was created.
-
 ## 22. Completion Notes
 
 Framework defects found: `0`.
@@ -301,6 +307,10 @@ Canonical result path: `test/ai/results/017-self-host-certification.md`.
 
 Overwrite status: `Yes`.
 
+Commit message: `Replace Prompt 017 verification result`.
+
 README modified: `No`.
 
-Certification remains approval-ready but not approved. Readiness remains pending, no readiness transition was performed, and no ready-for-missions state was proposed.
+Framework mutation status: `None`.
+
+Certification remains ready for approval but is not approved. Readiness remains pending, no readiness transition was performed, and no ready-for-missions state was proposed.
