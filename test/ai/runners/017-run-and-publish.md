@@ -40,7 +40,7 @@ Read these 16 files at testing evidence revision `4042369bfe6d1284fbe51de5037d4d
 15. `test/ai/prompts/016-run-representative-proving-mission.md`
 16. `test/ai/results/016-run-representative-proving-mission.md`
 
-These files provide the canonical evidence for certification scenarios 1 through 9. Preserve each retained result's exact tested framework revision and evidence references. Do not infer missing information.
+These files provide the canonical evidence for certification scenarios 1 through 9. Every scenario evidence revision must equal the pinned testing evidence revision. Do not retain or report an older transformation-embedded evidence revision.
 
 ## Deterministic fixture sources
 
@@ -53,13 +53,22 @@ Base fixture blob: ea34857e39da0440a5d6f4d555475c91161aac24
 Transformation runner path: test/ai/tools/run_prompt_017_fixtures.py
 Transformation runner commit: f91548956e6220585d0554d7d4104b993579e282
 Transformation runner blob: 720109e3bb1e5c1ec9f9eafe98f0dbc76f6c6295
+Current-evidence wrapper path: test/ai/tools/run_prompt_017_current_evidence.py
+Current-evidence wrapper commit: 04082c4fe427ecc20a297cb6a241f7f71a57ab8a
+Current-evidence wrapper blob: 1cf1b52edd4ce876dd4f74cb0d2daa8db14fd9f3
 Self-hosting fixture commit: 5f1b69df1b5e47f0bad874cbe03238ae3860920b
 Self-hosting fixture blob: 1ecc8a3adb14c09e9c804a3f2f2b70f60c0b63d0
 ```
 
-Retrieve each source through the GitHub connector and verify its exact blob identity before execution. Execute only in memory. Do not write, normalize, reconstruct, or silently edit fixture source.
+Retrieve all three Python sources through the GitHub connector and verify their exact blobs. Execute the wrapper in memory and call its `run(base_source, transformation_source)` function. The wrapper must make exactly one evidence-revision correction and return:
 
-The transformation may supply the runner-pinned framework revision, testing evidence revision, and current retained evidence identities. Every applied correction must be explicitly enumerated and counted. Any unsupported or ambiguous source change is a prompt-or-fixture defect and prevents a passing verification.
+```text
+evidence_revision: 4042369bfe6d1284fbe51de5037d4de7adb85df2
+execution_mode: in-memory connector source with current-evidence wrapper
+wrapper_correction_count: 1
+```
+
+The underlying transformation must still report its 25 deterministic corrections. Unsupported or ambiguous changes are prompt-or-fixture defects and prevent a passing verification.
 
 ## Completion requirements
 
@@ -105,4 +114,4 @@ Do not create alternate results or modify `test/ai/README.md`. Commit only the c
 Replace Prompt 017 verification result
 ```
 
-The final response must report every pinned identity, fixture execution and correction results, outcome distinction, defect counts, required counts, format result, canonical path, overwrite status, result commit, commit message, `README modified: No`, framework mutation status, and notes.
+The final response must report every pinned identity, the single canonical testing evidence revision, fixture execution and correction results, outcome distinction, defect counts, required counts, format result, canonical path, overwrite status, result commit, commit message, `README modified: No`, framework mutation status, and notes.
