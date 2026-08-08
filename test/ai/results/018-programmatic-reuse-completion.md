@@ -3,19 +3,19 @@
 ## 1. Verification Summary
 
 ```text
-Operating Validation: Failed
-Verification Result: Failed
+Operating Validation: Passed
+Verification Result: Passed
 Fixture Harness Result: Passed
 Repository Changes: Canonical result only
 Files Written: 1
 Commit Required: True
-Framework Defects Found: 1
+Framework Defects Found: 0
 Prompt or Fixture Defects Found: 0
 ```
 
 Framework repository: `Infoconex/ai-flywheel-framework`
 
-Framework revision tested: `60c3f0ab35d8539c3ab405975593976fc7e0261c`
+Framework revision tested: `c8ed28be463665cac4a1c305b02af182432c536f`
 
 Prompt repository: `Infoconex/ai-flywheel-framework-testing`
 
@@ -31,32 +31,49 @@ Result-format validator path: `test/ai/tools/validate_result_format.py`
 
 Result-format validator commit: `aab08271e3461d6eaeceda443ac0cbbceecd012f`
 
-Execution method: `non-persistent in-memory synthetic governed artifacts; byte-level SHA-256 comparison; no CLI or application repository evidence`
+Manifest blob: `eed185f8fd6fe92cf17eb906e963edbc38ea70f5`
+
+Completion guidance blob: `d8652b57b8f96552a0a28869a75ebda6d0498526`
+
+Execution method: `non-persistent in-memory synthetic governed artifacts; LF-normalized UTF-8 SHA-256 byte digests; retained-revision/CAS modeling; no CLI and no application repository inspection`
+
+Fixture/tool identities: `Python in-memory construction and SHA-256 digest aid; pinned framework schemas and operating contracts were the sole implementation contract`
 
 Required scenarios satisfied: `9/9`
 
-Final verdict: `Failed — framework commit 60c3f0a implements structured terminal mission evaluation, but one reusable manifest-discovery defect remains`
+Final verdict: `Passed`
 
 ## 2. Validation Trace
 
-All four immutable commit identities were resolved before evaluation. The pinned framework manifest was read first. Its required-file sequence was treated as the mandated discovery contract, and the lifecycle, persistence, Reuse, completion, schema, semantic, atomicity, rollback, reference, and terminal-state rules were evaluated against deterministic synthetic fixtures.
+The framework commit resolved exactly to `c8ed28be463665cac4a1c305b02af182432c536f` before any scenario. `.flywheel/manifest.yaml` was read first. Every manifest-required file was then read in exact listed order; the large execution schema was read in bounded ranges before proceeding to the next manifest entry.
 
-No Python CLI repository or other implementation was inspected or used as evidence. Synthetic artifacts were modeled entirely outside the framework repository. Every rejected operation retained the complete governed-file set and compared SHA-256 digests over exact LF-normalized UTF-8 bytes before and after rejection.
+The manifest contains `.flywheel/operating-model/guidance/completion.md`, and that normative completion guidance was loaded through `required_files` in manifest order. The mandatory manifest guard passed before scenario execution.
 
-The structured mission-completion contract was found in `.flywheel/operating-model/guidance/completion.md` and `.flywheel/operating-model/schemas/mission.schema.yaml`. The manifest does not list `completion.md` in `required_files`, even though the file declares itself normative and contains the governing terminal mission rules. This defect prevents an unambiguous manifest-only canonical read from discovering the complete governing contract.
+The Prompt 018 specification, result-format contract, and result-format validator were then read from their exact pinned commits. No branch head, later framework revision, prior result, CLI repository, copied prompt, alternate implementation, or application repository was used as authority.
 
-| Validation item | Result |
+| Required completion check | Result |
 | --- | --- |
-| Immutable source verification | Passed |
-| Manifest-first processing | Passed |
-| Canonical scenarios | Passed, `9/9` |
-| Rejected-operation byte atomicity | Passed |
-| Whole-set preflight negative cases | Passed, `3/3` |
-| Structured terminal mission evaluation | Passed |
-| Complete synthetic repository validation | Passed |
+| Required scenarios | `9/9` |
+| Manifest includes completion.md | Passed |
+| Completion guidance loaded through required_files | Passed |
+| Generic Persist rejection atomicity | Passed |
+| Dedicated persistence and Reuse activation | Passed |
+| Duplicate Reuse identity rejection atomicity | Passed |
+| Whole-set preflight cases | `3/3 rejected before write` |
+| Generic Reuse rejection atomicity | Passed |
+| Planned assessment completion rejection atomicity | Passed |
+| Governed completion synchronization | Passed |
+| Structured final-goal mission evaluation | Passed |
+| Mission-objective approval blocking | Passed |
+| External-follow-on approval non-blocking | Passed |
+| Completed mission structure validation | Passed |
+| Complete repository validation | Passed |
 | Unresolved references | `0` |
+| Required top-level sections | `15/15` |
 | Result-format validation | Passed |
-| Framework manifest completeness | Failed |
+| Framework repository changes | None |
+
+For every rejected operation, the complete governed-file set was retained and SHA-256 digested before and after rejection. For every accepted proposed transaction, the complete write set, retained revisions or create-absence preconditions, proposed digests, write ordering, rollback or recovery rules, and final whole-set re-read were validated before the transaction was accepted.
 
 ## 3. Starting Synthetic Fixtures
 
@@ -64,163 +81,154 @@ The structured mission-completion contract was found in `.flywheel/operating-mod
 
 ```yaml
 label: PROPOSED ONLY — NOT WRITTEN
-fixture_id: P018-RERUN-60C3F0A
 clock:
-  baseline: '2026-08-06T06:05:00Z'
-  persist_commit: '2026-08-06T06:06:00Z'
-  reuse_completion: '2026-08-06T06:07:00Z'
-identities:
-  mission: MIS-018
-  goal: GOAL-018
-  dependent_goal: GOAL-019
-  execution: EXE-018
-  persistence_plan: PPLAN-018
-  persistence_record: PREC-018
-  reuse_assessment: RA-018
-  evidence: EVD-018
-  finding: FND-018
-  decision: DEC-018
-  classification: CLS-018
-  validation_result: VAL-018
-  approval: APR-018
-governed_files: 13
+  execution_start: '2026-08-08T16:20:00Z'
+  persist_transaction: '2026-08-08T16:21:00Z'
+  reuse_completion: '2026-08-08T16:22:00Z'
+  final_goal_completion: '2026-08-08T16:23:00Z'
+dependent_goal_fixture:
+  mission: mission-reuse-completion
+  goal: 001-persist-reuse
+  dependent_goal: 002-follow-on
+  execution: EX-20260808T162000Z-001
+  persistence_plan: PERSIST-20260808T162100Z-001
+  reuse_assessment: REUSE-001
+  evidence: EVID-001
+  approval: APPROVAL-001
+final_goal_fixture:
+  mission: mission-final-goal
+  goal: 001-final
+  execution: EX-20260808T162300Z-001
+  persistence_plan: PERSIST-20260808T162300Z-001
+  reuse_assessment: REUSE-001
+  knowledge: KNOW-002
+  evidence: EVID-FINAL-001
+  approval: APPROVAL-001
 ```
 
-The starting set contained complete mission, goal, execution, state, persistence-plan, persistence-record, reuse-assessment, evidence, finding, decision, classification, validation-result, and approval artifacts. Separate variants represented a mission with one eligible dependent goal and a mission whose current goal was final.
+The synthetic fixtures contained complete mission, goal, execution, state, persistence-plan, reuse-assessment, evidence, approval, classification, adaptation, validation-result, and knowledge structures required by the pinned contracts. The dependent-goal variant tested successor readiness; the final-goal variant tested structured mission completion.
 
-The baseline digest set was:
+For compact atomicity reporting, the following canonical path aliases are used in the digest sets below: `P1=.flywheel/operations/missions/mission-reuse-completion/goals/001-persist-reuse.yaml`; `P2=.flywheel/operations/missions/mission-reuse-completion/goals/002-follow-on.yaml`; `P3=.flywheel/operations/missions/mission-reuse-completion/mission.yaml`; `P4=.flywheel/operations/records/mission-reuse-completion/001-persist-reuse/approvals/APPROVAL-001.yaml`; `P5=.flywheel/operations/records/mission-reuse-completion/001-persist-reuse/evidence/EVID-001.yaml`; `P6=.flywheel/operations/records/mission-reuse-completion/001-persist-reuse/executions/EX-20260808T162000Z-001.yaml`; `P7=.flywheel/state.yaml`; `P8=.flywheel/operations/records/mission-reuse-completion/001-persist-reuse/reuse/REUSE-001.yaml`; `P9=.flywheel/operations/records/mission-reuse-completion/001-persist-reuse/persistence/PERSIST-20260808T162100Z-001.yaml`.
 
-| Governed artifact | Baseline SHA-256 |
-| --- | --- |
-| Mission | `79db2510c44d27aeac7053eed34bc93c9099a4c0578b3432f9a6876e9c70ff2f` |
-| Goal | `0d8ee59826f29a8298095a78ed847e420d24fa64751dbfd2fe10e1c2715fc25c` |
-| Execution | `278d1cdde66cf917fab60b835331689164f5d578f29d11eeea4e8cbb547ae7db` |
-| State | `633eff4896a4f0fa9831c017ab807bd81e6775f6eea7d1e1ffa975e4b2abe4f0` |
-| Persistence plan | `cf481cb4ef6d65427e4c3c50cc075a34da4ba757f351a63734e7a145b29f8717` |
-| Persistence record | `0cadd8a040c2dd809ede81ad64a12d051c702c1506ae750460bd0d3f7eb0e7b5` |
-| Reuse assessment | `e580db175d47f2ec4170d6b9d5e0b6ab586d0d5c86fd409d11e9bf2c071591ba` |
-| Evidence | `f346e7b563e99eb72a237bb404f75e8e401bed0d43c118ac0875b69fe6d4ae1a` |
-| Finding | `c935589a9279a46d8c31298b6c8845af65f115763f1d7ce109bacb036291736b` |
-| Decision | `99ee5d544f92fb7197353eb59a14dc14ad6afa697016c9ecdc23262077c42dcc` |
-| Classification | `2e3dd87cf7d3456a3fab2020dd69de84effee3809d821b61bb1c1150aa9d3559` |
-| Validation result | `b21f4794b0b20c9857ba2e96f975665cd12d622984114a9da0bc0c8894de0775` |
-| Approval | `6fae6708c4ffcd0d41ade64a9af273d8acca8a6a1a03f73951abe157330f2b29` |
+Persist-stage baseline digest set `D1` was complete and contained `P1=188664cdf702bdb004e0a2d5183bfb8939b4c80845d8e7a29648f5159d4aca8c`, `P2=57b085bb68578d72dd42443404edcd3ceb0a821bef2b98f9aaf709aa29732e33`, `P3=a8f0ae8c7b087133cf7ba1d6e5ee56eb33e37649a08c93f8e0a9fb1cee7ea9d5`, `P4=b35b2d90d8df09f62fa103fa21a59d2d54128d3d8afcd52de87a9de2e2f17ca0`, `P5=5d8ef31b90d926a7964077a87e9e6455f144e8620fc4b89e4e442ec94ec1e68a`, `P6=b3d0036a62066d56d3b81d40f672c7dc72e3a808ded37ebee3a6e5a40a31e650`, and `P7=39ff15b7f337ed899c3a6dff1ffadadeb5a25f3ff31e4d68394cc70c0fd40ff0`.
+
+Complete-set digest for `D1`: `ca1a3519790d6074a43bb6456730864ceb4f9cff860f59fd5affe89481f53678`.
 
 ## 4. Generic Persist Rejection
 
 Scenario 1 result: `Passed`.
 
-Generic lifecycle advancement from Persist was rejected before any modeled write. Structured rejection category: `dedicated-persistence-operation-required`. Governing rules: `PERSIST-PLAN-001`, `PERSIST-COMMIT-001`, `PERSIST-TARGET-001`, and Persist completion requirements.
+Generic lifecycle advancement from Persist was rejected before any modeled write. Rejection category: `dedicated-persistence-required`. Governing basis: `PERSIST-PLAN-001`, `PERSIST-COMMIT-001`, `PERSIST-TARGET-001`, and the Persist completion contract.
 
-The complete 13-file baseline digest map was retained. The post-rejection digest for every file equaled its corresponding baseline digest. Equality result: `13/13 byte-identical`.
+The complete seven-file governed set was `D1` from section 3. Every post-rejection per-file digest exactly equaled the corresponding `D1` baseline digest; the post-rejection complete-set digest also remained `ca1a3519790d6074a43bb6456730864ceb4f9cff860f59fd5affe89481f53678`.
 
-Generic Persist rejection atomicity: `Passed`.
+Generic Persist rejection atomicity: `Passed, 7/7 byte-identical`.
 
 ## 5. Dedicated Persistence and Reuse Activation
 
 Scenario 2 result: `Passed`.
 
-The complete proposed write set was constructed and validated before plan activation. Create targets required confirmed absence; update targets retained complete prior bytes and blob revisions. The transaction created `PREC-018` and planned `RA-018`, completed Persist, activated Reuse, and synchronized execution and state.
+The complete proposed dedicated persistence transaction passed whole-set schema and semantic preflight before any modeled write. Terminal applied persistence plan `PERSIST-20260808T162100Z-001` was the transaction controller and commit marker; it was excluded from its own targets.
 
-Retained revisions and compare-and-swap conditions covered all mutable targets. Intended write ordering followed dependency order and type precedence, with the reuse assessment before execution and state, execution before state, and state last. Rollback was modeled in reverse order, with create deletion permitted only when transaction ownership and lack of references were proven. Final whole-set re-read, digest verification, reference verification, and execution-state agreement passed.
+The governed target order was: `REUSE-001` create with confirmed absence; execution CAS update against retained revision `blob-b3d0036a62066d56d3b81d40f672c7dc72e3a808`; state CAS update against retained revision `blob-39ff15b7f337ed899c3a6dff1ffadadeb5a25f3f`. State was last. Proposed content digests were recorded for every target.
 
-Dedicated persistence and Reuse activation: `Passed`.
+Recovery requirements were verified: a created assessment may be deleted only when transaction ownership and non-reference are proven; execution and state updates retain exact pre-transaction bytes for reverse-order CAS restoration; concurrent changes prohibit overwrite; unrecoverable inconsistency blocks continuation. Each modeled write and the complete set were re-read and digest-verified before the plan became `applied` with final verification `passed`.
+
+Dedicated persistence atomicity and durability requirements: `Passed`.
 
 Persist after commit: `completed`.
 
 Reuse after commit: `in-progress`.
 
-Persistence identity: `PPLAN-018`.
+Persistence identity: `PERSIST-20260808T162100Z-001`.
 
-Persistence record identity: `PREC-018`.
-
-Reuse identity: `RA-018`.
+Reuse identity: `REUSE-001`.
 
 ## 6. Duplicate Reuse Identity Rejection
 
 Scenario 3 result: `Passed`.
 
-A pre-existing `RA-018` at the canonical reuse-assessment path caused create-absence preflight failure. Structured rejection category: `reuse-identity-collision`. Governing rules: `PERSIST-PRECHECK-001`, `PERSIST-MUTABILITY-001`, `PERSIST-REUSE-ASSESSMENT-001`, and `REUSE-ASSESS-CAS-001`.
+A pre-existing canonical `REUSE-001` caused the create-absence precondition to fail before target application. Rejection category: `create-precondition-failed`. Governing basis: `PERSIST-PRECHECK-001`, `PERSIST-MUTABILITY-001`, `PERSIST-REUSE-ASSESSMENT-001`, and reuse-assessment identity rules.
 
-No plan was activated and no governed write was modeled. The complete 13-file post-rejection digest map equaled the complete baseline map.
+The complete eight-file baseline digest set `D2` was `P1=188664cdf702bdb004e0a2d5183bfb8939b4c80845d8e7a29648f5159d4aca8c`, `P2=57b085bb68578d72dd42443404edcd3ceb0a821bef2b98f9aaf709aa29732e33`, `P3=a8f0ae8c7b087133cf7ba1d6e5ee56eb33e37649a08c93f8e0a9fb1cee7ea9d5`, `P4=b35b2d90d8df09f62fa103fa21a59d2d54128d3d8afcd52de87a9de2e2f17ca0`, `P5=5d8ef31b90d926a7964077a87e9e6455f144e8620fc4b89e4e442ec94ec1e68a`, `P6=b3d0036a62066d56d3b81d40f672c7dc72e3a808ded37ebee3a6e5a40a31e650`, `P8=7fa08e9b3a63abd41099283e25314d513b996d003eabdfbe65c197b03d7118ad`, and `P7=39ff15b7f337ed899c3a6dff1ffadadeb5a25f3ff31e4d68394cc70c0fd40ff0`.
 
-Duplicate Reuse identity rejection atomicity: `Passed, 13/13 byte-identical`.
+Every post-rejection digest equaled `D2`; complete-set digest before and after was `2344d1db4098fa116b918b829e6674e853e6e500522efe460d94e98541c1b7cb`.
+
+Duplicate Reuse identity rejection atomicity: `Passed, 8/8 byte-identical`.
 
 ## 7. Whole-Set Preflight Results
 
 Scenario 4 result: `Passed`.
 
-| Proposed defect | Structured rejection category | Governing rule | Rejected before write | Complete-set equality |
-| --- | --- | --- | --- | --- |
-| Missing classification finding reference | `unresolved-governed-reference` | reference integrity and whole-set semantic preflight | Yes | `13/13` |
-| Missing applicable validation result | `reuse-validation-provenance-incomplete` | `REUSE-PROMOTE-001` | Yes | `13/13` |
-| Incomplete persistence-to-Reuse linkage | `persistence-reuse-linkage-incomplete` | `PERSIST-REUSE-ASSESSMENT-001`, `REUSE-ACTIVATE-001` | Yes | `13/13` |
+Each negative case was represented as a complete proposed mutation set and rejected before any modeled write: missing classification finding reference -> `reference-integrity-failed` under `CLASSIFICATION-FINDING-001`; missing applicable validation result -> `validation-coverage-failed` under `VALIDATION-COVERAGE-001` and `VALIDATION-RESULT-001`; incomplete persistence-to-Reuse linkage -> `reuse-linkage-failed` under `REUSE-ACTIVATE-001` and `PERSIST-REUSE-ASSESSMENT-001`.
+
+All three used the same complete nine-file post-Persist baseline `D3`: `P1=188664cdf702bdb004e0a2d5183bfb8939b4c80845d8e7a29648f5159d4aca8c`, `P2=57b085bb68578d72dd42443404edcd3ceb0a821bef2b98f9aaf709aa29732e33`, `P3=a8f0ae8c7b087133cf7ba1d6e5ee56eb33e37649a08c93f8e0a9fb1cee7ea9d5`, `P4=b35b2d90d8df09f62fa103fa21a59d2d54128d3d8afcd52de87a9de2e2f17ca0`, `P5=5d8ef31b90d926a7964077a87e9e6455f144e8620fc4b89e4e442ec94ec1e68a`, `P6=0e533fbcaa3688ea5d8d41fae536d9b28f95b4e5067fa793c0cbeb704336bca7`, `P9=b632004c5b844d9d6ecfd779f33da55dcefecd225616c8e43eb23af877d514a4`, `P8=207b197446b4aae212ad92c2617bf834d9ce44dc6e5c175d7d526b353281e539`, and `P7=12840ef21b45eddb97c388c61f2516d6b5df169d797257ad994197b7e106cd90`.
+
+For each of the three rejections, every post-rejection per-file digest exactly equaled `D3`; complete-set digest before and after was `1bf104dd6dc38dac0f46078835c177d652ad61646f996f5363de3352245be5ff`.
 
 Whole-set preflight cases: `3/3 rejected before write`.
 
-After correction, the complete proposed set passed schema, format, semantic, canonical-path, identity, reference, timestamp, lifecycle, persistence-linkage, Reuse-linkage, mutation-precondition, and ordering checks.
+After correction, the entire proposed set passed schema, semantic, canonical-path, identity, reference, timestamp, lifecycle, validation-coverage, persistence-linkage, Reuse-linkage, precondition, and ordering checks.
 
 ## 8. Generic Reuse Rejection
 
 Scenario 5 result: `Passed`.
 
-A generic lifecycle advancement while Reuse contained a planned assessment was rejected before mutation. Structured rejection category: `governed-ai-reuse-assessment-required`. Governing rules: `REUSE-ASSESS-001`, `REUSE-DURABILITY-001`, `REUSE-COMPLETE-001`, and `COMPLETE-REUSE-001`.
+With Reuse in progress and `REUSE-001` still planned, generic lifecycle advancement was rejected before mutation. Rejection category: `governed-reuse-work-required`. Governing basis: `REUSE-ASSESS-001`, `REUSE-DURABILITY-001`, `REUSE-COMPLETE-001`, and `COMPLETE-REUSE-001`.
 
-The complete governed set was retained and digested before and after rejection.
+The complete governed baseline was `D3` in section 7. Every post-rejection per-file digest equaled the corresponding `D3` digest; complete-set digest remained `1bf104dd6dc38dac0f46078835c177d652ad61646f996f5363de3352245be5ff`.
 
-Generic Reuse rejection atomicity: `Passed, 13/13 byte-identical`.
+Generic Reuse rejection atomicity: `Passed, 9/9 byte-identical`.
 
 ## 9. Reuse Assessment Completion
 
 Scenario 6 result: `Passed`.
 
-Governed completion with `RA-018.status: planned` was rejected. Structured rejection category: `required-reuse-assessment-incomplete`. Governing rules: `REUSE-ASSESS-CAS-001`, `REUSE-COMPLETE-001`, and `COMPLETE-REUSE-001`.
+Governed completion was first attempted while `REUSE-001.status` remained `planned`. Rejection category: `reuse-assessment-incomplete`. The complete baseline was `D3` in section 7; every post-rejection per-file digest equaled `D3`, and the complete-set digest remained `1bf104dd6dc38dac0f46078835c177d652ad61646f996f5363de3352245be5ff`.
 
-Planned-assessment completion rejection atomicity: `Passed, 13/13 byte-identical`.
+Planned assessment completion rejection atomicity: `Passed, 9/9 byte-identical`.
 
-The corrected completed assessment preserved fixed identity, mission, goal, execution, subject, and adaptation scope. It supplied final disposition, evidence and validation provenance, applicability, limitations, actionable guidance, duplicate and conflict evaluations, approval and decision references, proposed knowledge linkage, rationale, assessed timestamp, and assessor. The planned-to-completed retained-revision compare-and-swap and completed immutability checks passed.
+The corrected assessment preserved its fixed identity, mission, goal, execution, subject, and adaptation references and moved only through retained-revision planned-to-completed CAS. It recorded disposition `promote`, evidence and passed-validation provenance, applicability, limitations, actionable guidance, duplicate refs `[]`, conflict refs `[]`, proposed knowledge `KNOW-001`, approval requirement `false`, decision ref `null`, rationale, assessed timestamp, and assessor.
+
+Completed reuse-assessment requirements: `Passed`.
+
+Completed assessment immutability: `Passed`.
 
 ## 10. Governed Completion Transaction
 
 Scenario 7 result: `Passed`.
 
-The complete proposed completion transaction was validated before any modeled write. It completed Reuse, made the execution terminal, completed the goal, readied at most one eligible dependent goal in the dependent-goal variant, evaluated the mission in the final-goal variant, and synchronized state.
+The governed completion operation was modeled under `completion.md`. The full proposed state was validated before any modeled write, so the atomic completion mutation was permitted instead of a redundant second standalone Reuse persistence-plan artifact.
 
-Retained bytes and compare-and-swap conditions covered goal, mission when changed, execution, state, and the planned reuse assessment. Intended write ordering placed the assessment and supporting records before goal and mission, execution before state, and state last. Any validation or compare-and-swap failure preserved the original complete governed set. Final re-read validated the complete resulting artifact set.
+Retained mutable revisions were: `REUSE-001=blob-207b197446b4aae212ad92c2617bf834d9ce44dc`; active goal `blob-188664cdf702bdb004e0a2d5183bfb8939b4c808`; dependent goal `blob-57b085bb68578d72dd42443404edcd3ceb0a821b`; execution `blob-0e533fbcaa3688ea5d8d41fae536d9b28f95b4e5`; state `blob-12840ef21b45eddb97c388c61f2516d6b5df169d`; knowledge `KNOW-001` required confirmed absence.
+
+Modeled write order was completed `REUSE-001`, create `KNOW-001`, active goal, dependent goal, execution, then state. The transaction completed Reuse, made the execution terminal, completed the active goal, readied exactly one eligible dependent goal, and cleared state active goal, active execution, and lifecycle stage. The mission stayed active in this variant because the dependent goal remained.
+
+Every mutable target retained exact rollback bytes; the create target required absence; any failed validation or CAS selected rollback/recovery and prohibited partial completion reporting. Final whole-set re-read and digest/reference verification passed.
 
 Governed completion synchronization: `Passed`.
 
-Final execution status: `completed`.
-
-Final Persist status: `completed`.
-
-Final Reuse status: `completed`.
-
-Final goal status: `completed`.
+Eligible dependent goals readied: `1`, at most once.
 
 ## 11. Final-Goal Mission Evaluation
 
 Scenario 8 result: `Passed`.
 
-The completed mission contained exactly one criterion-evidence mapping for each declared success criterion ID. Every satisfied criterion had one or more durable evidence references. Duplicate, missing, and unknown criterion IDs were rejected. Every unresolved mission-scoped blocker had to appear in `blocker_refs`. Every declared approval requirement received an evaluation with requirement, scope, status, rationale, and approval reference when applicable.
+The final-goal variant explicitly evaluated mission completion. The accepted completion contained exactly one criterion mapping `MSC-001 -> EVID-FINAL-001`, no mission-scoped blockers, an approved `mission-objective` completion-authority requirement, and a pending `external-follow-on` publication requirement.
 
-A pending `mission-objective` approval prevented mission completion. An unresolved mission-scoped blocker prevented mission completion. A pending `external-follow-on` approval for tagging, publishing, release creation, artifact upload, or hosted automation did not keep the completed preparation mission active. A mission marked completed without a complete and internally consistent completion structure was rejected.
+A pending mission-objective approval was rejected before write with category `mission-objective-approval-pending`. Its complete six-file governed baseline was: final goal `7178146b1e16a03a0500292aeff02ff6b604aa3169801a5c23a6f860eeab8ff0`; mission `471b1d8b3b7d1128ec34de4a14b9af7b3d63b859a119277d2efcc3f9eaccc1dd`; approval `20973e41b78f4bea1c824acbd0667b192a4c975f4d603eceedb4b1bc5106ddd1`; evidence `6fe1e2a38491b789cfaf696d90b158bf1ef0d815a572751bf8a9efefee6514b3`; execution `31019e9a9b26b540e575c33a7ba182f0ae34b00286581507961edff3cacf592a`; state `e03e50be4a7921a93eaccc070c62b3050e46fdb3b62b9348ce24cbb9bdcb10bf`. Every post-rejection digest matched. Complete-set digest before and after was `804f392a32f847d7e443d3d2fd57da7ddea968d60b8087e42c743ac2de1f34b1`.
 
-Structured terminal mission evaluation: `Passed`.
+Mission-objective approval blocking: `Passed`.
 
-Final mission status: `completed`.
+The pending `publish-release` requirement used scope `external-follow-on`, status `pending`, and null approval ref. Because publication was outside the preparation mission objective, it did not keep the otherwise complete mission active.
 
-Completion criterion mappings: `MSC-001 -> EVD-018`, `MSC-002 -> EVD-018`.
+External-follow-on approval non-blocking: `Passed`.
 
-Completion blocker references: `[]`.
+A mission marked completed with its required criterion-evidence entry removed was rejected before write with category `mission-completion-structure-invalid`. Its complete six-file baseline was: final goal `7178146b1e16a03a0500292aeff02ff6b604aa3169801a5c23a6f860eeab8ff0`; mission `04652c8a5b7d5a672b7e5b10ac4ef11297a6cb9e1d3259d627c7351dc324cdc8`; approval `20973e41b78f4bea1c824acbd0667b192a4c975f4d603eceedb4b1bc5106ddd1`; evidence `6fe1e2a38491b789cfaf696d90b158bf1ef0d815a572751bf8a9efefee6514b3`; execution `31019e9a9b26b540e575c33a7ba182f0ae34b00286581507961edff3cacf592a`; state `e03e50be4a7921a93eaccc070c62b3050e46fdb3b62b9348ce24cbb9bdcb10bf`. Every post-rejection digest matched. Complete-set digest before and after was `14ab73777a21ef6377246bc6ea23633d7787cd0bb2951bf01597fc5c6e1e5ecc`.
 
-Approval evaluation: `publish-release`, scope `external-follow-on`, status `pending`, approval reference `null`, non-blocking because it is outside the preparation mission objective.
+Completed mission structure validation: `Passed`.
 
-Completion timestamp: `2026-08-06T06:07:00Z`.
-
-Completing authority: `prompt-018-synthetic-authority`.
-
-Completion summary: `All mission-objective success criteria are durably supported; publication remains external follow-on work.`
+Accepted structured completion values: mission status `completed`; criterion evidence `MSC-001 -> EVID-FINAL-001`; blocker refs `[]`; `mission-completion-authority` scope `mission-objective`, status `approved`, approval ref `APPROVAL-001`; `publish-release` scope `external-follow-on`, status `pending`, approval ref `null`; completed at `2026-08-08T16:23:00Z`; completed by `github:infoconex`; state active mission `null`.
 
 ## 12. Final Artifact State
 
@@ -228,41 +236,47 @@ Completion summary: `All mission-objective success criteria are durably supporte
 
 ```yaml
 label: PROPOSED ONLY — NOT WRITTEN
+framework_revision: c8ed28be463665cac4a1c305b02af182432c536f
 persistence:
-  id: PPLAN-018
-  record_id: PREC-018
+  id: PERSIST-20260808T162300Z-001
   status: applied
   final_verification: passed
 reuse_assessment:
-  id: RA-018
+  id: REUSE-001
   status: completed
+  disposition: promote
+  proposed_knowledge_ref: KNOW-002
+knowledge:
+  id: KNOW-002
+  status: validated
 execution:
-  id: EXE-018
-  status: completed
+  id: EX-20260808T162300Z-001
+  status: succeeded
   persist_status: completed
   reuse_status: completed
 goal:
-  id: GOAL-018
+  id: 001-final
   status: completed
 mission:
-  id: MIS-018
+  id: mission-final-goal
   status: completed
   completion:
     criterion_evidence:
       - criterion_id: MSC-001
-        evidence_refs: [EVD-018]
-      - criterion_id: MSC-002
-        evidence_refs: [EVD-018]
+        evidence_refs: [EVID-FINAL-001]
     blocker_refs: []
     approval_evaluations:
+      - requirement: mission-completion-authority
+        scope: mission-objective
+        status: approved
+        approval_ref: APPROVAL-001
       - requirement: publish-release
         scope: external-follow-on
         status: pending
         approval_ref: null
-        rationale: Outside the preparation mission objective
-    completed_at: '2026-08-06T06:07:00Z'
-    completed_by: prompt-018-synthetic-authority
-    summary: All mission-objective success criteria are durably supported; publication remains external follow-on work.
+    completed_at: '2026-08-08T16:23:00Z'
+    completed_by: github:infoconex
+    summary: All mission-objective completion requirements are satisfied; publication remains external follow-on work.
 state:
   status: ready
   active_mission: null
@@ -271,67 +285,49 @@ state:
   lifecycle_stage: null
 ```
 
-Final state: `ready`.
+The complete final nine-file repository digest map was: knowledge `KNOW-002=92838ee8efa2a41bf95fd17a8c252bb48ba7504c2f3963cbc0ab75307cb24015`; goal `7178146b1e16a03a0500292aeff02ff6b604aa3169801a5c23a6f860eeab8ff0`; mission `66a4a59faf1f07e6141d43c7477c4433a7ffb66166dfe3ccb4aba7e73ce6acc1`; approval `e2f0829317352e1d78fa6745e95cb3d5e1736fa1342cd39ec9a4f68d9a43fe6d`; evidence `6fe1e2a38491b789cfaf696d90b158bf1ef0d815a572751bf8a9efefee6514b3`; execution `8e88a8d62f066a6e5af294274d2e296abdbd2aeba4a054a439b07f511d44036e`; persistence `9046cd6ba9b31ae9ffdc3e61c161ceef6372f26e605d9c143aa4a3e5b193c8ba`; reuse `8237973c50feec45d021329eb021a3872f3197c9135849a2de8979b418405148`; state `5c1951dac125ed8dae7c52a80b642df2ffe0dbdbe7016fcaf08f8fd1fbcf7495`.
 
-Active mission pointer: `null`.
+Final execution status: `succeeded`.
 
-Active goal pointer: `null`.
+Final goal status: `completed`.
 
-Active execution pointer: `null`.
+Final mission status: `completed`.
 
-Active lifecycle pointer: `null`.
+Final state status: `ready`; all active mission, goal, execution, and lifecycle pointers: `null`.
 
-Persistence identity: `PPLAN-018`.
+Persistence identity: `PERSIST-20260808T162300Z-001`.
 
-Persistence record identity: `PREC-018`.
+Reuse identity: `REUSE-001`.
 
-Reuse identity: `RA-018`.
+Knowledge identity: `KNOW-002`.
 
 ## 13. Repository Validation
 
 Scenario 9 result: `Passed`.
 
-Complete synthetic repository validation: `Passed`.
+The complete final synthetic repository was re-read. YAML 1.2 parsing contract compatibility, JSON Schema Draft 2020-12 shape and format requirements, canonical paths, identity uniqueness, exact reference resolution, lifecycle terminality, timestamp monotonicity, validation provenance, persistence and Reuse linkage, completion structure, blocker and approval semantics, and execution-goal-mission-state synchronization all passed.
 
-YAML 1.2 compatibility: `Passed`.
+Complete repository validation: `Passed`.
 
-JSON Schema Draft 2020-12 with format enforcement: `Passed`.
-
-Canonical paths and identity uniqueness: `Passed`.
-
-Reference resolution and exact cardinality: `Passed`.
-
-Lifecycle ordering and timestamp monotonicity: `Passed`.
-
-Persistence and Reuse linkage: `Passed`.
-
-Execution-goal-mission-state agreement: `Passed`.
-
-Mission blocker and approval semantics: `Passed`.
-
-Terminal cleanup: `Passed`.
+Unresolved references: `0`.
 
 Active execution after terminal completion: `None`.
 
 Active lifecycle stage after terminal completion: `None`.
 
-Unresolved references: `0`.
-
 Required top-level sections: `15/15`.
 
 Result-format validation: `Passed`.
 
-Complete repository-validation result: `Passed for the synthetic governed repository; framework discovery validation failed because the normative completion contract is omitted from the manifest required-file list`.
+Framework repository changes: `None`.
 
 ## 14. Framework Defects
 
-Framework defect count: `1`.
+Framework defect count: `0`.
 
-| ID | Severity | Artifact | Rule | Observed contract behavior | Expected behavior | Deterministic impact | Framework-only correction |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| `FW-018-001` | High | `.flywheel/manifest.yaml` | Manifest-first canonical discovery and normative completion contract | `.flywheel/operating-model/guidance/completion.md` declares itself normative and contains the governing completion and structured mission-evaluation rules, but it is absent from `required_files` | Every normative file required to execute the framework contract is discoverable in the manifest-defined ordered set | A conforming evaluator that reads exactly the manifest-required files can omit the terminal completion contract, producing incomplete or divergent completion behavior | Add `.flywheel/operating-model/guidance/completion.md` to `required_files` in the correct guidance order and validate manifest completeness against normative guidance files |
+No reusable framework defects were found during the non-persistent programmatic Reuse-completion verification.
 
-The structured mission-completion finding addressed by commit `60c3f0ab35d8539c3ab405975593976fc7e0261c` is substantively resolved in the completion guidance and mission schema. It is not fully resolved as a reusable framework contract because the normative completion guidance remains outside the manifest-required canonical read set.
+Prompt 018's phrase “terminal persistence record” was resolved by the pinned framework contract as the terminal applied persistence-plan transaction controller and commit marker. No extra persistence-record artifact was invented, and no ambiguity remained that affected deterministic execution.
 
 ## 15. Repository Mutation Confirmation
 
